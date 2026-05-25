@@ -90,7 +90,25 @@ export function HomePage({ setActiveTab }: HomePageProps) {
                 <div className="absolute right-6 w-2 h-2 rounded-full bg-muted-foreground/40" />
               </div>
               <div className="visual-card">
-                <Coffee className="visual-cup-icon" />
+                {/* Playful sketchy sleeping coffee mug illustration */}
+                <svg className="visual-cup-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                  {/* Steaming waves */}
+                  <path d="M42 22 Q45 15 40 8" />
+                  <path d="M50 20 Q53 12 48 6" />
+                  <path d="M58 22 Q61 15 56 8" />
+                  
+                  {/* Mug Body with organic hand-drawn wobble */}
+                  <path d="M30 35 C30 35 30 75 50 75 C70 75 70 35 70 35 Z" fill="none" strokeWidth="3.5" />
+                  
+                  {/* Mug Handle */}
+                  <path d="M70 43 C80 43 83 57 70 61" strokeWidth="3.5" />
+                  
+                  {/* Sleepy Eyelids on the mug */}
+                  <path d="M41 52 C43 56 46 56 48 52" strokeWidth="2.5" /> 
+                  <path d="M52 52 C54 56 57 56 59 52" strokeWidth="2.5" /> 
+                  {/* Cute tiny mouth */}
+                  <path d="M48 60 Q50 63 52 60" strokeWidth="2" />
+                </svg>
                 <div className="visual-state-label">
                   <Moon className="h-4 w-4" />
                   Nap State: Locked
