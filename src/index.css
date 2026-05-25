@@ -1,0 +1,772 @@
+@import "../styles/globals.css";
+
+@layer base {
+  :root {
+    @apply font-sans;
+  }
+
+  body {
+    @apply grid place-items-center min-w-[320px] min-h-screen relative m-0 bg-background text-foreground;
+  }
+}
+
+/* Cozy ambient light glow effects */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  opacity: 0.8;
+  background: radial-gradient(circle at 10% 20%, oklch(0.93 0.04 70 / 40%) 0%, transparent 40%),
+              radial-gradient(circle at 90% 80%, oklch(0.75 0.16 75 / 15%) 0%, transparent 50%),
+              radial-gradient(circle at 50% 50%, oklch(0.91 0.04 70 / 5%) 0%, transparent 60%);
+  filter: blur(40px);
+  pointer-events: none;
+  transition: background 1s ease-in-out;
+}
+
+.dark body::before {
+  background: radial-gradient(circle at 10% 20%, oklch(0.2 0.04 35 / 30%) 0%, transparent 40%),
+              radial-gradient(circle at 90% 80%, oklch(0.18 0.03 255 / 20%) 0%, transparent 50%),
+              radial-gradient(circle at 50% 50%, oklch(0.15 0.02 35 / 10%) 0%, transparent 60%);
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(0.9);
+    opacity: 0.6;
+    background-color: oklch(0.68 0.15 65 / 20%);
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+    background-color: oklch(0.68 0.15 65 / 50%);
+  }
+}
+
+@keyframes steam {
+  0% {
+    transform: translateY(0) scaleX(1);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-20px) scaleX(1.1);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-40px) scaleX(0.9);
+    opacity: 0;
+  }
+}
+
+.animate-breathe {
+  animation: breathe 5s ease-in-out infinite;
+}
+
+.animate-steam {
+  animation: steam 4s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8,0,1,1);
+  }
+  50% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0,0,0.2,1);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+}
+
+@media (prefers-reduced-motion) {
+  *,
+  ::before,
+  ::after {
+    animation: none !important;
+  }
+}
+
+/* ==========================================
+   SEMANTIC CLASS SYSTEM (TAILWIND BUNDLED)
+   ========================================== */
+
+/* 1. App General Layout & Footer */
+.app-container {
+  @apply min-h-screen w-full flex flex-col justify-between overflow-x-hidden pb-12 transition-colors duration-500 bg-background text-foreground;
+}
+
+.bg-radial-highlight {
+  @apply absolute top-0 left-0 right-0 h-[500px] bg-gradient-to-b from-primary/10 to-transparent pointer-events-none z-0;
+}
+
+.app-content-wrapper {
+  @apply relative z-10 w-full flex flex-col gap-6 pt-4;
+}
+
+.app-main {
+  @apply w-full flex-grow;
+}
+
+.app-footer {
+  @apply relative z-10 w-full max-w-5xl mx-auto px-6 mt-16 text-center;
+}
+
+.footer-content {
+  @apply border-t border-border/60 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4;
+}
+
+.footer-text {
+  @apply text-xs text-muted-foreground font-medium;
+}
+
+.footer-links {
+  @apply flex gap-4 text-xs font-semibold text-muted-foreground;
+}
+
+.footer-link {
+  @apply hover:text-primary transition-colors cursor-pointer;
+}
+
+/* 2. Navbar Styles */
+.navbar-header {
+  @apply sticky top-4 z-50 mx-auto w-full max-w-5xl px-4;
+}
+
+.navbar-container {
+  @apply flex h-16 items-center justify-between rounded-2xl border border-border bg-card/60 px-6 backdrop-blur-md transition-all duration-300;
+}
+
+.navbar-logo-btn {
+  @apply flex items-center gap-3 transition-transform duration-300 hover:scale-105;
+}
+
+.logo-badge {
+  @apply relative flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-lg shadow-primary/20 overflow-hidden;
+}
+
+.logo-steam-line {
+  @apply w-0.5 h-2 bg-primary-foreground/60 rounded-full;
+  animation: steam 4s ease-in-out infinite;
+}
+
+.logo-brand-name {
+  @apply block text-lg font-bold tracking-tight text-foreground font-sans;
+}
+
+.logo-sub-tag {
+  @apply block text-xs font-medium text-muted-foreground -mt-1;
+}
+
+.navbar-nav {
+  @apply flex items-center gap-1 rounded-xl bg-secondary/80 p-1 border border-border/50;
+}
+
+.navbar-tab-btn {
+  @apply relative flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition-all duration-300 text-muted-foreground hover:text-foreground hover:bg-card/30;
+}
+
+.navbar-tab-btn-active {
+  @apply bg-card text-foreground shadow-sm;
+}
+
+.theme-toggle-btn {
+  @apply flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-card/80 text-foreground transition-all duration-300 hover:bg-secondary hover:scale-105 active:scale-95;
+}
+
+/* 3. HomePage Styles */
+.home-container {
+  @apply flex flex-col gap-16 max-w-5xl mx-auto px-6 py-6 relative;
+}
+
+.hero-section {
+  @apply relative overflow-hidden rounded-3xl border border-border bg-card shadow-2xl;
+}
+
+.hero-gradient-overlay {
+  @apply absolute inset-0 bg-gradient-to-tr from-primary/5 via-accent/5 to-transparent pointer-events-none;
+}
+
+.hero-content {
+  @apply flex flex-col lg:flex-row items-center justify-between gap-8 p-8 md:p-12 relative z-10;
+}
+
+.hero-text-block {
+  @apply flex-1 text-left space-y-6;
+}
+
+.hero-badge {
+  @apply inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/10 px-3 py-1 text-xs font-semibold text-accent;
+}
+
+.hero-title {
+  @apply text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground font-sans;
+}
+
+.hero-accent-text {
+  @apply text-transparent bg-clip-text bg-gradient-to-r from-accent to-amber-500;
+}
+
+.hero-desc {
+  @apply text-base md:text-lg text-muted-foreground font-medium max-w-lg leading-relaxed;
+}
+
+.hero-button-group {
+  @apply flex flex-wrap gap-4 pt-2;
+}
+
+.primary-btn {
+  @apply flex items-center gap-2 rounded-xl bg-primary text-primary-foreground font-semibold px-6 py-3.5 shadow-lg shadow-primary/20 hover:bg-primary/95 transition-all duration-300 hover:scale-[1.03] active:scale-95;
+}
+
+.secondary-btn {
+  @apply flex items-center gap-2 rounded-xl border border-border bg-secondary/80 font-semibold px-6 py-3.5 hover:bg-secondary transition-all duration-300 hover:scale-[1.03] active:scale-95 text-foreground;
+}
+
+.hero-visual-block {
+  @apply flex-1 flex justify-center relative w-full max-w-md lg:max-w-none;
+}
+
+.hero-visual-container {
+  @apply relative w-80 h-80 md:w-96 md:h-96 flex items-center justify-center;
+}
+
+.visual-steams {
+  @apply absolute -top-4 flex gap-3 justify-center w-full;
+}
+
+.visual-steam {
+  @apply bg-accent/25 rounded-full;
+  animation: steam 4s ease-in-out infinite;
+}
+
+.visual-glow {
+  @apply absolute inset-0 rounded-full bg-accent/15 blur-3xl;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.visual-dial {
+  @apply relative w-64 h-64 md:w-72 md:h-72 rounded-full border-2 border-dashed border-border/80 flex items-center justify-center;
+  animation: spin 50s linear infinite;
+}
+
+.visual-card {
+  @apply absolute w-44 h-44 md:w-52 md:h-52 rounded-[2rem] bg-secondary/90 border border-border/80 flex flex-col items-center justify-center shadow-2xl backdrop-blur-sm transition-all duration-500 hover:rotate-2 hover:scale-[1.03];
+}
+
+.visual-cup-icon {
+  @apply h-20 w-20 md:h-24 md:w-24 text-primary;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.visual-state-label {
+  @apply absolute bottom-5 flex items-center gap-2 text-xs md:text-sm font-bold text-accent;
+}
+
+.modes-section {
+  @apply space-y-8;
+}
+
+.modes-header {
+  @apply text-center max-w-2xl mx-auto space-y-3;
+}
+
+.modes-title {
+  @apply text-3xl font-extrabold tracking-tight sm:text-4xl text-foreground;
+}
+
+.modes-desc {
+  @apply text-muted-foreground font-medium text-sm sm:text-base;
+}
+
+.modes-grid {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-6;
+}
+
+.mode-card {
+  @apply relative h-full flex flex-col justify-between rounded-2xl border border-border bg-card p-6 shadow-md transition-all duration-300 hover:shadow-xl hover:scale-[1.02] hover:border-primary/20;
+}
+
+.mode-header {
+  @apply flex items-center justify-between;
+}
+
+.mode-icon-wrapper {
+  @apply p-3 rounded-xl bg-gradient-to-r text-white;
+}
+
+.mode-range-badge {
+  @apply text-xs font-semibold px-2.5 py-1 rounded-full bg-secondary text-foreground border border-border;
+}
+
+.mode-body {
+  @apply space-y-4;
+}
+
+.mode-card-title {
+  @apply text-xl font-bold text-foreground;
+}
+
+.mode-duration {
+  @apply text-2xl font-extrabold text-primary;
+}
+
+.mode-desc {
+  @apply text-sm text-muted-foreground leading-relaxed;
+}
+
+.mode-footer {
+  @apply mt-6 pt-4 border-t border-border/40 space-y-4;
+}
+
+.mode-benefit-row {
+  @apply flex items-start gap-2.5;
+}
+
+.mode-benefit-text {
+  @apply text-xs font-medium text-foreground;
+}
+
+.mode-action-btn {
+  @apply w-full inline-flex items-center justify-center gap-2 rounded-xl bg-secondary font-bold text-sm px-4 py-2.5 hover:bg-primary hover:text-primary-foreground text-foreground transition-all duration-300;
+}
+
+.science-intro-section {
+  @apply rounded-3xl border border-border bg-secondary/50 p-8 md:p-12 space-y-8;
+}
+
+.science-intro-header {
+  @apply flex flex-col md:flex-row items-start md:items-center justify-between gap-6;
+}
+
+.science-intro-title {
+  @apply text-2xl md:text-3xl font-bold tracking-tight text-foreground;
+}
+
+.science-intro-subtitle {
+  @apply text-muted-foreground font-medium text-sm;
+}
+
+.science-intro-link {
+  @apply text-sm font-bold text-primary hover:text-accent flex items-center gap-1.5 transition-colors;
+}
+
+.science-intro-steps {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-8 relative;
+}
+
+.science-step {
+  @apply flex flex-col gap-3 relative;
+}
+
+.step-number {
+  @apply flex h-12 w-12 items-center justify-center rounded-xl bg-card border border-border shadow-sm text-lg font-extrabold text-accent;
+}
+
+.step-title {
+  @apply text-lg font-bold text-foreground;
+}
+
+.step-desc {
+  @apply text-xs sm:text-sm text-muted-foreground leading-relaxed;
+}
+
+/* 4. SciencePage Styles */
+.science-container {
+  @apply flex flex-col gap-16 max-w-5xl mx-auto px-6 py-6 text-left;
+}
+
+.science-header {
+  @apply space-y-4;
+}
+
+.science-title {
+  @apply text-4xl md:text-5xl font-extrabold tracking-tight text-foreground font-sans;
+}
+
+.science-subtitle {
+  @apply text-base md:text-lg text-muted-foreground font-medium max-w-2xl leading-relaxed;
+}
+
+.science-grid {
+  @apply grid grid-cols-1 lg:grid-cols-3 gap-10;
+}
+
+.pillars-col {
+  @apply lg:col-span-2 space-y-6;
+}
+
+.section-heading {
+  @apply text-2xl font-bold tracking-tight text-foreground flex items-center gap-2;
+}
+
+.accordion-list {
+  @apply space-y-4;
+}
+
+.accordion-item {
+  @apply rounded-2xl border border-border bg-card overflow-hidden shadow-sm transition-all duration-300 hover:border-primary/20;
+}
+
+.accordion-trigger {
+  @apply w-full flex items-center justify-between p-6 text-left focus:outline-none;
+}
+
+.accordion-icon-box {
+  @apply p-2.5 rounded-xl bg-secondary text-primary shrink-0;
+}
+
+.accordion-title-box {
+  @apply flex gap-4 items-center;
+}
+
+.accordion-title {
+  @apply text-base font-bold text-foreground sm:text-lg;
+}
+
+.accordion-summary {
+  @apply text-xs text-muted-foreground font-semibold mt-0.5;
+}
+
+.accordion-content {
+  @apply px-6 pb-6 pt-2 border-t border-border/40;
+}
+
+.nap-secret-box {
+  @apply p-4 rounded-xl border border-accent/20 bg-accent/5 flex gap-3 text-foreground;
+}
+
+.nap-secret-text {
+  @apply text-xs font-semibold;
+}
+
+.aside-col {
+  @apply space-y-6 flex flex-col justify-start;
+}
+
+.benefits-list {
+  @apply space-y-4 flex-grow;
+}
+
+.benefit-card {
+  @apply rounded-2xl border border-border bg-card p-6 shadow-sm flex gap-4;
+}
+
+.benefit-icon-box {
+  @apply h-10 w-10 rounded-xl bg-accent/15 text-accent flex items-center justify-center shrink-0;
+}
+
+.benefit-title {
+  @apply text-sm font-bold text-foreground uppercase tracking-wider;
+}
+
+.benefit-desc {
+  @apply text-xs text-muted-foreground leading-relaxed;
+}
+
+.quote-box {
+  @apply rounded-2xl border-2 border-dashed border-border p-6 bg-secondary/30 relative overflow-hidden;
+}
+
+.quote-text {
+  @apply text-xs font-semibold text-muted-foreground italic leading-relaxed;
+}
+
+.quote-source {
+  @apply block text-[10px] font-extrabold tracking-wide uppercase text-accent mt-3 text-right not-italic;
+}
+
+.synergy-section {
+  @apply rounded-3xl border border-border bg-card p-8 md:p-12 space-y-8;
+}
+
+.synergy-title {
+  @apply text-2xl font-bold text-foreground text-center;
+}
+
+.synergy-grid {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-6 text-center;
+}
+
+.synergy-card {
+  @apply rounded-2xl border border-border bg-secondary/20 p-6 space-y-3;
+}
+
+.synergy-card-active {
+  @apply rounded-2xl border border-accent/30 bg-accent/5 p-6 space-y-3 shadow-md shadow-accent/5;
+}
+
+.synergy-card-title {
+  @apply text-base font-bold text-foreground;
+}
+
+.synergy-progress-track {
+  @apply h-2 w-full rounded-full bg-border overflow-hidden;
+}
+
+.synergy-progress-bar {
+  @apply h-full bg-amber-500 w-1/3;
+}
+
+.synergy-progress-bar-active {
+  @apply h-full bg-accent w-full;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.synergy-desc {
+  @apply text-xs text-muted-foreground leading-relaxed;
+}
+
+.synergy-desc-active {
+  @apply text-xs text-foreground leading-relaxed font-medium;
+}
+
+/* 5. TimerPage Styles */
+.timer-container {
+  @apply flex flex-col gap-10 max-w-2xl mx-auto px-6 py-6 text-center relative z-10;
+}
+
+.sandbox-banner {
+  @apply flex justify-between items-center rounded-2xl border border-border bg-secondary/40 p-4;
+}
+
+.sandbox-content {
+  @apply flex items-center gap-2 text-left;
+}
+
+.sandbox-title {
+  @apply block text-xs font-bold text-foreground;
+}
+
+.sandbox-desc {
+  @apply block text-[10px] text-muted-foreground font-semibold;
+}
+
+.sandbox-toggle-btn {
+  @apply flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-bold transition-all border duration-300 bg-card border-border text-muted-foreground;
+}
+
+.sandbox-toggle-btn-active {
+  @apply bg-accent/15 border-accent text-accent;
+}
+
+.timer-card {
+  @apply rounded-3xl border border-border bg-card p-8 md:p-12 shadow-xl relative overflow-hidden transition-all duration-500;
+}
+
+.idle-view {
+  @apply space-y-8;
+}
+
+.idle-header {
+  @apply space-y-2;
+}
+
+.idle-title {
+  @apply text-2xl font-extrabold tracking-tight text-foreground;
+}
+
+.idle-desc {
+  @apply text-xs text-muted-foreground font-semibold max-w-sm mx-auto;
+}
+
+.idle-modes-list {
+  @apply flex flex-col gap-3;
+}
+
+.idle-mode-option {
+  @apply w-full flex items-center gap-4 rounded-2xl border p-4 text-left transition-all duration-300 border-border bg-card/50 hover:bg-secondary/40 hover:scale-[1.01];
+}
+
+.idle-mode-option-active {
+  @apply border-primary bg-secondary/80 ring-2 ring-primary/20 shadow-md;
+}
+
+.idle-mode-icon-box {
+  @apply p-3 rounded-xl bg-gradient-to-r text-white shadow-md;
+}
+
+.idle-mode-info {
+  @apply flex-grow;
+}
+
+.idle-mode-header {
+  @apply flex justify-between items-center;
+}
+
+.idle-mode-title {
+  @apply text-base font-bold text-foreground;
+}
+
+.idle-mode-duration {
+  @apply text-sm font-extrabold text-primary;
+}
+
+.idle-mode-desc {
+  @apply block text-xs text-muted-foreground mt-0.5 leading-relaxed;
+}
+
+.pre-view {
+  @apply space-y-8 flex flex-col items-center;
+}
+
+.pre-header {
+  @apply space-y-2;
+}
+
+.pre-badge {
+  @apply inline-flex items-center gap-1.5 rounded-full bg-accent/10 border border-accent/20 px-3 py-1 text-xs font-semibold text-accent;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.pre-title {
+  @apply text-xl font-bold text-foreground;
+}
+
+.pre-desc {
+  @apply text-xs text-muted-foreground font-semibold max-w-xs leading-relaxed;
+}
+
+.breathing-circle-wrapper {
+  @apply relative w-48 h-48 flex items-center justify-center;
+}
+
+.breathing-bg-ring {
+  @apply absolute inset-0 rounded-full bg-accent/5;
+  animation: breathe 5s ease-in-out infinite;
+}
+
+.breathing-dashed-ring {
+  @apply absolute w-36 h-36 rounded-full border-2 border-dashed border-accent/40;
+  animation: spin 16s linear infinite;
+}
+
+.timer-time-display {
+  @apply relative z-10 flex flex-col items-center justify-center;
+}
+
+.time-label {
+  @apply text-[10px] uppercase font-bold text-accent tracking-wider mt-1;
+}
+
+.time-label-accent {
+  @apply text-[10px] font-extrabold uppercase text-accent tracking-widest mt-1.5;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.timer-controls {
+  @apply flex gap-4 w-full;
+}
+
+.skip-pre-btn {
+  @apply flex-grow flex items-center justify-center gap-1.5 rounded-xl border border-border bg-secondary/80 font-bold text-sm px-4 py-3 hover:bg-secondary transition-all;
+}
+
+.stop-timer-btn {
+  @apply rounded-xl border border-border bg-destructive/10 text-destructive font-bold text-sm px-4 py-3 hover:bg-destructive/20 transition-all flex items-center justify-center;
+}
+
+.sleep-view {
+  @apply space-y-8 flex flex-col items-center;
+}
+
+.sleep-header {
+  @apply space-y-2;
+}
+
+.sleep-title {
+  @apply text-xl font-bold text-foreground;
+}
+
+.sleep-desc {
+  @apply text-xs text-muted-foreground font-semibold;
+}
+
+.sleep-circular-progress {
+  @apply relative w-56 h-56 flex items-center justify-center;
+}
+
+.svg-progress-track {
+  @apply stroke-secondary fill-none;
+}
+
+.svg-progress-bar {
+  @apply stroke-primary fill-none transition-all duration-1000;
+}
+
+.sleep-sound-section {
+  @apply w-full space-y-4;
+}
+
+.sound-header {
+  @apply flex items-center justify-between border-t border-border/40 pt-4;
+}
+
+.sound-title-box {
+  @apply text-xs font-bold text-foreground flex items-center gap-1.5;
+}
+
+.sound-mute-btn {
+  @apply p-1.5 rounded-lg border transition-all bg-secondary border-border text-muted-foreground hover:text-foreground;
+}
+
+.sound-mute-btn-active {
+  @apply bg-destructive/10 border-destructive/20 text-destructive;
+}
+
+.sounds-grid {
+  @apply grid grid-cols-4 gap-2;
+}
+
+.sound-option-btn {
+  @apply w-full rounded-xl border py-2.5 text-xs font-bold transition-all border-border bg-card/60 text-muted-foreground hover:bg-secondary/50;
+}
+
+.sound-option-btn-active {
+  @apply bg-primary border-primary text-primary-foreground shadow-sm hover:bg-primary;
+}
+
+.cancel-nap-btn {
+  @apply w-full flex items-center justify-center gap-2 rounded-xl bg-destructive/10 text-destructive font-bold text-sm px-6 py-3.5 hover:bg-destructive/15 transition-all;
+}
+
+.alarm-view {
+  @apply space-y-8 flex flex-col items-center;
+  animation: bounce 3s infinite;
+}
+
+.alarm-alert-icon {
+  @apply h-20 w-20 rounded-full bg-accent/20 border-2 border-accent text-accent flex items-center justify-center shadow-lg shadow-accent/20;
+}
+
+.alarm-title {
+  @apply text-3xl font-extrabold tracking-tight text-foreground;
+}
+
+.alarm-desc {
+  @apply text-xs text-muted-foreground font-semibold max-w-xs leading-relaxed;
+}
+
+.alarm-action-btn {
+  @apply w-full flex items-center justify-center gap-2 rounded-2xl bg-accent text-accent-foreground font-extrabold text-base px-6 py-4.5 shadow-lg shadow-accent/20 hover:scale-[1.02] active:scale-95 transition-all duration-300;
+}
