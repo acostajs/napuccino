@@ -208,7 +208,6 @@ export function TimerPage(): React.ReactElement {
       case "white": playWhiteNoise(ctx); break;
       case "rain":  playRainNoise(ctx);  break;
       case "cafe":  playCafeNoise(ctx);  break;
-      case "silence": break;
       default: {
         const _exhaustiveCheck: never = ambientSound;
         return _exhaustiveCheck;
@@ -251,7 +250,6 @@ export function TimerPage(): React.ReactElement {
         osc.frequency.setValueAtTime(880.00, ctx.currentTime);
         osc.frequency.exponentialRampToValueAtTime(1320.00, ctx.currentTime + 0.12);
         break;
-      case "silence": break;
       default: {
         const _exhaustiveCheck: never = sound;
         return _exhaustiveCheck;
