@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 
 type SoundItem<T> = {
   id: T;
@@ -34,6 +34,7 @@ export function SoundSelector<T extends string>({
           return (
             <li key={sound.id}>
               <button
+                type="button"
                 onClick={() => {
                   onSelect(sound.id);
                   if (onPreview) {

@@ -1,8 +1,8 @@
-import React from "react";
-import { Volume2, VolumeX, Sparkles, Square } from "lucide-react";
-import { SoundSelector } from "./SoundSelector";
+import { Sparkles, Square, Volume2, VolumeX } from "lucide-react";
+import type React from "react";
+import type { AlarmSound, AmbientSound } from "../hooks/useAudioEngine";
 import { MODES, type NapMode } from "../lib/modes";
-import type { AmbientSound, AlarmSound } from "../hooks/useAudioEngine";
+import { SoundSelector } from "./SoundSelector";
 
 type SleepViewProps = {
   activeMode: NapMode;
@@ -53,13 +53,12 @@ export function SleepView({
     <section className="sleep-view">
       <div className="sleep-header">
         <h2 className="sleep-title">{currentConfig.title} Active</h2>
-        <p className="sleep-desc">
-          Adenosine clearance cycle currently in progress. Rest comfortably.
-        </p>
+        <p className="sleep-desc">Adenosine clearance cycle currently in progress. Rest comfortably.</p>
       </div>
 
       <figure className="sleep-circular-progress">
         <svg className="absolute inset-0 w-full h-full transform -rotate-90">
+          <title>Nap progress indicator</title>
           <circle cx="112" cy="112" r="100" className="svg-progress-track" strokeWidth="8" />
           <circle
             cx="112"
@@ -74,9 +73,7 @@ export function SleepView({
         </svg>
 
         <div className="timer-time-display">
-          <time className="text-4xl font-extrabold tracking-tight text-foreground">
-            {formatTime(sleepTimeLeft)}
-          </time>
+          <time className="text-4xl font-extrabold tracking-tight text-foreground">{formatTime(sleepTimeLeft)}</time>
           <figcaption className="time-label-accent">Napping...</figcaption>
         </div>
       </figure>
@@ -89,6 +86,7 @@ export function SleepView({
           </span>
 
           <button
+            type="button"
             onClick={() => setIsMuted((prev) => !prev)}
             className={isMuted ? "sound-mute-btn-active" : "sound-mute-btn"}
             title={isMuted ? "Unmute sounds" : "Mute sounds"}
@@ -118,7 +116,7 @@ export function SleepView({
         />
       </div>
 
-      <button onClick={handleStop} className="cancel-nap-btn">
+      <button type="button" onClick={handleStop} className="cancel-nap-btn">
         <Square className="h-4.5 w-4.5 fill-current" />
         Cancel Nap Loop
       </button>

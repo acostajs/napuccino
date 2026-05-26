@@ -9,6 +9,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App";
 
+// biome-ignore lint/style/noNonNullAssertion: standard root mounting in React templates
 const elem = document.getElementById("root")!;
 const app = (
   <StrictMode>
@@ -17,4 +18,5 @@ const app = (
 );
 
 // https://bun.com/docs/bundler/hot-reloading#import-meta-hot-data
+// biome-ignore lint/suspicious/noAssignInExpressions: standard HMR setup in Bun React templates
 (import.meta.hot.data.root ??= createRoot(elem)).render(app);

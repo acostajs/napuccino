@@ -21,12 +21,7 @@ type AudioEngineResult = {
   stopAmbient: () => void;
 };
 
-export function useAudioEngine({
-  isMuted,
-  ambientSound,
-  alarmSound,
-  timerState,
-}: AudioEngineProps): AudioEngineResult {
+export function useAudioEngine({ isMuted, ambientSound, alarmSound, timerState }: AudioEngineProps): AudioEngineResult {
   const audioCtxRef = useRef<AudioContext | null>(null);
   const ambientNodeRef = useRef<StoppableNode | null>(null);
   const alarmNodeRef = useRef<AudioScheduledSourceNode[]>([]);
@@ -126,8 +121,12 @@ export function useAudioEngine({
 
     ambientNodeRef.current = {
       stop: () => {
-        try { rainSource.stop(); } catch (e) {}
-        try { lfo.stop(); } catch (e) {}
+        try {
+          rainSource.stop();
+        } catch (_e) {}
+        try {
+          lfo.stop();
+        } catch (_e) {}
       },
     };
   };
@@ -158,8 +157,12 @@ export function useAudioEngine({
 
     ambientNodeRef.current = {
       stop: () => {
-        try { osc1.stop(); } catch (e) { }
-        try { osc2.stop(); } catch (e) { }
+        try {
+          osc1.stop();
+        } catch (_e) {}
+        try {
+          osc2.stop();
+        } catch (_e) {}
       },
     };
   };
@@ -168,7 +171,7 @@ export function useAudioEngine({
     if (ambientNodeRef.current) {
       try {
         ambientNodeRef.current.stop();
-      } catch (e) { }
+      } catch (_e) {}
       ambientNodeRef.current = null;
     }
   };
@@ -188,14 +191,14 @@ export function useAudioEngine({
     osc.type = "sine";
     switch (sound) {
       case "harp":
-        osc.frequency.setValueAtTime(440.00, ctx.currentTime);
+        osc.frequency.setValueAtTime(440.0, ctx.currentTime);
         break;
       case "bells":
         osc.frequency.setValueAtTime(523.25, ctx.currentTime);
         break;
       case "forest":
-        osc.frequency.setValueAtTime(880.00, ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(1320.00, ctx.currentTime + 0.12);
+        osc.frequency.setValueAtTime(880.0, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(1320.0, ctx.currentTime + 0.12);
         break;
       default: {
         const _exhaustiveCheck: never = sound;
@@ -283,8 +286,8 @@ export function useAudioEngine({
       switch (currentSound) {
         case "harp":
           playChime(329.63, baseDelay);
-          playChime(392.00, baseDelay + 0.2);
-          playChime(440.00, baseDelay + 0.4);
+          playChime(392.0, baseDelay + 0.2);
+          playChime(440.0, baseDelay + 0.4);
           playChime(523.25, baseDelay + 0.6);
           playChime(659.25, baseDelay + 0.8);
           break;
@@ -295,16 +298,16 @@ export function useAudioEngine({
           playBell(783.99, baseDelay + 1.2);
           break;
         case "forest":
-          playForestChirp(880.00, baseDelay);
-          playForestChirp(1200.00, baseDelay + 0.15);
-          playForestChirp(880.00, baseDelay + 0.4);
+          playForestChirp(880.0, baseDelay);
+          playForestChirp(1200.0, baseDelay + 0.15);
+          playForestChirp(880.0, baseDelay + 0.4);
           playForestChirp(987.77, baseDelay + 0.55);
           break;
-        case "silence": break;
+        case "silence":
+          break;
         default: {
           const _exhaustiveCheck: never = currentSound;
-          return _exhaustiveCheck;
-      }
+        }
       }
 
       count++;
@@ -323,11 +326,15 @@ export function useAudioEngine({
       alarmTimeoutRef.current = null;
     }
     alarmNodeRef.current.forEach((node) => {
-      try { node.stop(); } catch (e) { }
+      try {
+        node.stop();
+      } catch (_e) {}
     });
     alarmNodeRef.current = [];
     if (alarmGainRef.current) {
-      try { alarmGainRef.current.disconnect(); } catch (e) { }
+      try {
+        alarmGainRef.current.disconnect();
+      } catch (_e) {}
       alarmGainRef.current = null;
     }
   };
@@ -352,12 +359,17 @@ export function useAudioEngine({
       stopAmbient();
 
       switch (ambientSound) {
-        case "white": playWhiteNoise(ctx); break;
-        case "rain":  playRainNoise(ctx);  break;
-        case "cafe":  playCafeNoise(ctx);  break;
+        case "white":
+          playWhiteNoise(ctx);
+          break;
+        case "rain":
+          playRainNoise(ctx);
+          break;
+        case "cafe":
+          playCafeNoise(ctx);
+          break;
         default: {
           const _exhaustiveCheck: never = ambientSound;
-          return _exhaustiveCheck;
         }
       }
     };
@@ -365,7 +377,8 @@ export function useAudioEngine({
     startAmbient();
 
     return () => stopAmbient();
-  }, [ambientSound, timerState, isMuted]);
+    // biome-ignore lint/correctness/useExhaustiveDependencies: audio nodes do not need to trigger re-renders
+  }, [ambientSound, timerState, isMuted, playCafeNoise, stopAmbient, playRainNoise, playWhiteNoise, initAudio]);
 
   // Handle alarm when timerState becomes "alarm"
   useEffect(() => {
@@ -374,7 +387,8 @@ export function useAudioEngine({
     } else {
       stopAlarm();
     }
-  }, [timerState]);
+    // biome-ignore lint/correctness/useExhaustiveDependencies: startAlarm and stopAlarm are stable audio controllers
+  }, [timerState, startAlarm, stopAlarm]);
 
   // Clean up on component unmount
   useEffect(() => {
@@ -384,11 +398,12 @@ export function useAudioEngine({
       if (audioCtxRef.current) {
         try {
           audioCtxRef.current.close();
-        } catch (e) {}
+        } catch (_e) {}
         audioCtxRef.current = null;
       }
     };
-  }, []);
+    // biome-ignore lint/correctness/useExhaustiveDependencies: run once on cleanup
+  }, [stopAmbient, stopAlarm]);
 
   return {
     initAudio,

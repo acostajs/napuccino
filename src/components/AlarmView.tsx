@@ -1,5 +1,5 @@
-import React from "react";
 import { Coffee } from "lucide-react";
+import type React from "react";
 
 type AlarmViewProps = {
   handleStop: () => void;
@@ -19,7 +19,7 @@ export function AlarmView({ handleStop }: AlarmViewProps): React.ReactElement {
         </p>
       </div>
 
-      <button onClick={handleStop} className="alarm-action-btn">
+      <button type="button" onClick={handleStop} className="alarm-action-btn">
         Rise and Grind
       </button>
     </section>

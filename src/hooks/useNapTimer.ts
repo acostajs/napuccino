@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import { MODES, type NapMode } from "../lib/modes";
 import type { TimerState } from "./useAudioEngine";
 
-type UseNapTimerProps = {};
+type UseNapTimerProps = Record<string, never>;
 
 type UseNapTimerResult = {
   timerState: TimerState;
@@ -19,7 +19,7 @@ type UseNapTimerResult = {
   progressPercent: number;
 };
 
-export function useNapTimer({}: UseNapTimerProps = {}): UseNapTimerResult {
+export function useNapTimer(_props: UseNapTimerProps = {}): UseNapTimerResult {
   const [timerState, setTimerState] = useState<TimerState>("idle");
   const [activeMode, setActiveMode] = useState<NapMode>("napuccino");
   const [preTimeLeft, setPreTimeLeft] = useState<number>(150);
@@ -39,27 +39,33 @@ export function useNapTimer({}: UseNapTimerProps = {}): UseNapTimerResult {
     let timer: ReturnType<typeof setInterval> | null = null;
 
     if (timerState === "pre") {
-      timer = setInterval(() => {
-        setPreTimeLeft((prev) => {
-          if (prev <= 1) {
-            if (timer) clearInterval(timer);
-            setTimerState("sleep");
-            return 0;
-          }
-          return prev - 1;
-        });
-      }, testMode ? 50 : 1000);
+      timer = setInterval(
+        () => {
+          setPreTimeLeft((prev) => {
+            if (prev <= 1) {
+              if (timer) clearInterval(timer);
+              setTimerState("sleep");
+              return 0;
+            }
+            return prev - 1;
+          });
+        },
+        testMode ? 50 : 1000,
+      );
     } else if (timerState === "sleep") {
-      timer = setInterval(() => {
-        setSleepTimeLeft((prev) => {
-          if (prev <= 1) {
-            if (timer) clearInterval(timer);
-            setTimerState("alarm");
-            return 0;
-          }
-          return prev - 1;
-        });
-      }, testMode ? 10 : 1000);
+      timer = setInterval(
+        () => {
+          setSleepTimeLeft((prev) => {
+            if (prev <= 1) {
+              if (timer) clearInterval(timer);
+              setTimerState("alarm");
+              return 0;
+            }
+            return prev - 1;
+          });
+        },
+        testMode ? 10 : 1000,
+      );
     }
 
     return () => {
@@ -86,9 +92,7 @@ export function useNapTimer({}: UseNapTimerProps = {}): UseNapTimerResult {
   };
 
   const totalDuration = MODES[activeMode].duration;
-  const progressPercent = timerState === "sleep"
-    ? ((totalDuration - sleepTimeLeft) / totalDuration) * 100
-    : 0;
+  const progressPercent = timerState === "sleep" ? ((totalDuration - sleepTimeLeft) / totalDuration) * 100 : 0;
 
   return {
     timerState,

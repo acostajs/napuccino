@@ -1,5 +1,5 @@
-import React from "react";
-import { Coffee, Moon, Sun, Timer, BookOpen } from "lucide-react";
+import { BookOpen, Coffee, Moon, Sun, Timer } from "lucide-react";
+import type React from "react";
 
 type NavbarProps = {
   activeTab: "home" | "timer" | "science";
@@ -18,10 +18,9 @@ export function Navbar({ activeTab, setActiveTab, theme, toggleTheme }: NavbarPr
   return (
     <header className="navbar-header">
       <div className="navbar-container">
-        
         {/* Mobile top-row container / Desktop side-by-side logo */}
         <div className="flex w-full items-center justify-between md:w-auto">
-          <button onClick={() => setActiveTab("home")} className="navbar-logo-btn group">
+          <button type="button" onClick={() => setActiveTab("home")} className="navbar-logo-btn group">
             <div className="logo-badge">
               <div className="absolute top-1.5 flex gap-0.5 justify-center w-full">
                 <span className="logo-steam-line" style={{ animationDelay: "0.2s" }} />
@@ -38,7 +37,7 @@ export function Navbar({ activeTab, setActiveTab, theme, toggleTheme }: NavbarPr
 
           {/* Theme Toggle (Mobile Only) */}
           <div className="md:hidden flex items-center">
-            <button onClick={toggleTheme} aria-label="Toggle Theme" className="theme-toggle-btn">
+            <button type="button" onClick={toggleTheme} aria-label="Toggle Theme" className="theme-toggle-btn">
               {theme === "dark" ? (
                 <Sun className="h-5 w-5 text-accent animate-spin" style={{ animationDuration: "12s" }} />
               ) : (
@@ -55,6 +54,7 @@ export function Navbar({ activeTab, setActiveTab, theme, toggleTheme }: NavbarPr
             const isActive = activeTab === tab.id;
             return (
               <button
+                type="button"
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 className={`navbar-tab-btn ${isActive ? "navbar-tab-btn-active" : ""}`}
@@ -68,7 +68,7 @@ export function Navbar({ activeTab, setActiveTab, theme, toggleTheme }: NavbarPr
 
         {/* Theme Toggle (Desktop Only) */}
         <div className="hidden md:flex items-center gap-2">
-          <button onClick={toggleTheme} aria-label="Toggle Theme" className="theme-toggle-btn">
+          <button type="button" onClick={toggleTheme} aria-label="Toggle Theme" className="theme-toggle-btn">
             {theme === "dark" ? (
               <Sun className="h-5 w-5 text-accent animate-spin" style={{ animationDuration: "12s" }} />
             ) : (
