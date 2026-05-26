@@ -174,7 +174,9 @@
 .logo-badge {
   @apply relative flex h-10 w-10 items-center justify-center border border-border text-primary overflow-hidden;
   border-radius: 12px 6px 10px 7px / 8px 10px 7px 11px;
-  background-color: var(--mode-napuccino-start); /* Warm cozy caramel backing */
+  background-color: var(--mode-powernap-start);
+  color: white;
+  /* Warm cozy caramel backing */
 }
 
 .logo-steam-line {
@@ -183,7 +185,9 @@
 }
 
 .logo-brand-name {
-  @apply block text-xl font-black tracking-tight text-foreground font-serif; /* Playfair Display Wordmark */
+  @apply block text-xl font-black tracking-tight text-foreground font-serif;
+  color: var(--accent);
+  /* Playfair Display Wordmark */
 }
 
 .logo-sub-tag {
@@ -199,13 +203,17 @@
 }
 
 .navbar-tab-btn-active {
-  @apply text-primary border border-border shadow-xs;
-  background-color: oklch(0.72 0.11 75 / 15%); /* Cozy highlighter marker overlay in light mode */
+  @apply text-primary shadow-xs;
+  background-color: oklch(0.72 0.11 75 / 35%);
+  border: 1px solid oklch(0.2 0.025 40 / 25%);
+  /* Cozy highlighter marker overlay in light mode */
   border-radius: 8px 14px 7px 10px / 10px 7px 12px 8px;
 }
 
 .dark .navbar-tab-btn-active {
-  background-color: oklch(0.71 0.14 45 / 15%); /* Cozy highlighter marker overlay in dark mode */
+  background-color: oklch(0.71 0.14 45 / 35%);
+  border-color: oklch(0.94 0.015 70 / 25%);
+  /* Cozy highlighter marker overlay in dark mode */
 }
 
 .theme-toggle-btn {
@@ -1013,9 +1021,11 @@
 .bg-gradient-mode-napuccino {
   background-image: linear-gradient(to right, var(--mode-napuccino-start), var(--mode-napuccino-end));
 }
+
 .bg-gradient-mode-powernap {
   background-image: linear-gradient(to right, var(--mode-powernap-start), var(--mode-powernap-end));
 }
+
 .bg-gradient-mode-consolidation {
   background-image: linear-gradient(to right, var(--mode-consolidation-start), var(--mode-consolidation-end));
 }
@@ -1023,9 +1033,11 @@
 .shadow-mode-napuccino {
   box-shadow: 0 10px 25px -5px oklch(0.72 0.11 75 / 20%);
 }
+
 .shadow-mode-powernap {
   box-shadow: 0 10px 25px -5px oklch(0.85 0.08 115 / 20%);
 }
+
 .shadow-mode-consolidation {
   box-shadow: 0 10px 25px -5px oklch(0.74 0.13 40 / 20%);
 }
@@ -1033,9 +1045,11 @@
 .dark .shadow-mode-napuccino {
   box-shadow: 0 10px 25px -5px oklch(0.71 0.14 45 / 30%);
 }
+
 .dark .shadow-mode-powernap {
   box-shadow: 0 10px 25px -5px oklch(0.77 0.08 175 / 30%);
 }
+
 .dark .shadow-mode-consolidation {
   box-shadow: 0 10px 25px -5px oklch(0.74 0.14 80 / 30%);
 }
@@ -1051,7 +1065,8 @@
   @apply border-0 shadow-md transition-all duration-500 ease-out;
   border-radius: 2rem;
   padding: 2rem;
-  color: #2c1e16; /* Organic deep espresso for high contrast in light mode */
+  color: #2c1e16;
+  /* Organic deep espresso for high contrast in light mode */
 }
 
 .preset-card-napuccino {
@@ -1069,7 +1084,8 @@
 .dark .preset-card-napuccino,
 .dark .preset-card-powernap,
 .dark .preset-card-consolidation {
-  color: #1c130e; /* Deep roasted coffee for high contrast in dark mode */
+  color: #1c130e;
+  /* Deep roasted coffee for high contrast in dark mode */
 }
 
 /* Force inner text components to inherit parent contrast color */
@@ -1222,12 +1238,15 @@
 .breathing-mode-napuccino .breathing-bg-ring {
   background-color: oklch(0.72 0.11 75 / 15%);
 }
+
 .breathing-mode-napuccino .breathing-dashed-ring {
   border-color: oklch(0.72 0.11 75 / 45%);
 }
+
 .dark .breathing-mode-napuccino .breathing-bg-ring {
   background-color: oklch(0.71 0.14 45 / 15%);
 }
+
 .dark .breathing-mode-napuccino .breathing-dashed-ring {
   border-color: oklch(0.71 0.14 45 / 45%);
 }
@@ -1235,12 +1254,15 @@
 .breathing-mode-powernap .breathing-bg-ring {
   background-color: oklch(0.85 0.08 115 / 15%);
 }
+
 .breathing-mode-powernap .breathing-dashed-ring {
   border-color: oklch(0.85 0.08 115 / 45%);
 }
+
 .dark .breathing-mode-powernap .breathing-bg-ring {
   background-color: oklch(0.77 0.08 175 / 15%);
 }
+
 .dark .breathing-mode-powernap .breathing-dashed-ring {
   border-color: oklch(0.77 0.08 175 / 45%);
 }
@@ -1248,12 +1270,15 @@
 .breathing-mode-consolidation .breathing-bg-ring {
   background-color: oklch(0.74 0.13 40 / 15%);
 }
+
 .breathing-mode-consolidation .breathing-dashed-ring {
   border-color: oklch(0.74 0.13 40 / 45%);
 }
+
 .dark .breathing-mode-consolidation .breathing-bg-ring {
   background-color: oklch(0.74 0.14 80 / 15%);
 }
+
 .dark .breathing-mode-consolidation .breathing-dashed-ring {
   border-color: oklch(0.74 0.14 80 / 45%);
 }
@@ -1262,9 +1287,11 @@
 .sleep-progress-napuccino .svg-progress-bar {
   stroke: var(--mode-napuccino-start);
 }
+
 .sleep-progress-powernap .svg-progress-bar {
   stroke: var(--mode-powernap-start);
 }
+
 .sleep-progress-consolidation .svg-progress-bar {
   stroke: var(--mode-consolidation-start);
 }
@@ -1273,6 +1300,7 @@
 .alarm-view.alarm-mode-napuccino {
   background-color: oklch(0.72 0.11 75 / 5%);
 }
+
 .dark .alarm-view.alarm-mode-napuccino {
   background-color: oklch(0.71 0.14 45 / 5%);
 }
@@ -1280,6 +1308,7 @@
 .alarm-view.alarm-mode-powernap {
   background-color: oklch(0.85 0.08 115 / 5%);
 }
+
 .dark .alarm-view.alarm-mode-powernap {
   background-color: oklch(0.77 0.08 175 / 5%);
 }
@@ -1287,6 +1316,7 @@
 .alarm-view.alarm-mode-consolidation {
   background-color: oklch(0.74 0.13 40 / 5%);
 }
+
 .dark .alarm-view.alarm-mode-consolidation {
   background-color: oklch(0.74 0.14 80 / 5%);
 }
