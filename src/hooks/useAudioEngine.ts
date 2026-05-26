@@ -112,7 +112,7 @@ export function useAudioEngine({
     lfo.type = "sine";
     lfo.frequency.value = 0.2;
     const lfoGain = ctx.createGain();
-    lfoGain.gain.value = 0.03;
+    lfoGain.gain.setValueAtTime(0.03, ctx.currentTime);
 
     lfo.connect(lfoGain);
     lfoGain.connect(gainNode.gain);
