@@ -36,9 +36,12 @@ export function useAudioEngine({ isMuted, ambientSound, alarmSound, timerState }
 
   useEffect(() => {
     isMutedRef.current = isMuted;
-    if (alarmGainRef.current) {
-      // Sync mute changes to active alarm instantly if it's playing
-      alarmGainRef.current.gain.setValueAtTime(isMuted ? 0 : 0.4, audioCtxRef.current?.currentTime ?? 0);
+    if (alarmGainRef.current && audioCtxRef.current) {
+      const ctx = audioCtxRef.current;
+      const targetGain = isMuted ? 0 : 0.4;
+      // Smooth out mute transitions to avoid clicks/pops
+      alarmGainRef.current.gain.setValueAtTime(alarmGainRef.current.gain.value, ctx.currentTime);
+      alarmGainRef.current.gain.linearRampToValueAtTime(targetGain, ctx.currentTime + 0.08);
     }
   }, [isMuted]);
 
