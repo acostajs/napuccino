@@ -1,0 +1,31 @@
+{
+  "hero": {
+    "badge": "Révolutionnez Vos Siestes",
+    "title_line1": "Préparez. Dormez.",
+    "title_accent": "Conquérez.",
+    "desc": "Découvrez Napuccino : l'intersection scientifique d'une absorption riche en caféine et d'états de sommeil optimisés. Battez la fatigue de l'après-midi avec une précision mathématique.",
+    "nap_state_locked": "État de la Sieste : Verrouillé",
+    "illustration_title": "Illustration de tasse de café endormie"
+  },
+  "cta": {
+    "start": "Démarrer la Sieste Optimisée",
+    "explore": "Explorer la Science"
+  },
+  "modes": {
+    "title": "Choisissez Votre Rythme",
+    "desc": "Sélectionnez l'une des trois structures de sieste scientifiquement prouvées et optimisées pour éliminer la fatigue cérébrale sans causer de somnolence.",
+    "benefit_label": "Bénéfice :",
+    "select_mode": "Sélectionner le Mode"
+  },
+  "science": {
+    "title": "La Science du Napuccino en 30 Secondes",
+    "subtitle": "Comment consommer de la caféine avant une sieste crée un superpouvoir de productivité.",
+    "read_deep": "Lire l'analyse scientifique profonde",
+    "step1_title": "Préparer & Ingestion",
+    "step1_desc": "Buvez une tasse de café ou un shot d'espresso *rapidement*. Vous voulez que la caféine pénètre votre flux sanguin d'un coup.",
+    "step2_title": "Sommeil Immédiat",
+    "step2_desc": "Allongez-vous immédiatement et lancez le minuteur verrouillé de 20 minutes. Pendant que vous dormez, votre cerveau élimine l'**adénosine** inductrice du sommeil.",
+    "step3_title": "Réveil Surboosté",
+    "step3_desc": "À la minute 20, vous vous réveillez. La caféine vient d'atteindre votre cerveau. L'adénosine étant éliminée, la caféine se fixe parfaitement."
+  }
+}

@@ -1,8 +1,8 @@
 import type React from "react";
 import { createContext, createElement, useContext, useState } from "react";
-import en from "./locales/en.json";
-import es from "./locales/es.json";
-import fr from "./locales/fr.json";
+import en from "./locales/en";
+import es from "./locales/es";
+import fr from "./locales/fr";
 
 export type Locale = "en" | "es" | "fr";
 

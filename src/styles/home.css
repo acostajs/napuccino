@@ -1,0 +1,279 @@
+/* 3. HomePage Styles */
+.home-container {
+  @apply flex flex-col gap-16 max-w-5xl mx-auto py-6 relative;
+}
+
+.hero-section {
+  @apply relative overflow-hidden bg-card border border-border/30 p-8 md:p-12 transition-all duration-500 ease-out;
+  border-radius: 40px 10px 30px 15px / 15px 35px 12px 40px;
+  box-shadow: 0 10px 35px -10px oklch(0.2 0.025 40 / 5%);
+}
+
+.dark .hero-section {
+  box-shadow: 0 10px 35px -10px oklch(0 0 0 / 30%);
+}
+
+.hero-gradient-overlay {
+  @apply absolute inset-0 bg-gradient-to-tr from-accent/5 via-transparent to-transparent pointer-events-none;
+}
+
+.hero-content {
+  @apply flex flex-col lg:flex-row items-center justify-between gap-8 relative z-10;
+}
+
+.hero-text-block {
+  @apply flex-1 text-left space-y-6;
+}
+
+.hero-badge {
+  @apply inline-flex items-center gap-2 rounded-full border border-accent bg-accent/5 px-3 py-1 text-xs font-bold text-accent;
+}
+
+.hero-title {
+  @apply text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-foreground font-serif leading-none;
+}
+
+.hero-accent-text {
+  @apply text-accent underline decoration-2 decoration-accent/40 underline-offset-8;
+}
+
+.hero-desc {
+  @apply text-base md:text-lg text-muted-foreground font-semibold max-w-lg leading-relaxed;
+}
+
+.hero-button-group {
+  @apply flex flex-wrap gap-4 pt-2;
+}
+
+.primary-btn {
+  @apply flex items-center gap-2 bg-primary text-primary-foreground font-bold px-6 py-3 transition-all duration-500 ease-out active:scale-95 border border-transparent;
+  border-radius: 12px 20px 8px 15px / 15px 8px 18px 10px;
+  box-shadow: 0 4px 15px -3px oklch(0.2 0.025 40 / 12%);
+}
+
+.primary-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px -3px oklch(0.2 0.025 40 / 18%);
+}
+
+.primary-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px 0px var(--accent);
+}
+
+.secondary-btn {
+  @apply flex items-center gap-2 border border-border bg-card font-bold px-6 py-3 transition-all duration-500 ease-out active:scale-95 text-foreground;
+  border-radius: 18px 8px 15px 12px / 8px 15px 10px 18px;
+  box-shadow: 0 4px 12px -3px oklch(0.2 0.025 40 / 4%);
+}
+
+.secondary-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px -3px oklch(0.2 0.025 40 / 6%);
+}
+
+.secondary-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px 0px var(--primary);
+}
+
+.hero-visual-block {
+  @apply flex-grow lg:flex-1 flex justify-center relative w-full max-w-md lg:max-w-none;
+}
+
+.hero-visual-container {
+  @apply relative w-80 h-80 md:w-96 md:h-96 flex items-center justify-center;
+}
+
+.visual-steams {
+  @apply absolute -top-4 flex gap-3 justify-center w-full;
+}
+
+.visual-steam {
+  @apply bg-accent/25 rounded-full;
+  animation: steam 4s ease-in-out infinite;
+}
+
+.visual-glow {
+  @apply absolute inset-0 rounded-full bg-accent/5 blur-3xl;
+  animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.visual-dial {
+  @apply relative w-64 h-64 md:w-72 md:h-72 rounded-full border-2 border-dashed border-primary/50 flex items-center justify-center;
+  animation: spin 60s linear infinite;
+}
+
+.dial-dot-accent {
+  @apply absolute top-3 w-4 h-4 rounded-full bg-accent/70 shadow-sm;
+}
+
+.dial-dot-primary {
+  @apply absolute bottom-3 w-3 h-3 rounded-full bg-primary/50;
+}
+
+.dial-dot-muted {
+  @apply absolute right-6 w-2 h-2 rounded-full bg-muted-foreground/40;
+}
+
+.visual-card {
+  @apply absolute w-44 h-44 md:w-52 md:h-52 bg-card border border-border flex flex-col items-center justify-center transition-all duration-500 hover:rotate-3;
+  border-radius: 24px 40px 18px 30px / 30px 18px 40px 24px;
+  box-shadow: 0 10px 25px -10px oklch(0.2 0.025 40 / 6%);
+}
+
+.visual-card:hover {
+  transform: translate(-1px, -1px) scale(1.02);
+  box-shadow: 0 12px 30px -10px oklch(0.2 0.025 40 / 8%);
+}
+
+.visual-card:hover {
+  transform: translate(-3px, -3px) scale(1.02);
+  box-shadow: 8px 8px 0px 0px var(--primary);
+}
+
+.visual-cup-icon {
+  @apply h-20 w-20 md:h-24 md:w-24 text-primary;
+  animation: pulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.visual-state-label {
+  @apply absolute bottom-5 flex items-center gap-2 text-xs md:text-sm font-extrabold text-accent;
+}
+
+.modes-section {
+  @apply space-y-8;
+}
+
+.modes-header {
+  @apply text-center max-w-2xl mx-auto space-y-3;
+}
+
+.modes-title {
+  @apply text-3xl font-black tracking-tight sm:text-4xl text-foreground font-serif;
+}
+
+.modes-desc {
+  @apply text-muted-foreground font-bold text-sm sm:text-base;
+}
+
+.modes-grid {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-8;
+}
+
+.mode-card {
+  @apply relative h-full flex flex-col justify-between bg-card border border-border/35 p-6 transition-all duration-500 ease-out;
+  border-radius: 20px 8px 24px 12px / 12px 24px 8px 20px;
+  box-shadow: 0 10px 25px -10px oklch(0.2 0.025 40 / 5%);
+}
+
+.dark .mode-card {
+  box-shadow: 0 10px 25px -10px oklch(0 0 0 / 25%);
+}
+
+.mode-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 35px -10px oklch(0.2 0.025 40 / 7%);
+}
+
+.dark .mode-card:hover {
+  box-shadow: 0 14px 35px -10px oklch(0 0 0 / 35%);
+}
+
+.mode-header {
+  @apply flex items-center justify-between;
+}
+
+.mode-icon-wrapper {
+  @apply p-3 border border-border/30 rounded-xl bg-secondary text-primary shadow-xs;
+  border-radius: 12px 6px 10px 8px / 8px 10px 7px 11px;
+}
+
+.mode-range-badge {
+  @apply text-xs font-extrabold px-2.5 py-1 rounded-full bg-secondary text-foreground border border-border/40;
+}
+
+.mode-body {
+  @apply space-y-4;
+}
+
+.mode-card-title {
+  @apply text-xl font-black text-foreground;
+}
+
+.mode-duration {
+  @apply text-2xl font-black text-primary;
+}
+
+.mode-desc {
+  @apply text-sm text-muted-foreground font-semibold leading-relaxed;
+}
+
+.mode-footer {
+  @apply mt-6 pt-4 border-t-2 border-primary/20 space-y-4;
+}
+
+.mode-benefit-row {
+  @apply flex items-start gap-2.5;
+}
+
+.mode-benefit-text {
+  @apply text-xs font-extrabold text-foreground;
+}
+
+.mode-action-btn {
+  @apply w-full inline-flex items-center justify-center gap-2 border border-border bg-secondary font-bold text-sm px-4 py-2.5 hover:bg-primary hover:text-primary-foreground text-foreground transition-all duration-500 ease-out;
+  border-radius: 10px 15px 8px 12px / 12px 8px 15px 10px;
+}
+
+.science-intro-section {
+  @apply bg-card border border-border/30 p-8 md:p-12 space-y-8 transition-all duration-500 ease-out;
+  border-radius: 30px 15px 40px 10px / 10px 35px 12px 30px;
+  box-shadow: 0 10px 30px -10px oklch(0.2 0.025 40 / 4%);
+}
+
+.dark .science-intro-section {
+  box-shadow: 0 10px 30px -10px oklch(0 0 0 / 25%);
+}
+
+.science-intro-section:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 35px -10px oklch(0.2 0.025 40 / 6%);
+}
+
+.science-intro-header {
+  @apply flex flex-col md:flex-row items-start md:items-center justify-between gap-6;
+}
+
+.science-intro-title {
+  @apply text-2xl md:text-3xl font-black tracking-tight text-foreground;
+}
+
+.science-intro-subtitle {
+  @apply text-muted-foreground font-semibold text-sm;
+}
+
+.science-intro-link {
+  @apply text-sm font-bold text-primary hover:text-accent flex items-center gap-1.5 transition-colors underline decoration-primary/30 underline-offset-4;
+}
+
+.science-intro-steps {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-8 relative;
+}
+
+.science-step {
+  @apply flex flex-col gap-3 relative;
+}
+
+.step-number {
+  @apply flex h-12 w-12 items-center justify-center border border-border bg-secondary shadow-xs text-lg font-black text-accent;
+  border-radius: 14px 6px 12px 8px / 8px 12px 7px 10px;
+}
+
+.step-title {
+  @apply text-lg font-black text-foreground;
+}
+
+.step-desc {
+  @apply text-xs sm:text-sm text-muted-foreground font-semibold leading-relaxed;
+}

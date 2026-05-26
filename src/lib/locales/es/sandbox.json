@@ -1,0 +1,7 @@
+{
+  "title": "Herramientas de Sandbox de Desarrollador",
+  "desc": "Acelerar la velocidad del temporizador para pruebas y validación de código.",
+  "speed_on": "Velocidad Rápida (Activa)",
+  "speed_off": "Probar Velocidad",
+  "toggle_label": "Activar/desactivar velocidad acelerada del sandbox"
+}

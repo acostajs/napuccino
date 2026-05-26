@@ -1,0 +1,23 @@
+{
+  "napuccino": {
+    "title": "The Napuccino",
+    "durationDisplay": "20 min",
+    "range": "Recommended",
+    "description": "Locked strictly to 20 minutes. Drink your espresso, close your eyes, and wake up supercharged.",
+    "benefit": "Double boost: Clears fatigue + triggers high-alertness receptors."
+  },
+  "powernap": {
+    "title": "Power Nap",
+    "durationDisplay": "15 min",
+    "range": "10-20 mins",
+    "description": "Locked strictly to 15 minutes. Pure light sleep to prevent grogginess and restore focus.",
+    "benefit": "Instant motor skill recovery and sensory reset."
+  },
+  "consolidation": {
+    "title": "Consolidation Block",
+    "durationDisplay": "45 min",
+    "range": "30-60 mins",
+    "description": "Locked strictly to 45 minutes. Extended rest for deep sleep cognitive and motor cleanup.",
+    "benefit": "Dramatically improves memory retention and logical reasoning."
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "title": "La Ciencia de las",
+  "title_accent": "Siestas de Alto Rendimiento",
+  "subtitle": "Tomar una siesta no es pereza; es un bio-hack. Descubre la dinámica neuroquímica detrás de la eliminación de adenosina, la absorción de cafeína y los ciclos de sueño óptmos.",
+  "pillars_heading": "Pilares Biológicos",
+  "benefits_heading": "Beneficios Demostrados",
+  "synergy_title": "La Sinergia Molecular: Café vs Sueño vs Napuccino",
+  "topics": {
+    "adenosine": {
+      "title": "1. Adenosina y Presión de Sueño",
+      "summary": "Comprender la batería biológica orgánica que desencadena la somnolencia.",
+      "p1": "A lo largo del día, a medida que tu cerebro quema energía, se acumula constantemente un compuesto químico llamado **adenosina**. La adenosina se une a receptores específicos en tu sistema nervioso central, amortiguando gradualmente la actividad neuronal y creando lo que los científicos llaman **presión de sueño**.",
+      "p2": "Cuanto mayor sea la concentración de adenosina, más somnoliento y fatigado te sentirás. Cuando duermes, tu cerebro elimina de forma natural esta acumulación, reiniciando tu batería biológica.",
+      "secret_title": "El Secreto de la Siesta:",
+      "secret_desc": " ¡Incluso una siesta diminuta de 15 a 20 minutos elimina una cantidad sustancial de adenosina de tus receptores, dejándolos libres para que la cafeína los bloquee!"
+    },
+    "caffeine": {
+      "title": "2. El Retraso de la Cafeína de 20 Minutos",
+      "summary": "Por qué tomar café *justo antes* de dormir produce un superpoder matemático.",
+      "p1": "Cuando bebes una taza de café, la cafeína no llega instantáneamente a tu cerebro. Debe pasar por tu estómago, ingresar al intestino delgado, absorberse en el torrente sanguíneo y finalmente cruzar la barrera hematoencefálica.",
+      "p2": "Este viaje metabólico toma exactamente **de 20 a 30 minutos**.",
+      "p3": "Por lo tanto, si bebes café y te acuestas de inmediato, la cafeína está completamente inactiva durante los siguientes 20 minutos. Funciona como un temporizador silencioso. En el momento en que te estás despertando, la cafeína alcanza su concentración máxima en el cerebro, creando una onda de choque de alerta doblemente amplificada."
+    },
+    "grogginess": {
+      "title": "3. Prevención de la Inercia del Sueño (La Trampa del Aturdimiento)",
+      "summary": "Por qué dormir exactamente 20 minutos es estructuralmente superior a una siesta de 45 minutos.",
+      "p1": "Un ciclo de sueño humano estándar consta de múltiples etapas: sueño ligero (etapas 1 y 2), sueño profundo de ondas lentas (etapa 3) y sueño REM.",
+      "p2": "Se necesitan aproximadamente **30 minutos** para pasar del sueño ligero al sueño profundo de ondas lentas. Si te despiertas *durante* el sueño profundo, tu cerebro experimenta una severa **inercia del sueño**: la sensación pesada, desorientada y aturdida que puede arruinar el resto de tu día.",
+      "p3": "Al bloquear nuestro Napuccino a **20 minutos** y la Siesta de Poder a **15 minutos**, garantizamos que permanezcas estrictamente dentro del sueño ligero, lo que te permite despertarte de inmediato refrescado y alerta, con cero fatiga posterior a la siesta."
+    }
+  },
+  "benefits": {
+    "learning": {
+      "title": "Aprendizaje Acelerado",
+      "desc": "Los estudios demuestran que las siestas con café mejoran la memoria de trabajo, facilitando el procesamiento y la categorización de información compleja."
+    },
+    "sensory": {
+      "title": "Reinicio Sensorial",
+      "desc": "Elimina la sobrecarga sensorial y el estrés, reiniciando la fatiga visual y las velocidades de procesamiento mental."
+    },
+    "motor": {
+      "title": "Coordinación Motora",
+      "desc": "Mejora la precisión de las habilidades motoras y los tiempos de reacción rápidos, fundamental para atletas, músicos y programadores."
+    }
+  },
+  "quote": {
+    "text": "\"Descubrimos que combinar la ingesta de cafeína con una breve sesión de sueño conduce a mejoras masivas en la precisión de las tareas visuales, las habilidades motoras y la memoria de trabajo en comparación con la cafeína o el sueño solos.\"",
+    "source": "— Estudio de Investigación del Sueño de la Universidad de Loughborough"
+  },
+  "synergy": {
+    "coffee_title": "A. Café Solo",
+    "coffee_desc": "Las moléculas de cafeína compiten con bloques masivos de adenosina existente. Los receptores ya están saturados, lo que conduce a un pico silencioso y nerviosismo severo.",
+    "sleep_title": "B. Sueño Solo",
+    "sleep_desc": "Elimina la adenosina con éxito, pero no agrega moléculas estimulantes. La alerta aumenta lentamente, a veces acompañada de inercia del sueño inicial.",
+    "napuccino_title": "C. El Napuccino",
+    "napuccino_desc": "El sueño elimina por completo la adenosina de los receptores cerebrales. La cafeína llega inmediatamente después, uniéndose perfectamente a los receptores vacíos. ¡La alerta se maximiza!"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "napuccino": {
+    "title": "El Napuccino",
+    "durationDisplay": "20 min",
+    "range": "Recomendado",
+    "description": "Bloqueado estrictamente a 20 minutos. Bebe tu espresso, cierra los ojos y despierta supercargado.",
+    "benefit": "Doble impulso: Elimina la fatiga + activa los receptores de alta alerta."
+  },
+  "powernap": {
+    "title": "Siesta de Poder",
+    "durationDisplay": "15 min",
+    "range": "10-20 min",
+    "description": "Bloqueado estrictamente a 15 minutos. Sueño ligero puro para prevenir la pesadez y restaurar el enfoque.",
+    "benefit": "Recuperación instantánea de habilidades motoras y reinicio sensorial."
+  },
+  "consolidation": {
+    "title": "Bloque de Consolidación",
+    "durationDisplay": "45 min",
+    "range": "30-60 min",
+    "description": "Bloqueado estrictamente a 45 minutos. Descanso prolongado para la limpieza cognitiva y motora del sueño profundo.",
+    "benefit": "Mejora dramáticamente la retención de memoria y el razonamiento lógico."
+  }
+}

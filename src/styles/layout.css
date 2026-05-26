@@ -1,0 +1,142 @@
+/* 1. App General Layout & Footer */
+.app-container {
+  @apply min-h-screen w-full flex flex-col justify-between overflow-x-hidden pb-12 transition-colors duration-500 bg-transparent text-foreground relative;
+}
+
+.bg-radial-highlight {
+  @apply absolute top-0 left-0 right-0 h-[400px] bg-gradient-to-b from-primary/5 to-transparent pointer-events-none z-0;
+}
+
+.app-content-wrapper {
+  @apply relative z-10 w-full flex flex-col gap-6 pt-4 px-4 sm:px-6;
+}
+
+.app-main {
+  @apply w-full flex-grow;
+}
+
+.app-footer {
+  @apply relative z-10 w-full max-w-5xl mx-auto px-6 mt-16 text-center;
+}
+
+.footer-content {
+  @apply border-t-2 border-primary/20 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4;
+}
+
+.footer-text {
+  @apply text-xs text-muted-foreground font-bold tracking-wide uppercase;
+}
+
+.footer-links {
+  @apply flex gap-4 text-xs font-extrabold text-muted-foreground;
+}
+
+.footer-link {
+  @apply hover:text-accent transition-colors cursor-pointer underline decoration-primary/30 underline-offset-4;
+}
+
+/* 2. Navbar Styles */
+.navbar-header {
+  @apply sticky top-4 z-50 mx-auto w-full max-w-5xl;
+}
+
+.navbar-container {
+  @apply flex flex-col h-auto gap-3 bg-card px-4 py-3 md:flex-row md:h-16 md:py-0 md:px-6 md:justify-between md:items-center md:gap-0 border border-border/30 transition-all duration-500 ease-out;
+  border-radius: 18px 10px 18px 10px / 10px 18px 8px 20px;
+  box-shadow: 0 8px 30px -10px oklch(0.2 0.025 40 / 4%);
+}
+
+.dark .navbar-container {
+  box-shadow: 0 8px 30px -10px oklch(0 0 0 / 25%);
+}
+
+@media (min-width: 768px) {
+  .navbar-container {
+    border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  }
+}
+
+.navbar-logo-btn {
+  @apply flex items-center gap-3 transition-all duration-500 ease-out hover:opacity-85 hover:scale-[1.02];
+}
+
+.logo-badge {
+  @apply relative flex h-10 w-10 items-center justify-center border border-border text-primary overflow-hidden;
+  border-radius: 12px 6px 10px 7px / 8px 10px 7px 11px;
+  background-color: var(--mode-powernap-start);
+  color: white;
+}
+
+.logo-steam-line {
+  @apply w-0.5 h-2 bg-primary/60 rounded-full;
+  animation: steam 4s ease-in-out infinite;
+}
+
+.logo-brand-name {
+  @apply block text-xl font-black tracking-tight text-foreground font-serif;
+  color: var(--accent);
+}
+
+.logo-sub-tag {
+  @apply block text-[10px] font-bold text-muted-foreground -mt-1 tracking-wider uppercase;
+}
+
+.navbar-nav {
+  @apply flex items-center justify-around w-full md:w-auto gap-1 rounded-xl bg-secondary/80 p-0.5 border border-border/30;
+}
+
+.navbar-tab-btn {
+  @apply relative flex items-center justify-center flex-grow md:flex-grow-0 gap-2 rounded-lg px-2 sm:px-4 py-1.5 text-[11px] sm:text-sm font-extrabold transition-all duration-500 ease-out text-muted-foreground hover:text-foreground;
+}
+
+.navbar-tab-btn-active {
+  @apply text-primary shadow-xs;
+  background-color: oklch(0.72 0.11 75 / 35%);
+  border: 1px solid oklch(0.2 0.025 40 / 25%);
+  border-radius: 8px 14px 7px 10px / 10px 7px 12px 8px;
+}
+
+.dark .navbar-tab-btn-active {
+  background-color: oklch(0.71 0.14 45 / 35%);
+  border-color: oklch(0.94 0.015 70 / 25%);
+}
+
+.theme-toggle-btn {
+  @apply flex h-10 w-10 items-center justify-center border border-border bg-card text-foreground transition-all duration-500 ease-out hover:bg-secondary hover:scale-105 active:scale-95;
+  border-radius: 14px 6px 12px 8px / 8px 12px 7px 10px;
+}
+
+.navbar-mobile-row {
+  @apply flex w-full items-center justify-between md:w-auto;
+}
+
+.navbar-controls-mobile {
+  @apply flex items-center gap-2 md:hidden;
+}
+
+.navbar-controls-desktop {
+  @apply hidden md:flex items-center gap-3;
+}
+
+[popover] {
+  border: none;
+  background: none;
+  color: inherit;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+}
+
+.locale-dropdown {
+  @apply absolute right-0 mt-2 w-10 border border-border bg-card text-foreground z-50 overflow-hidden flex flex-col gap-1 p-1;
+  box-shadow: 0 4px 15px -2px oklch(0.2 0.025 40 / 6%);
+  border-radius: 12px 6px 10px 8px / 8px 10px 7px 11px;
+}
+
+.locale-option-btn {
+  @apply w-full h-8 flex items-center justify-center text-[11px] font-extrabold transition-all duration-500 ease-out uppercase border-2 border-transparent rounded-md hover:bg-secondary text-muted-foreground hover:text-foreground;
+}
+
+.locale-option-btn-active {
+  @apply bg-primary text-primary-foreground font-black hover:bg-primary;
+}

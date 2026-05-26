@@ -1,0 +1,23 @@
+{
+  "napuccino": {
+    "title": "Le Napuccino",
+    "durationDisplay": "20 min",
+    "range": "Recommandé",
+    "description": "Verrouillé strictement à 20 minutes. Buvez votre espresso, fermez les yeux et réveillez-vous surboosté.",
+    "benefit": "Double effet : Élimine la fatigue + active les récepteurs de vigilance."
+  },
+  "powernap": {
+    "title": "Sieste Éclair",
+    "durationDisplay": "15 min",
+    "range": "10-20 min",
+    "description": "Verrouillé strictement à 15 minutes. Sommeil léger pur pour éviter la somnolence et restaurer la concentration.",
+    "benefit": "Récupération motrice instantanée et réinitialisation sensorielle."
+  },
+  "consolidation": {
+    "title": "Bloc de Consolidation",
+    "durationDisplay": "45 min",
+    "range": "30-60 min",
+    "description": "Verrouillé strictement à 45 minutes. Repos prolongé pour le nettoyage cognitif et moteur en sommeil profond.",
+    "benefit": "Améliore considérablement la rétention de la mémoire et le raisonnement logique."
+  }
+}

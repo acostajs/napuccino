@@ -1,0 +1,34 @@
+{
+  "idle": {
+    "title": "Set Your Sleep Wave",
+    "desc": "Select your locked scientific target block. Make sure to prepare your coffee.",
+    "minute_short": "m",
+    "initiate": "Initiate Countdown"
+  },
+  "pre": {
+    "badge": "Transition Wave",
+    "title": "Prepare to Fall Asleep",
+    "desc": "Drink your coffee now if you haven't! Follow the breathing guide below to calm your mind.",
+    "breathe_rest": "Breathe & Rest",
+    "skip": "Skip Pre-Countdown"
+  },
+  "sounds": {
+    "transition_title": "Transition Sound (Active Now)",
+    "alarm_title": "Wake-Up Alarm (Audition on tap)",
+    "ambient_title": "Ambient Sound"
+  },
+  "sleep": {
+    "active": "{mode} Active",
+    "desc": "Adenosine clearance cycle currently in progress. Rest comfortably.",
+    "napping": "Napping...",
+    "sound_machine": "Sleep Sound Machine",
+    "cancel": "Cancel Nap Loop",
+    "mute": "Mute sounds",
+    "unmute": "Unmute sounds"
+  },
+  "alarm": {
+    "title": "Time to Conquer!",
+    "desc": "Your 20 minutes is up. The caffeine has successfully crossed into your brain receptors. Rise and shine!",
+    "action": "Rise and Grind"
+  }
+}
