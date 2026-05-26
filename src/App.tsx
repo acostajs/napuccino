@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Navbar } from "./components/Navbar";
 import { HomePage } from "./components/HomePage";
 import { TimerPage } from "./components/TimerPage";
 import { SciencePage } from "./components/SciencePage";
 import "./index.css";
 
-export function App() {
+export function App(): React.ReactElement {
   const [activeTab, setActiveTab] = useState<"home" | "timer" | "science">("home");
   
   const [theme, setTheme] = useState<"light" | "dark">(() => {
@@ -26,7 +26,7 @@ export function App() {
     localStorage.setItem("napuccino-theme", theme);
   }, [theme]);
 
-  const toggleTheme = () => {
+  const toggleTheme = (): void => {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
   };
 

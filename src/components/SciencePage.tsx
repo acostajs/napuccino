@@ -1,11 +1,11 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Brain, Coffee, Zap, Award, Activity, Heart, ShieldAlert, Sparkles, ChevronDown, ChevronUp } from "lucide-react";
 import { CoffeeRing, SleepingSloth, CoffeeBeans } from "./Doodles";
 
-export function SciencePage() {
+export function SciencePage(): React.ReactElement {
   const [openSection, setOpenSection] = useState<string | null>("adenosine");
 
-  const toggleSection = (id: string) => {
+  const toggleSection = (id: string): void => {
     setOpenSection((prev) => (prev === id ? null : id));
   };
 
