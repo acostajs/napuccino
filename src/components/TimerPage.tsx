@@ -6,6 +6,9 @@ type TimerState = "idle" | "pre" | "sleep" | "alarm";
 type NapMode = "napuccino" | "powernap" | "consolidation";
 type AmbientSound = "silence" | "cafe" | "rain" | "white";
 
+/** Minimal interface satisfied by AudioBufferSourceNode, OscillatorNode, and the synthetic cafe stop-object. */
+type StoppableNode = { stop: () => void };
+
 interface ModeConfig {
   id: NapMode;
   title: string;
@@ -26,14 +29,14 @@ export function TimerPage() {
   const [alarmSound, setAlarmSound] = useState<"silence" | "harp" | "bells" | "forest">("harp");
 
   const audioCtxRef = useRef<AudioContext | null>(null);
-  const ambientNodeRef = useRef<AudioNode | null>(null);
+  const ambientNodeRef = useRef<StoppableNode | null>(null);
   const alarmNodeRef = useRef<AudioScheduledSourceNode[]>([]);
   const alarmGainRef = useRef<GainNode | null>(null);
 
   const timerStateRef = useRef<TimerState>("idle");
   const alarmSoundRef = useRef<"silence" | "harp" | "bells" | "forest">("harp");
   const isAlarmPlayingRef = useRef<boolean>(false);
-  const alarmTimeoutRef = useRef<any>(null);
+  const alarmTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     timerStateRef.current = timerState;
@@ -79,7 +82,8 @@ export function TimerPage() {
 
   const initAudio = () => {
     if (!audioCtxRef.current) {
-      audioCtxRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const AudioContextCtor = window.AudioContext ?? window.webkitAudioContext;
+      audioCtxRef.current = new AudioContextCtor();
     }
     if (audioCtxRef.current.state === "suspended") {
       audioCtxRef.current.resume();
@@ -179,8 +183,8 @@ export function TimerPage() {
       stop: () => {
         try { osc1.stop(); } catch (e) { }
         try { osc2.stop(); } catch (e) { }
-      }
-    } as any;
+      },
+    };
   };
 
   useEffect(() => {
@@ -210,7 +214,7 @@ export function TimerPage() {
   const stopAmbient = () => {
     if (ambientNodeRef.current) {
       try {
-        (ambientNodeRef.current as any).stop();
+        ambientNodeRef.current.stop();
       } catch (e) { }
       ambientNodeRef.current = null;
     }
