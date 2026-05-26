@@ -42,72 +42,72 @@
 }
 
 :root {
-  --radius: 0.75rem;
-  --background: oklch(0.98 0.01 50);
-  --foreground: oklch(0.22 0.04 35);
-  --card: oklch(0.95 0.015 50);
-  --card-foreground: oklch(0.22 0.04 35);
-  --popover: oklch(0.98 0.01 50);
-  --popover-foreground: oklch(0.22 0.04 35);
-  --primary: oklch(0.32 0.05 32);
-  --primary-foreground: oklch(0.98 0.01 50);
-  --secondary: oklch(0.91 0.025 55);
-  --secondary-foreground: oklch(0.32 0.05 32);
-  --muted: oklch(0.91 0.02 55);
-  --muted-foreground: oklch(0.5 0.03 40);
-  --accent: oklch(0.68 0.15 65);
-  --accent-foreground: oklch(0.98 0.01 50);
+  --radius: 1.5rem;
+  --background: oklch(0.94 0.025 65); /* Rich warm organic kraft notebook cover/desk */
+  --foreground: oklch(0.18 0.04 35);
+  --card: oklch(0.995 0.005 60); /* Crisp wobbly clean white paper sheet */
+  --card-foreground: oklch(0.18 0.04 35);
+  --popover: oklch(0.995 0.005 60);
+  --popover-foreground: oklch(0.18 0.04 35);
+  --primary: oklch(0.18 0.04 35);
+  --primary-foreground: oklch(0.98 0.015 65);
+  --secondary: oklch(0.90 0.03 65); /* Warm recycled paper button tags */
+  --secondary-foreground: oklch(0.18 0.04 35);
+  --muted: oklch(0.90 0.03 65);
+  --muted-foreground: oklch(0.5 0.02 45);
+  --accent: oklch(0.6 0.18 15);
+  --accent-foreground: oklch(0.99 0.01 65);
   --destructive: oklch(0.55 0.18 28);
-  --border: oklch(0.86 0.025 50);
-  --input: oklch(0.86 0.025 50);
-  --ring: oklch(0.68 0.15 65);
-  --chart-1: oklch(0.68 0.15 65);
-  --chart-2: oklch(0.32 0.05 32);
+  --border: oklch(0.85 0.035 65); /* Sketchbook margin line ink shade */
+  --input: oklch(0.85 0.035 65);
+  --ring: oklch(0.6 0.18 15);
+  --chart-1: oklch(0.6 0.18 15);
+  --chart-2: oklch(0.18 0.04 35);
   --chart-3: oklch(0.55 0.05 45);
   --chart-4: oklch(0.82 0.1 70);
   --chart-5: oklch(0.91 0.05 60);
-  --sidebar: oklch(0.98 0.01 50);
-  --sidebar-foreground: oklch(0.22 0.04 35);
-  --sidebar-primary: oklch(0.32 0.05 32);
-  --sidebar-primary-foreground: oklch(0.98 0.01 50);
-  --sidebar-accent: oklch(0.91 0.025 55);
-  --sidebar-accent-foreground: oklch(0.32 0.05 32);
-  --sidebar-border: oklch(0.86 0.025 50);
-  --sidebar-ring: oklch(0.68 0.15 65);
+  --sidebar: oklch(0.94 0.025 65);
+  --sidebar-foreground: oklch(0.18 0.04 35);
+  --sidebar-primary: oklch(0.18 0.04 35);
+  --sidebar-primary-foreground: oklch(0.98 0.015 65);
+  --sidebar-accent: oklch(0.90 0.03 65);
+  --sidebar-accent-foreground: oklch(0.18 0.04 35);
+  --sidebar-border: oklch(0.85 0.035 65);
+  --sidebar-ring: oklch(0.6 0.18 15);
 }
 
 .dark {
-  --background: oklch(0.12 0.012 35);
-  --foreground: oklch(0.96 0.015 60);
-  --card: oklch(0.16 0.02 35);
-  --card-foreground: oklch(0.96 0.015 60);
-  --popover: oklch(0.16 0.02 35);
-  --popover-foreground: oklch(0.96 0.015 60);
-  --primary: oklch(0.91 0.04 70);
-  --primary-foreground: oklch(0.16 0.02 35);
-  --secondary: oklch(0.22 0.025 35);
-  --secondary-foreground: oklch(0.91 0.04 70);
-  --muted: oklch(0.22 0.025 35);
-  --muted-foreground: oklch(0.7 0.02 60);
-  --accent: oklch(0.75 0.16 75);
-  --accent-foreground: oklch(0.12 0.012 35);
+  --background: oklch(0.09 0.012 35); /* Deep rich roasted coffee/charcoal desk */
+  --foreground: oklch(0.96 0.01 65);
+  --card: oklch(0.16 0.016 35); /* Slightly lighter cozy twilight slate board */
+  --card-foreground: oklch(0.96 0.01 65);
+  --popover: oklch(0.16 0.016 35);
+  --popover-foreground: oklch(0.96 0.01 65);
+  --primary: oklch(0.96 0.01 65);
+  --primary-foreground: oklch(0.09 0.012 35);
+  --secondary: oklch(0.20 0.018 35); /* Slate gray secondary button tab */
+  --secondary-foreground: oklch(0.96 0.01 65);
+  --muted: oklch(0.20 0.018 35);
+  --muted-foreground: oklch(0.65 0.01 65);
+  --accent: oklch(0.72 0.14 75);
+  --accent-foreground: oklch(0.09 0.012 35);
   --destructive: oklch(0.62 0.17 28);
-  --border: oklch(0.24 0.02 35);
-  --input: oklch(0.24 0.02 35);
-  --ring: oklch(0.75 0.16 75);
-  --chart-1: oklch(0.75 0.16 75);
-  --chart-2: oklch(0.91 0.04 70);
+  --border: oklch(0.22 0.015 35);
+  --input: oklch(0.22 0.015 35);
+  --ring: oklch(0.72 0.14 75);
+  --chart-1: oklch(0.72 0.14 75);
+  --chart-2: oklch(0.96 0.01 65);
   --chart-3: oklch(0.55 0.08 45);
   --chart-4: oklch(0.4 0.06 35);
   --chart-5: oklch(0.3 0.04 35);
-  --sidebar: oklch(0.16 0.02 35);
-  --sidebar-foreground: oklch(0.96 0.015 60);
-  --sidebar-primary: oklch(0.91 0.04 70);
-  --sidebar-primary-foreground: oklch(0.16 0.02 35);
-  --sidebar-accent: oklch(0.22 0.025 35);
-  --sidebar-accent-foreground: oklch(0.91 0.04 70);
-  --sidebar-border: oklch(0.24 0.02 35);
-  --sidebar-ring: oklch(0.75 0.16 75);
+  --sidebar: oklch(0.16 0.016 35);
+  --sidebar-foreground: oklch(0.96 0.01 65);
+  --sidebar-primary: oklch(0.96 0.01 65);
+  --sidebar-primary-foreground: oklch(0.09 0.012 35);
+  --sidebar-accent: oklch(0.20 0.018 35);
+  --sidebar-accent-foreground: oklch(0.96 0.01 65);
+  --sidebar-border: oklch(0.22 0.015 35);
+  --sidebar-ring: oklch(0.72 0.14 75);
 }
 
 @layer base {

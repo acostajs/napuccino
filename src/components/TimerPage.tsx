@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Coffee, BatteryCharging, Brain, Play, Square, FastForward, Volume2, VolumeX, Sparkles, AlertCircle } from "lucide-react";
+import { CoffeeRing, CrescentMoon, ZZzCloud } from "./Doodles";
 
 type TimerState = "idle" | "pre" | "sleep" | "alarm";
 type NapMode = "napuccino" | "powernap" | "consolidation";
@@ -22,11 +23,25 @@ export function TimerPage() {
   const [ambientSound, setAmbientSound] = useState<AmbientSound>("silence");
   const [testMode, setTestMode] = useState<boolean>(false);
   const [isMuted, setIsMuted] = useState<boolean>(false);
+  const [alarmSound, setAlarmSound] = useState<"silence" | "harp" | "bells" | "forest">("harp");
 
   const audioCtxRef = useRef<AudioContext | null>(null);
   const ambientNodeRef = useRef<AudioNode | null>(null);
   const alarmNodeRef = useRef<AudioScheduledSourceNode[]>([]);
   const alarmGainRef = useRef<GainNode | null>(null);
+
+  const timerStateRef = useRef<TimerState>("idle");
+  const alarmSoundRef = useRef<"silence" | "harp" | "bells" | "forest">("harp");
+  const isAlarmPlayingRef = useRef<boolean>(false);
+  const alarmTimeoutRef = useRef<any>(null);
+
+  useEffect(() => {
+    timerStateRef.current = timerState;
+  }, [timerState]);
+
+  useEffect(() => {
+    alarmSoundRef.current = alarmSound;
+  }, [alarmSound]);
 
   const modes: Record<NapMode, ModeConfig> = {
     napuccino: {
@@ -139,7 +154,7 @@ export function TimerPage() {
   const playCafeNoise = (ctx: AudioContext) => {
     const osc1 = ctx.createOscillator();
     const osc2 = ctx.createOscillator();
-    
+
     osc1.type = "sine";
     osc1.frequency.value = 90;
     osc2.type = "triangle";
@@ -162,14 +177,14 @@ export function TimerPage() {
 
     ambientNodeRef.current = {
       stop: () => {
-        try { osc1.stop(); } catch(e) {}
-        try { osc2.stop(); } catch(e) {}
+        try { osc1.stop(); } catch (e) { }
+        try { osc2.stop(); } catch (e) { }
       }
     } as any;
   };
 
   useEffect(() => {
-    if (timerState !== "sleep") {
+    if (timerState !== "sleep" && timerState !== "pre") {
       stopAmbient();
       return;
     }
@@ -196,12 +211,42 @@ export function TimerPage() {
     if (ambientNodeRef.current) {
       try {
         (ambientNodeRef.current as any).stop();
-      } catch (e) {}
+      } catch (e) { }
       ambientNodeRef.current = null;
     }
   };
 
+  const previewAlarmSound = (sound: "silence" | "harp" | "bells" | "forest") => {
+    if (sound === "silence") return;
+    initAudio();
+    const ctx = audioCtxRef.current;
+    if (!ctx) return;
+
+    const gainNode = ctx.createGain();
+    gainNode.gain.setValueAtTime(isMuted ? 0 : 0.15, ctx.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.8);
+    gainNode.connect(ctx.destination);
+
+    const osc = ctx.createOscillator();
+    osc.type = "sine";
+    if (sound === "harp") {
+      osc.frequency.setValueAtTime(440.00, ctx.currentTime);
+    } else if (sound === "bells") {
+      osc.frequency.setValueAtTime(523.25, ctx.currentTime);
+    } else if (sound === "forest") {
+      osc.frequency.setValueAtTime(880.00, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(1320.00, ctx.currentTime + 0.12);
+    }
+
+    osc.connect(gainNode);
+    osc.start();
+    osc.stop(ctx.currentTime + 1.8);
+  };
+
   const startAlarm = () => {
+    if (alarmSoundRef.current === "silence") return;
+
+    isAlarmPlayingRef.current = true;
     initAudio();
     const ctx = audioCtxRef.current;
     if (!ctx) return;
@@ -210,42 +255,87 @@ export function TimerPage() {
 
     const gainNode = ctx.createGain();
     gainNode.gain.setValueAtTime(0, ctx.currentTime);
-    gainNode.gain.linearRampToValueAtTime(isMuted ? 0 : 0.4, ctx.currentTime + 10);
+    gainNode.gain.linearRampToValueAtTime(isMuted ? 0 : 0.4, ctx.currentTime + 8);
     gainNode.connect(ctx.destination);
     alarmGainRef.current = gainNode;
 
     const playChime = (freq: number, delay: number) => {
       const osc = ctx.createOscillator();
       const oscGain = ctx.createGain();
-
       osc.type = "sine";
       osc.frequency.setValueAtTime(freq, ctx.currentTime + delay);
-      
       oscGain.gain.setValueAtTime(0, ctx.currentTime + delay);
       oscGain.gain.linearRampToValueAtTime(0.3, ctx.currentTime + delay + 0.05);
       oscGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + delay + 1.5);
-
       osc.connect(oscGain);
       oscGain.connect(gainNode);
       osc.start(ctx.currentTime + delay);
       osc.stop(ctx.currentTime + delay + 1.6);
-      
+      alarmNodeRef.current.push(osc);
+    };
+
+    const playBell = (freq: number, delay: number) => {
+      const osc = ctx.createOscillator();
+      const oscGain = ctx.createGain();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(freq, ctx.currentTime + delay);
+      oscGain.gain.setValueAtTime(0, ctx.currentTime + delay);
+      oscGain.gain.linearRampToValueAtTime(0.2, ctx.currentTime + delay + 0.02);
+      oscGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + delay + 2.5);
+      osc.connect(oscGain);
+      oscGain.connect(gainNode);
+      osc.start(ctx.currentTime + delay);
+      osc.stop(ctx.currentTime + delay + 2.6);
+      alarmNodeRef.current.push(osc);
+    };
+
+    const playForestChirp = (freq: number, delay: number) => {
+      const osc = ctx.createOscillator();
+      const oscGain = ctx.createGain();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(freq, ctx.currentTime + delay);
+      osc.frequency.exponentialRampToValueAtTime(freq * 1.5, ctx.currentTime + delay + 0.15);
+
+      oscGain.gain.setValueAtTime(0, ctx.currentTime + delay);
+      oscGain.gain.linearRampToValueAtTime(0.12, ctx.currentTime + delay + 0.03);
+      oscGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + delay + 0.25);
+
+      osc.connect(oscGain);
+      oscGain.connect(gainNode);
+      osc.start(ctx.currentTime + delay);
+      osc.stop(ctx.currentTime + delay + 0.3);
       alarmNodeRef.current.push(osc);
     };
 
     let count = 0;
     const playLoop = () => {
-      if (timerState !== "alarm") return;
+      if (!isAlarmPlayingRef.current) return;
+      if (audioCtxRef.current?.state === "suspended") return;
+
+      const currentSound = alarmSoundRef.current;
       const baseDelay = 0;
-      playChime(329.63, baseDelay);
-      playChime(392.00, baseDelay + 0.2);
-      playChime(440.00, baseDelay + 0.4);
-      playChime(523.25, baseDelay + 0.6);
-      playChime(659.25, baseDelay + 0.8);
+
+      if (currentSound === "harp") {
+        playChime(329.63, baseDelay);
+        playChime(392.00, baseDelay + 0.2);
+        playChime(440.00, baseDelay + 0.4);
+        playChime(523.25, baseDelay + 0.6);
+        playChime(659.25, baseDelay + 0.8);
+      } else if (currentSound === "bells") {
+        playBell(523.25, baseDelay);
+        playBell(587.33, baseDelay + 0.4);
+        playBell(659.25, baseDelay + 0.8);
+        playBell(783.99, baseDelay + 1.2);
+      } else if (currentSound === "forest") {
+        playForestChirp(880.00, baseDelay);
+        playForestChirp(1200.00, baseDelay + 0.15);
+        playForestChirp(880.00, baseDelay + 0.4);
+        playForestChirp(987.77, baseDelay + 0.55);
+      }
 
       count++;
-      if (count < 10) {
-        setTimeout(playLoop, 2500);
+      if (count < 25) {
+        alarmTimeoutRef.current = setTimeout(playLoop, currentSound === "forest" ? 1800 : 2500);
       }
     };
 
@@ -253,12 +343,17 @@ export function TimerPage() {
   };
 
   const stopAlarm = () => {
+    isAlarmPlayingRef.current = false;
+    if (alarmTimeoutRef.current) {
+      clearTimeout(alarmTimeoutRef.current);
+      alarmTimeoutRef.current = null;
+    }
     alarmNodeRef.current.forEach((node) => {
-      try { node.stop(); } catch (e) {}
+      try { node.stop(); } catch (e) { }
     });
     alarmNodeRef.current = [];
     if (alarmGainRef.current) {
-      try { alarmGainRef.current.disconnect(); } catch (e) {}
+      try { alarmGainRef.current.disconnect(); } catch (e) { }
       alarmGainRef.current = null;
     }
   };
@@ -329,15 +424,19 @@ export function TimerPage() {
   };
 
   const totalDuration = modes[activeMode].duration;
-  const progressPercent = timerState === "sleep" 
-    ? ((totalDuration - sleepTimeLeft) / totalDuration) * 100 
+  const progressPercent = timerState === "sleep"
+    ? ((totalDuration - sleepTimeLeft) / totalDuration) * 100
     : 0;
 
   const currentConfig = modes[activeMode];
-  
+
   return (
     <div className="timer-container">
-      
+      {/* Sketchbook Background Doodles */}
+      <CoffeeRing className="absolute left-1/2 -translate-x-1/2 top-[120px] w-96 h-96 opacity-60 pointer-events-none z-0" />
+      <CrescentMoon className="absolute hidden md:block -right-28 top-[60px] w-24 h-24 pointer-events-none z-0 rotate-[10deg] opacity-75" />
+      <ZZzCloud className="absolute hidden md:block -left-28 top-[240px] w-28 h-28 pointer-events-none z-0 rotate-[-8deg] opacity-70" />
+
       <section className="sandbox-banner">
         <div className="sandbox-content">
           <Sparkles className="h-4 w-4 text-accent animate-pulse" />
@@ -356,7 +455,7 @@ export function TimerPage() {
       </section>
 
       <div className="timer-card">
-        
+
         {timerState === "idle" && (
           <section className="idle-view">
             <div className="idle-header">
@@ -412,12 +511,76 @@ export function TimerPage() {
             <figure className="breathing-circle-wrapper">
               <div className="breathing-bg-ring" />
               <div className="breathing-dashed-ring" />
-              
+
               <div className="timer-time-display">
                 <time className="text-3xl font-extrabold text-foreground">{formatTime(preTimeLeft)}</time>
                 <figcaption className="time-label">Breathe & Rest</figcaption>
               </div>
             </figure>
+
+            {/* Transition Sound & Alarm Selector Panel */}
+            <div className="w-full space-y-5 py-4 border-t-2 border-dashed border-primary/20">
+
+              {/* Transit Sound Machine Selector */}
+              <div className="space-y-2.5">
+                <span className="flex items-center justify-center gap-1.5 text-xs font-black text-foreground uppercase tracking-wider">
+                  <Volume2 className="h-4 w-4" />
+                  Transition Sound (Active Now)
+                </span>
+                <ul className="grid grid-cols-4 gap-2">
+                  {[
+                    { id: "silence" as const, label: "Silence" },
+                    { id: "cafe" as const, label: "Cozy Cafe" },
+                    { id: "rain" as const, label: "Gentle Rain" },
+                    { id: "white" as const, label: "Pink Noise" },
+                  ].map((sound) => {
+                    const isActive = ambientSound === sound.id;
+                    return (
+                      <li key={sound.id}>
+                        <button
+                          onClick={() => setAmbientSound(sound.id)}
+                          className={`sound-option-btn ${isActive ? "sound-option-btn-active" : ""}`}
+                        >
+                          {sound.label}
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+
+              {/* Wake-up Alarm Sound Selector */}
+              <div className="space-y-2.5 pt-2">
+                <span className="flex items-center justify-center gap-1.5 text-xs font-black text-foreground uppercase tracking-wider">
+                  <Sparkles className="h-4 w-4 text-accent animate-pulse" />
+                  Wake-Up Alarm (Audition on tap)
+                </span>
+                <ul className="grid grid-cols-4 gap-2">
+                  {[
+                    { id: "silence" as const, label: "Silence" },
+                    { id: "harp" as const, label: "Harp Arp" },
+                    { id: "bells" as const, label: "Cozy Bells" },
+                    { id: "forest" as const, label: "Forest Birds" },
+                  ].map((sound) => {
+                    const isActive = alarmSound === sound.id;
+                    return (
+                      <li key={sound.id}>
+                        <button
+                          onClick={() => {
+                            setAlarmSound(sound.id);
+                            previewAlarmSound(sound.id);
+                          }}
+                          className={`sound-option-btn ${isActive ? "sound-option-btn-active" : ""}`}
+                        >
+                          {sound.label}
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+
+            </div>
 
             <div className="timer-controls">
               <button onClick={handleSkipPre} className="skip-pre-btn">
@@ -433,7 +596,7 @@ export function TimerPage() {
 
         {timerState === "sleep" && (
           <section className="sleep-view">
-            
+
             <div className="sleep-header">
               <h2 className="sleep-title">{currentConfig.title} Active</h2>
               <p className="sleep-desc">Adenosine clearance cycle currently in progress. Rest comfortably.</p>
@@ -466,12 +629,11 @@ export function TimerPage() {
                   <Volume2 className="h-4 w-4" />
                   Sleep Sound Machine
                 </span>
-                
+
                 <button
                   onClick={() => setIsMuted((prev) => !prev)}
-                  className={`p-1.5 rounded-lg border transition-all ${
-                    isMuted ? "sound-mute-btn-active" : "sound-mute-btn"
-                  }`}
+                  className={`p-1.5 rounded-lg border transition-all ${isMuted ? "sound-mute-btn-active" : "sound-mute-btn"
+                    }`}
                   title={isMuted ? "Unmute sounds" : "Mute sounds"}
                 >
                   {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
@@ -490,6 +652,37 @@ export function TimerPage() {
                     <li key={sound.id}>
                       <button
                         onClick={() => setAmbientSound(sound.id)}
+                        className={`sound-option-btn ${isActive ? "sound-option-btn-active" : ""}`}
+                      >
+                        {sound.label}
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+
+            {/* Wake-Up Alarm Selector inside Sleep View */}
+            <div className="w-full space-y-2.5 pt-2">
+              <span className="flex items-center justify-center gap-1.5 text-xs font-black text-foreground uppercase tracking-wider">
+                <Sparkles className="h-4 w-4 text-accent animate-pulse" />
+                Wake-Up Alarm (Audition on tap)
+              </span>
+              <ul className="grid grid-cols-4 gap-2">
+                {[
+                  { id: "silence" as const, label: "Silence" },
+                  { id: "harp" as const, label: "Harp Arp" },
+                  { id: "bells" as const, label: "Cozy Bells" },
+                  { id: "forest" as const, label: "Forest Birds" },
+                ].map((sound) => {
+                  const isActive = alarmSound === sound.id;
+                  return (
+                    <li key={sound.id}>
+                      <button
+                        onClick={() => {
+                          setAlarmSound(sound.id);
+                          previewAlarmSound(sound.id);
+                        }}
                         className={`sound-option-btn ${isActive ? "sound-option-btn-active" : ""}`}
                       >
                         {sound.label}
