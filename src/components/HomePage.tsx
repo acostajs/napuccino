@@ -1,11 +1,12 @@
+import React from "react";
 import { Coffee, BatteryCharging, Brain, Zap, Moon, Play, ArrowRight, Activity } from "lucide-react";
 import { CoffeeRing, SleepingSloth, ZZzCloud, CoffeeBeans } from "./Doodles";
 
-interface HomePageProps {
+type HomePageProps = {
   setActiveTab: (tab: "home" | "timer" | "science") => void;
-}
+};
 
-export function HomePage({ setActiveTab }: HomePageProps) {
+export function HomePage({ setActiveTab }: HomePageProps): React.ReactElement {
   const modes = [
     {
       id: "napuccino",

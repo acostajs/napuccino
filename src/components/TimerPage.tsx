@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Coffee, BatteryCharging, Brain, Play, Square, FastForward, Volume2, VolumeX, Sparkles, AlertCircle } from "lucide-react";
 import { CoffeeRing, CrescentMoon, ZZzCloud } from "./Doodles";
 
@@ -9,16 +9,16 @@ type AmbientSound = "silence" | "cafe" | "rain" | "white";
 /** Minimal interface satisfied by AudioBufferSourceNode, OscillatorNode, and the synthetic cafe stop-object. */
 type StoppableNode = { stop: () => void };
 
-interface ModeConfig {
+type ModeConfig = {
   id: NapMode;
   title: string;
   duration: number;
   icon: typeof Coffee;
   description: string;
   color: string;
-}
+};
 
-export function TimerPage() {
+export function TimerPage(): React.ReactElement {
   const [timerState, setTimerState] = useState<TimerState>("idle");
   const [activeMode, setActiveMode] = useState<NapMode>("napuccino");
   const [preTimeLeft, setPreTimeLeft] = useState<number>(150);
@@ -80,7 +80,7 @@ export function TimerPage() {
     }
   }, [activeMode, timerState, testMode]);
 
-  const initAudio = () => {
+  const initAudio = (): void => {
     if (!audioCtxRef.current) {
       const AudioContextCtor = window.AudioContext ?? window.webkitAudioContext;
       audioCtxRef.current = new AudioContextCtor();
@@ -90,7 +90,7 @@ export function TimerPage() {
     }
   };
 
-  const playWhiteNoise = (ctx: AudioContext) => {
+  const playWhiteNoise = (ctx: AudioContext): void => {
     const bufferSize = 2 * ctx.sampleRate;
     const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
     const output = noiseBuffer.getChannelData(0);
@@ -117,7 +117,7 @@ export function TimerPage() {
     ambientNodeRef.current = whiteNoise;
   };
 
-  const playRainNoise = (ctx: AudioContext) => {
+  const playRainNoise = (ctx: AudioContext): void => {
     const bufferSize = 2 * ctx.sampleRate;
     const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
     const output = noiseBuffer.getChannelData(0);
@@ -155,7 +155,7 @@ export function TimerPage() {
     ambientNodeRef.current = rainSource;
   };
 
-  const playCafeNoise = (ctx: AudioContext) => {
+  const playCafeNoise = (ctx: AudioContext): void => {
     const osc1 = ctx.createOscillator();
     const osc2 = ctx.createOscillator();
 
@@ -211,7 +211,7 @@ export function TimerPage() {
     return () => stopAmbient();
   }, [ambientSound, timerState, isMuted]);
 
-  const stopAmbient = () => {
+  const stopAmbient = (): void => {
     if (ambientNodeRef.current) {
       try {
         ambientNodeRef.current.stop();
@@ -220,7 +220,7 @@ export function TimerPage() {
     }
   };
 
-  const previewAlarmSound = (sound: "silence" | "harp" | "bells" | "forest") => {
+  const previewAlarmSound = (sound: "silence" | "harp" | "bells" | "forest"): void => {
     if (sound === "silence") return;
     initAudio();
     const ctx = audioCtxRef.current;
@@ -247,7 +247,7 @@ export function TimerPage() {
     osc.stop(ctx.currentTime + 1.8);
   };
 
-  const startAlarm = () => {
+  const startAlarm = (): void => {
     if (alarmSoundRef.current === "silence") return;
 
     isAlarmPlayingRef.current = true;
@@ -263,7 +263,7 @@ export function TimerPage() {
     gainNode.connect(ctx.destination);
     alarmGainRef.current = gainNode;
 
-    const playChime = (freq: number, delay: number) => {
+    const playChime = (freq: number, delay: number): void => {
       const osc = ctx.createOscillator();
       const oscGain = ctx.createGain();
       osc.type = "sine";
@@ -278,7 +278,7 @@ export function TimerPage() {
       alarmNodeRef.current.push(osc);
     };
 
-    const playBell = (freq: number, delay: number) => {
+    const playBell = (freq: number, delay: number): void => {
       const osc = ctx.createOscillator();
       const oscGain = ctx.createGain();
       osc.type = "sine";
@@ -293,7 +293,7 @@ export function TimerPage() {
       alarmNodeRef.current.push(osc);
     };
 
-    const playForestChirp = (freq: number, delay: number) => {
+    const playForestChirp = (freq: number, delay: number): void => {
       const osc = ctx.createOscillator();
       const oscGain = ctx.createGain();
       osc.type = "sine";
@@ -312,7 +312,7 @@ export function TimerPage() {
     };
 
     let count = 0;
-    const playLoop = () => {
+    const playLoop = (): void => {
       if (!isAlarmPlayingRef.current) return;
       if (audioCtxRef.current?.state === "suspended") return;
 
@@ -346,7 +346,7 @@ export function TimerPage() {
     playLoop();
   };
 
-  const stopAlarm = () => {
+  const stopAlarm = (): void => {
     isAlarmPlayingRef.current = false;
     if (alarmTimeoutRef.current) {
       clearTimeout(alarmTimeoutRef.current);
@@ -402,14 +402,14 @@ export function TimerPage() {
     };
   }, []);
 
-  const handleStart = () => {
+  const handleStart = (): void => {
     initAudio();
     setPreTimeLeft(testMode ? 10 : 150);
     setSleepTimeLeft(modes[activeMode].duration);
     setTimerState("pre");
   };
 
-  const handleStop = () => {
+  const handleStop = (): void => {
     stopAmbient();
     stopAlarm();
     setTimerState("idle");
@@ -417,11 +417,11 @@ export function TimerPage() {
     setSleepTimeLeft(modes[activeMode].duration);
   };
 
-  const handleSkipPre = () => {
+  const handleSkipPre = (): void => {
     setTimerState("sleep");
   };
 
-  const formatTime = (seconds: number) => {
+  const formatTime = (seconds: number): string => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;

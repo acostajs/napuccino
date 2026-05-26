@@ -1,13 +1,14 @@
+import React from "react";
 import { Coffee, Moon, Sun, Timer, BookOpen } from "lucide-react";
 
-interface NavbarProps {
+type NavbarProps = {
   activeTab: "home" | "timer" | "science";
   setActiveTab: (tab: "home" | "timer" | "science") => void;
   theme: "light" | "dark";
   toggleTheme: () => void;
-}
+};
 
-export function Navbar({ activeTab, setActiveTab, theme, toggleTheme }: NavbarProps) {
+export function Navbar({ activeTab, setActiveTab, theme, toggleTheme }: NavbarProps): React.ReactElement {
   const tabs = [
     { id: "home" as const, label: "Home", icon: Coffee },
     { id: "timer" as const, label: "Nap Timer", icon: Timer },
