@@ -113,7 +113,7 @@ export function HomePage({ setActiveTab }: HomePageProps): React.ReactElement {
                 <article className={`mode-card group ${mode.glowColor}`}>
                   <div className="mode-body">
                     <div className="mode-header">
-                      <div className={`mode-icon-wrapper bg-gradient-to-r ${mode.color} ${mode.darkColor}`}>
+                      <div className={`mode-icon-wrapper ${mode.color}`}>
                         <Icon className="h-6 w-6" />
                       </div>
                       <span className="mode-range-badge">{t(`modes.${mode.id}.range`)}</span>
@@ -121,7 +121,7 @@ export function HomePage({ setActiveTab }: HomePageProps): React.ReactElement {
 
                     <div className="space-y-2">
                       <h3 className="mode-card-title">{t(`modes.${mode.id}.title`)}</h3>
-                      <div className="mode-duration">{mode.durationDisplay}</div>
+                      <div className="mode-duration">{t(mode.durationDisplay)}</div>
                       <p className="mode-desc">{t(`modes.${mode.id}.description`)}</p>
                     </div>
                   </div>

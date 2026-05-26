@@ -1,27 +1,10 @@
-import {
-  Activity,
-  Award,
-  Brain,
-  ChevronDown,
-  ChevronUp,
-  Coffee,
-  Heart,
-  ShieldAlert,
-  Sparkles,
-  Zap,
-} from "lucide-react";
+import { Activity, Award, Brain, ChevronDown, Coffee, Heart, ShieldAlert, Sparkles, Zap } from "lucide-react";
 import type React from "react";
-import { useState } from "react";
 import { CoffeeBeans, CoffeeRing, SleepingSloth } from "../../components/Doodles";
 import { useI18n } from "../../lib/i18n";
 
 export function SciencePage(): React.ReactElement {
   const { t } = useI18n();
-  const [openSection, setOpenSection] = useState<string | null>("adenosine");
-
-  const toggleSection = (id: string): void => {
-    setOpenSection((prev) => (prev === id ? null : id));
-  };
 
   const scienceTopics = [
     {
@@ -114,32 +97,23 @@ export function SciencePage(): React.ReactElement {
           <ul className="accordion-list">
             {scienceTopics.map((topic) => {
               const Icon = topic.icon;
-              const isOpen = openSection === topic.id;
               return (
                 <li key={topic.id} className="accordion-item">
-                  <button
-                    type="button"
-                    onClick={() => toggleSection(topic.id)}
-                    aria-expanded={isOpen}
-                    className="accordion-trigger"
-                  >
-                    <div className="accordion-title-box">
-                      <div className="accordion-icon-box">
-                        <Icon className="h-5 w-5" />
+                  <details name="science-pillars" open={topic.id === "adenosine"} className="group outline-none">
+                    <summary className="accordion-trigger cursor-pointer list-none outline-none">
+                      <div className="accordion-title-box">
+                        <div className="accordion-icon-box">
+                          <Icon className="h-5 w-5" />
+                        </div>
+                        <div>
+                          <h3 className="accordion-title">{topic.title}</h3>
+                          <p className="accordion-summary">{topic.summary}</p>
+                        </div>
                       </div>
-                      <div>
-                        <h3 className="accordion-title">{topic.title}</h3>
-                        <p className="accordion-summary">{topic.summary}</p>
-                      </div>
-                    </div>
-                    {isOpen ? (
-                      <ChevronUp className="h-5 w-5 text-muted-foreground shrink-0" />
-                    ) : (
-                      <ChevronDown className="h-5 w-5 text-muted-foreground shrink-0" />
-                    )}
-                  </button>
-
-                  {isOpen && <article className="accordion-content">{topic.details}</article>}
+                      <ChevronDown className="h-5 w-5 text-muted-foreground shrink-0 transition-transform duration-300 group-open:rotate-180" />
+                    </summary>
+                    <article className="accordion-content">{topic.details}</article>
+                  </details>
                 </li>
               );
             })}
