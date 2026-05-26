@@ -204,9 +204,16 @@ export function TimerPage(): React.ReactElement {
 
     stopAmbient();
 
-    if (ambientSound === "white") playWhiteNoise(ctx);
-    if (ambientSound === "rain") playRainNoise(ctx);
-    if (ambientSound === "cafe") playCafeNoise(ctx);
+    switch (ambientSound) {
+      case "white": playWhiteNoise(ctx); break;
+      case "rain":  playRainNoise(ctx);  break;
+      case "cafe":  playCafeNoise(ctx);  break;
+      case "silence": break;
+      default: {
+        const _exhaustiveCheck: never = ambientSound;
+        return _exhaustiveCheck;
+      }
+    }
 
     return () => stopAmbient();
   }, [ambientSound, timerState, isMuted]);
@@ -233,13 +240,22 @@ export function TimerPage(): React.ReactElement {
 
     const osc = ctx.createOscillator();
     osc.type = "sine";
-    if (sound === "harp") {
-      osc.frequency.setValueAtTime(440.00, ctx.currentTime);
-    } else if (sound === "bells") {
-      osc.frequency.setValueAtTime(523.25, ctx.currentTime);
-    } else if (sound === "forest") {
-      osc.frequency.setValueAtTime(880.00, ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(1320.00, ctx.currentTime + 0.12);
+    switch (sound) {
+      case "harp":
+        osc.frequency.setValueAtTime(440.00, ctx.currentTime);
+        break;
+      case "bells":
+        osc.frequency.setValueAtTime(523.25, ctx.currentTime);
+        break;
+      case "forest":
+        osc.frequency.setValueAtTime(880.00, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(1320.00, ctx.currentTime + 0.12);
+        break;
+      case "silence": break;
+      default: {
+        const _exhaustiveCheck: never = sound;
+        return _exhaustiveCheck;
+      }
     }
 
     osc.connect(gainNode);
@@ -319,22 +335,31 @@ export function TimerPage(): React.ReactElement {
       const currentSound = alarmSoundRef.current;
       const baseDelay = 0;
 
-      if (currentSound === "harp") {
-        playChime(329.63, baseDelay);
-        playChime(392.00, baseDelay + 0.2);
-        playChime(440.00, baseDelay + 0.4);
-        playChime(523.25, baseDelay + 0.6);
-        playChime(659.25, baseDelay + 0.8);
-      } else if (currentSound === "bells") {
-        playBell(523.25, baseDelay);
-        playBell(587.33, baseDelay + 0.4);
-        playBell(659.25, baseDelay + 0.8);
-        playBell(783.99, baseDelay + 1.2);
-      } else if (currentSound === "forest") {
-        playForestChirp(880.00, baseDelay);
-        playForestChirp(1200.00, baseDelay + 0.15);
-        playForestChirp(880.00, baseDelay + 0.4);
-        playForestChirp(987.77, baseDelay + 0.55);
+      switch (currentSound) {
+        case "harp":
+          playChime(329.63, baseDelay);
+          playChime(392.00, baseDelay + 0.2);
+          playChime(440.00, baseDelay + 0.4);
+          playChime(523.25, baseDelay + 0.6);
+          playChime(659.25, baseDelay + 0.8);
+          break;
+        case "bells":
+          playBell(523.25, baseDelay);
+          playBell(587.33, baseDelay + 0.4);
+          playBell(659.25, baseDelay + 0.8);
+          playBell(783.99, baseDelay + 1.2);
+          break;
+        case "forest":
+          playForestChirp(880.00, baseDelay);
+          playForestChirp(1200.00, baseDelay + 0.15);
+          playForestChirp(880.00, baseDelay + 0.4);
+          playForestChirp(987.77, baseDelay + 0.55);
+          break;
+        case "silence": break;
+        default: {
+          const _exhaustiveCheck: never = currentSound;
+          return _exhaustiveCheck;
+        }
       }
 
       count++;
