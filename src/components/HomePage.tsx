@@ -57,9 +57,9 @@ export function HomePage({ setActiveTab }: HomePageProps): React.ReactElement {
               <div className="visual-glow" />
               
               <div className="visual-dial">
-                <div className="absolute top-3 w-4 h-4 rounded-full bg-accent/70 shadow-sm" />
-                <div className="absolute bottom-3 w-3 h-3 rounded-full bg-primary/50" />
-                <div className="absolute right-6 w-2 h-2 rounded-full bg-muted-foreground/40" />
+                <div className="dial-dot-accent" />
+                <div className="dial-dot-primary" />
+                <div className="dial-dot-muted" />
               </div>
               <div className="visual-card">
                 {/* Playful sketchy sleeping coffee mug illustration */}

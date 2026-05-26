@@ -64,7 +64,7 @@ export function PreView({
       </figure>
 
       {/* Transition Sound & Alarm Selector Panel */}
-      <div className="w-full space-y-5 py-4 border-t-2 border-dashed border-primary/20">
+      <div className="sound-selector-panel">
         <SoundSelector
           title="Transition Sound (Active Now)"
           icon={<Volume2 className="h-4 w-4" />}
