@@ -4,9 +4,11 @@ import { HomePage } from "./components/HomePage";
 import { Navbar } from "./components/Navbar";
 import { SciencePage } from "./components/SciencePage";
 import { TimerPage } from "./components/TimerPage";
+import { I18nProvider, useI18n } from "./lib/i18n";
 import "./index.css";
 
-export function App(): React.ReactElement {
+function AppContent(): React.ReactElement {
+  const { t } = useI18n();
   const [activeTab, setActiveTab] = useState<"home" | "timer" | "science">("home");
 
   const [theme, setTheme] = useState<"light" | "dark">(() => {
@@ -47,21 +49,27 @@ export function App(): React.ReactElement {
 
       <footer className="app-footer">
         <div className="footer-content">
-          <p className="footer-text">
-            © {new Date().getFullYear()} Napuccino. Engineered for peak cognitive performance.
-          </p>
+          <p className="footer-text">{t("footer.copyright", { year: new Date().getFullYear().toString() })}</p>
           <div className="footer-links">
             <button type="button" className="footer-link" onClick={() => setActiveTab("science")}>
-              Science
+              {t("footer.science")}
             </button>
             <span>•</span>
             <button type="button" className="footer-link" onClick={() => setActiveTab("timer")}>
-              Naps
+              {t("footer.naps")}
             </button>
           </div>
         </div>
       </footer>
     </div>
+  );
+}
+
+export function App(): React.ReactElement {
+  return (
+    <I18nProvider>
+      <AppContent />
+    </I18nProvider>
   );
 }
 

@@ -1,5 +1,6 @@
 import { Activity, ArrowRight, Moon, Play, Zap } from "lucide-react";
 import type React from "react";
+import { useI18n } from "../lib/i18n";
 import { MODES } from "../lib/modes";
 import { CoffeeBeans, CoffeeRing, SleepingSloth, ZZzCloud } from "./Doodles";
 
@@ -8,6 +9,7 @@ type HomePageProps = {
 };
 
 export function HomePage({ setActiveTab }: HomePageProps): React.ReactElement {
+  const { t } = useI18n();
   const modes = Object.values(MODES);
 
   return (
@@ -24,23 +26,20 @@ export function HomePage({ setActiveTab }: HomePageProps): React.ReactElement {
           <div className="hero-text-block">
             <div className="hero-badge">
               <Zap className="h-3 w-3" />
-              Revolutionize Your Naps
+              {t("home.hero.badge")}
             </div>
             <h1 className="hero-title">
-              Brew. Sleep. <br />
-              <span className="hero-accent-text">Conquer.</span>
+              {t("home.hero.title_line1")} <br />
+              <span className="hero-accent-text">{t("home.hero.title_accent")}</span>
             </h1>
-            <p className="hero-desc">
-              Meet Napuccino: the scientific intersection of rich caffeine absorption and optimized sleep states. Beat
-              afternoon fatigue with mathematical precision.
-            </p>
+            <p className="hero-desc">{t("home.hero.desc")}</p>
             <div className="hero-button-group">
               <button type="button" onClick={() => setActiveTab("timer")} className="primary-btn group">
                 <Play className="h-4 w-4 fill-current group-hover:translate-x-0.5 transition-transform" />
-                Start Optimized Nap
+                {t("home.cta.start")}
               </button>
               <button type="button" onClick={() => setActiveTab("science")} className="secondary-btn">
-                Explore the Science
+                {t("home.cta.explore")}
                 <ArrowRight className="h-4 w-4 text-muted-foreground" />
               </button>
             </div>
@@ -72,7 +71,7 @@ export function HomePage({ setActiveTab }: HomePageProps): React.ReactElement {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 >
-                  <title>Sleeping coffee mug illustration</title>
+                  <title>{t("home.hero.illustration_title")}</title>
                   {/* Steaming waves */}
                   <path d="M42 22 Q45 15 40 8" />
                   <path d="M50 20 Q53 12 48 6" />
@@ -92,7 +91,7 @@ export function HomePage({ setActiveTab }: HomePageProps): React.ReactElement {
                 </svg>
                 <div className="visual-state-label">
                   <Moon className="h-4 w-4" />
-                  Nap State: Locked
+                  {t("home.hero.nap_state_locked")}
                 </div>
               </div>
             </div>
@@ -102,11 +101,8 @@ export function HomePage({ setActiveTab }: HomePageProps): React.ReactElement {
 
       <section className="modes-section">
         <div className="modes-header">
-          <h2 className="modes-title">Choose Your Rhythm</h2>
-          <p className="modes-desc">
-            Select one of three scientifically backed nap structures optimized to clear brain fatigue without causing
-            grogginess.
-          </p>
+          <h2 className="modes-title">{t("home.modes.title")}</h2>
+          <p className="modes-desc">{t("home.modes.desc")}</p>
         </div>
 
         <ul className="modes-grid">
@@ -120,13 +116,13 @@ export function HomePage({ setActiveTab }: HomePageProps): React.ReactElement {
                       <div className={`mode-icon-wrapper bg-gradient-to-r ${mode.color} ${mode.darkColor}`}>
                         <Icon className="h-6 w-6" />
                       </div>
-                      <span className="mode-range-badge">{mode.range}</span>
+                      <span className="mode-range-badge">{t(`modes.${mode.id}.range`)}</span>
                     </div>
 
                     <div className="space-y-2">
-                      <h3 className="mode-card-title">{mode.title}</h3>
+                      <h3 className="mode-card-title">{t(`modes.${mode.id}.title`)}</h3>
                       <div className="mode-duration">{mode.durationDisplay}</div>
-                      <p className="mode-desc">{mode.description}</p>
+                      <p className="mode-desc">{t(`modes.${mode.id}.description`)}</p>
                     </div>
                   </div>
 
@@ -134,11 +130,12 @@ export function HomePage({ setActiveTab }: HomePageProps): React.ReactElement {
                     <div className="mode-benefit-row">
                       <Activity className="h-4 w-4 text-accent mt-0.5 shrink-0" />
                       <span className="mode-benefit-text">
-                        <strong className="text-accent font-semibold">Benefit:</strong> {mode.benefit}
+                        <strong className="text-accent font-semibold">{t("home.modes.benefit_label")}</strong>{" "}
+                        {t(`modes.${mode.id}.benefit`)}
                       </span>
                     </div>
                     <button type="button" onClick={() => setActiveTab("timer")} className="mode-action-btn">
-                      Select Mode
+                      {t("home.modes.select_mode")}
                       <ArrowRight className="h-3 w-3" />
                     </button>
                   </div>
@@ -152,13 +149,11 @@ export function HomePage({ setActiveTab }: HomePageProps): React.ReactElement {
       <section className="science-intro-section">
         <div className="science-intro-header">
           <div className="space-y-2">
-            <h2 className="science-intro-title">The 30-Second Napuccino Science</h2>
-            <p className="science-intro-subtitle">
-              How drinking caffeine before a nap creates a productivity superpower.
-            </p>
+            <h2 className="science-intro-title">{t("home.science.title")}</h2>
+            <p className="science-intro-subtitle">{t("home.science.subtitle")}</p>
           </div>
           <button type="button" onClick={() => setActiveTab("science")} className="science-intro-link group">
-            Read deep science dive
+            {t("home.science.read_deep")}
             <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
           </button>
         </div>
@@ -166,29 +161,20 @@ export function HomePage({ setActiveTab }: HomePageProps): React.ReactElement {
         <ol className="science-intro-steps">
           <li className="science-step">
             <div className="step-number">1</div>
-            <h3 className="step-title">Brew & Ingest</h3>
-            <p className="step-desc">
-              Drink a cup of coffee or shot of espresso *rapidly*. You want the caffeine entering your bloodstream all
-              at once.
-            </p>
+            <h3 className="step-title">{t("home.science.step1_title")}</h3>
+            <p className="step-desc">{t("home.science.step1_desc")}</p>
           </li>
 
           <li className="science-step">
             <div className="step-number">2</div>
-            <h3 className="step-title">Immediate Snooze</h3>
-            <p className="step-desc">
-              Lie down immediately and set the locked 20-minute timer. As you sleep, your brain clears sleep-inducing
-              **adenosine**.
-            </p>
+            <h3 className="step-title">{t("home.science.step2_title")}</h3>
+            <p className="step-desc">{t("home.science.step2_desc")}</p>
           </li>
 
           <li className="science-step">
             <div className="step-number">3</div>
-            <h3 className="step-title">Supercharged Wake</h3>
-            <p className="step-desc">
-              At minute 20, you wake up. The caffeine has just reached your brain. Since adenosine is cleared, the
-              caffeine binds flawlessly.
-            </p>
+            <h3 className="step-title">{t("home.science.step3_title")}</h3>
+            <p className="step-desc">{t("home.science.step3_desc")}</p>
           </li>
         </ol>
       </section>

@@ -1,5 +1,7 @@
 import { BookOpen, Coffee, Moon, Sun, Timer } from "lucide-react";
 import type React from "react";
+import { useEffect, useRef, useState } from "react";
+import { useI18n } from "../lib/i18n";
 
 type NavbarProps = {
   activeTab: "home" | "timer" | "science";
@@ -9,11 +11,34 @@ type NavbarProps = {
 };
 
 export function Navbar({ activeTab, setActiveTab, theme, toggleTheme }: NavbarProps): React.ReactElement {
+  const { t, locale, setLocale } = useI18n();
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [desktopOpen, setDesktopOpen] = useState(false);
+  const mobileRef = useRef<HTMLDivElement>(null);
+  const desktopRef = useRef<HTMLDivElement>(null);
+
   const tabs = [
-    { id: "home" as const, label: "Home", icon: Coffee },
-    { id: "timer" as const, label: "Nap Timer", icon: Timer },
-    { id: "science" as const, label: "Science", icon: BookOpen },
+    { id: "home" as const, label: t("nav.home"), icon: Coffee },
+    { id: "timer" as const, label: t("nav.timer"), icon: Timer },
+    { id: "science" as const, label: t("nav.science"), icon: BookOpen },
   ];
+
+  const languages = [{ code: "en" as const }, { code: "es" as const }, { code: "fr" as const }];
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent): void {
+      if (mobileRef.current && !mobileRef.current.contains(event.target as Node)) {
+        setMobileOpen(false);
+      }
+      if (desktopRef.current && !desktopRef.current.contains(event.target as Node)) {
+        setDesktopOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <header className="navbar-header">
@@ -30,13 +55,52 @@ export function Navbar({ activeTab, setActiveTab, theme, toggleTheme }: NavbarPr
               <Coffee className="h-5 w-5 mt-1.5" />
             </div>
             <div className="text-left">
-              <span className="logo-brand-name">Napuccino</span>
-              <span className="logo-sub-tag">Coffee Nap Optimizer</span>
+              <span className="logo-brand-name">{t("nav.brand")}</span>
+              <span className="logo-sub-tag">{t("nav.sub")}</span>
             </div>
           </button>
 
-          {/* Theme Toggle (Mobile Only) */}
-          <div className="md:hidden flex items-center">
+          {/* Controls (Mobile Only) */}
+          <div className="md:hidden flex items-center gap-2">
+            <div className="relative" ref={mobileRef}>
+              <button
+                type="button"
+                onClick={() => setMobileOpen((prev) => !prev)}
+                className="theme-toggle-btn text-[13px] font-black tracking-tight text-foreground uppercase"
+              >
+                {locale}
+              </button>
+
+              {mobileOpen && (
+                <ul
+                  className="absolute right-0 mt-2 w-10 border-2 border-primary bg-card text-foreground shadow-[3px_3px_0px_0px_var(--primary)] z-50 overflow-hidden flex flex-col gap-1 p-1"
+                  style={{ borderRadius: "12px 6px 10px 8px / 8px 10px 7px 11px" }}
+                >
+                  {languages.map((lang) => {
+                    const isSelected = lang.code === locale;
+                    return (
+                      <li key={lang.code} className="w-full">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setLocale(lang.code);
+                            setMobileOpen(false);
+                          }}
+                          className={`w-full h-8 flex items-center justify-center text-[11px] font-extrabold transition-all duration-150 uppercase border-2 border-transparent rounded-md ${
+                            isSelected
+                              ? "bg-primary text-primary-foreground font-black"
+                              : "hover:bg-secondary text-muted-foreground hover:text-foreground"
+                          }`}
+                        >
+                          {lang.code}
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
+            </div>
+
             <button type="button" onClick={toggleTheme} aria-label="Toggle Theme" className="theme-toggle-btn">
               {theme === "dark" ? (
                 <Sun className="h-5 w-5 text-accent animate-spin" style={{ animationDuration: "12s" }} />
@@ -66,8 +130,47 @@ export function Navbar({ activeTab, setActiveTab, theme, toggleTheme }: NavbarPr
           })}
         </nav>
 
-        {/* Theme Toggle (Desktop Only) */}
-        <div className="hidden md:flex items-center gap-2">
+        {/* Controls (Desktop Only) */}
+        <div className="hidden md:flex items-center gap-3">
+          <div className="relative" ref={desktopRef}>
+            <button
+              type="button"
+              onClick={() => setDesktopOpen((prev) => !prev)}
+              className="theme-toggle-btn text-[13px] font-black tracking-tight text-foreground uppercase"
+            >
+              {locale}
+            </button>
+
+            {desktopOpen && (
+              <ul
+                className="absolute right-0 mt-2 w-10 border-2 border-primary bg-card text-foreground shadow-[3px_3px_0px_0px_var(--primary)] z-50 overflow-hidden flex flex-col gap-1 p-1"
+                style={{ borderRadius: "12px 6px 10px 8px / 8px 10px 7px 11px" }}
+              >
+                {languages.map((lang) => {
+                  const isSelected = lang.code === locale;
+                  return (
+                    <li key={lang.code} className="w-full">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setLocale(lang.code);
+                          setDesktopOpen(false);
+                        }}
+                        className={`w-full h-8 flex items-center justify-center text-[11px] font-extrabold transition-all duration-150 uppercase border-2 border-transparent rounded-md ${
+                          isSelected
+                            ? "bg-primary text-primary-foreground font-black"
+                            : "hover:bg-secondary text-muted-foreground hover:text-foreground"
+                        }`}
+                      >
+                        {lang.code}
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </div>
+
           <button type="button" onClick={toggleTheme} aria-label="Toggle Theme" className="theme-toggle-btn">
             {theme === "dark" ? (
               <Sun className="h-5 w-5 text-accent animate-spin" style={{ animationDuration: "12s" }} />

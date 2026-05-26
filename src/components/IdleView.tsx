@@ -1,5 +1,6 @@
 import { Play } from "lucide-react";
 import type React from "react";
+import { useI18n } from "../lib/i18n";
 import { MODES, type NapMode } from "../lib/modes";
 
 type IdleViewProps = {
@@ -9,11 +10,12 @@ type IdleViewProps = {
 };
 
 export function IdleView({ activeMode, setActiveMode, handleStart }: IdleViewProps): React.ReactElement {
+  const { t } = useI18n();
   return (
     <section className="idle-view">
       <div className="idle-header">
-        <h2 className="idle-title">Set Your Sleep Wave</h2>
-        <p className="idle-desc">Select your locked scientific target block. Make sure to prepare your coffee.</p>
+        <h2 className="idle-title">{t("timer.idle.title")}</h2>
+        <p className="idle-desc">{t("timer.idle.desc")}</p>
       </div>
 
       <ul className="idle-modes-list">
@@ -33,10 +35,13 @@ export function IdleView({ activeMode, setActiveMode, handleStart }: IdleViewPro
                 </div>
                 <div className="idle-mode-info">
                   <div className="idle-mode-header">
-                    <span className="idle-mode-title">{config.title}</span>
-                    <span className="idle-mode-duration">{config.duration / 60}m</span>
+                    <span className="idle-mode-title">{t(`modes.${mId}.title`)}</span>
+                    <span className="idle-mode-duration">
+                      {config.duration / 60}
+                      {t("timer.idle.minute_short")}
+                    </span>
                   </div>
-                  <span className="idle-mode-desc">{config.description}</span>
+                  <span className="idle-mode-desc">{t(`modes.${mId}.description`)}</span>
                 </div>
               </button>
             </li>
@@ -46,7 +51,7 @@ export function IdleView({ activeMode, setActiveMode, handleStart }: IdleViewPro
 
       <button type="button" onClick={handleStart} className="primary-btn w-full justify-center py-4">
         <Play className="h-5 w-5 fill-current" />
-        Initiate Countdown
+        {t("timer.idle.initiate")}
       </button>
     </section>
   );

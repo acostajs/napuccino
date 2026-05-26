@@ -3,6 +3,7 @@ import type React from "react";
 import { useState } from "react";
 import { type AlarmSound, type AmbientSound, useAudioEngine } from "../hooks/useAudioEngine";
 import { useNapTimer } from "../hooks/useNapTimer";
+import { useI18n } from "../lib/i18n";
 import { AlarmView } from "./AlarmView";
 import { CoffeeRing, CrescentMoon, ZZzCloud } from "./Doodles";
 import { IdleView } from "./IdleView";
@@ -10,6 +11,7 @@ import { PreView } from "./PreView";
 import { SleepView } from "./SleepView";
 
 export function TimerPage(): React.ReactElement {
+  const { t } = useI18n();
   const [ambientSound, setAmbientSound] = useState<AmbientSound>("silence");
   const [alarmSound, setAlarmSound] = useState<AlarmSound>("harp");
   const [isMuted, setIsMuted] = useState<boolean>(false);
@@ -52,8 +54,8 @@ export function TimerPage(): React.ReactElement {
         <div className="sandbox-content">
           <Sparkles className="h-4 w-4 text-accent animate-pulse" />
           <div>
-            <span className="sandbox-title">Developer Sandbox Tools</span>
-            <span className="sandbox-desc">Fast-forward timer speed for testing and code validation.</span>
+            <span className="sandbox-title">{t("sandbox.title")}</span>
+            <span className="sandbox-desc">{t("sandbox.desc")}</span>
           </div>
         </div>
         <button
@@ -62,7 +64,7 @@ export function TimerPage(): React.ReactElement {
           className={`sandbox-toggle-btn ${testMode ? "sandbox-toggle-btn-active" : ""}`}
         >
           <FastForward className="h-3 w-3" />
-          {testMode ? "Fast Speed (On)" : "Test Speed"}
+          {testMode ? t("sandbox.speed_on") : t("sandbox.speed_off")}
         </button>
       </section>
 
