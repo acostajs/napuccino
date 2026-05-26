@@ -3,7 +3,8 @@
     "title": "Outils Sandbox Développeur",
     "desc": "Accélérez la vitesse du minuteur pour les tests et la validation du code.",
     "speed_on": "Vitesse rapide (Active)",
-    "speed_off": "Tester la vitesse"
+    "speed_off": "Tester la vitesse",
+    "toggle_label": "Activer/désactiver la vitesse accélérée du sandbox"
   },
   "timer": {
     "idle": {

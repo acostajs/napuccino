@@ -1,10 +1,9 @@
+import type React from "react";
 import type { HTMLAttributes } from "react";
 
-interface DoodleProps extends HTMLAttributes<HTMLDivElement> {
-  className?: string;
-}
+type DoodleProps = HTMLAttributes<HTMLDivElement> & { className?: string };
 
-export function CoffeeRing({ className = "", ...props }: DoodleProps) {
+export function CoffeeRing({ className = "", ...props }: DoodleProps): React.ReactElement {
   return (
     <div className={`pointer-events-none select-none ${className}`} {...props}>
       <svg
@@ -34,7 +33,7 @@ export function CoffeeRing({ className = "", ...props }: DoodleProps) {
   );
 }
 
-export function SleepingSloth({ className = "", ...props }: DoodleProps) {
+export function SleepingSloth({ className = "", ...props }: DoodleProps): React.ReactElement {
   return (
     <div className={`pointer-events-none select-none ${className}`} {...props}>
       <svg
@@ -88,7 +87,7 @@ export function SleepingSloth({ className = "", ...props }: DoodleProps) {
   );
 }
 
-export function ZZzCloud({ className = "", ...props }: DoodleProps) {
+export function ZZzCloud({ className = "", ...props }: DoodleProps): React.ReactElement {
   return (
     <div className={`pointer-events-none select-none ${className}`} {...props}>
       <svg
@@ -142,7 +141,7 @@ export function ZZzCloud({ className = "", ...props }: DoodleProps) {
   );
 }
 
-export function CrescentMoon({ className = "", ...props }: DoodleProps) {
+export function CrescentMoon({ className = "", ...props }: DoodleProps): React.ReactElement {
   return (
     <div className={`pointer-events-none select-none ${className}`} {...props}>
       <svg
@@ -197,7 +196,7 @@ export function CrescentMoon({ className = "", ...props }: DoodleProps) {
   );
 }
 
-export function CoffeeBeans({ className = "", ...props }: DoodleProps) {
+export function CoffeeBeans({ className = "", ...props }: DoodleProps): React.ReactElement {
   return (
     <div className={`pointer-events-none select-none ${className}`} {...props}>
       <svg

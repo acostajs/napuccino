@@ -1,10 +1,10 @@
 import type React from "react";
 import { useEffect, useState } from "react";
-import { HomePage } from "./components/HomePage";
 import { Navbar } from "./components/Navbar";
-import { SciencePage } from "./components/SciencePage";
-import { TimerPage } from "./components/TimerPage";
 import { I18nProvider, useI18n } from "./lib/i18n";
+import { HomePage } from "./pages/Home/HomePage";
+import { SciencePage } from "./pages/Science/SciencePage";
+import { TimerPage } from "./pages/Timer/TimerPage";
 import "./index.css";
 
 function AppContent(): React.ReactElement {

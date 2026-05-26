@@ -1,8 +1,8 @@
 import { Activity, ArrowRight, Moon, Play, Zap } from "lucide-react";
 import type React from "react";
-import { useI18n } from "../lib/i18n";
-import { MODES } from "../lib/modes";
-import { CoffeeBeans, CoffeeRing, SleepingSloth, ZZzCloud } from "./Doodles";
+import { CoffeeBeans, CoffeeRing, SleepingSloth, ZZzCloud } from "../../components/Doodles";
+import { useI18n } from "../../lib/i18n";
+import { MODES } from "../../lib/modes";
 
 type HomePageProps = {
   setActiveTab: (tab: "home" | "timer" | "science") => void;
@@ -134,7 +134,12 @@ export function HomePage({ setActiveTab }: HomePageProps): React.ReactElement {
                         {t(`modes.${mode.id}.benefit`)}
                       </span>
                     </div>
-                    <button type="button" onClick={() => setActiveTab("timer")} className="mode-action-btn">
+                    <button
+                      type="button"
+                      onClick={() => setActiveTab("timer")}
+                      aria-label={`${t("home.modes.select_mode")} ${t(`modes.${mode.id}.title`)}`}
+                      className="mode-action-btn"
+                    >
                       {t("home.modes.select_mode")}
                       <ArrowRight className="h-3 w-3" />
                     </button>

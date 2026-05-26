@@ -1,7 +1,7 @@
 import { Play } from "lucide-react";
 import type React from "react";
-import { useI18n } from "../lib/i18n";
-import { MODES, type NapMode } from "../lib/modes";
+import { useI18n } from "../../lib/i18n";
+import { MODES, type NapMode } from "../../lib/modes";
 
 type IdleViewProps = {
   activeMode: NapMode;
@@ -28,6 +28,7 @@ export function IdleView({ activeMode, setActiveMode, handleStart }: IdleViewPro
               <button
                 type="button"
                 onClick={() => setActiveMode(mId)}
+                aria-pressed={isSelected}
                 className={`idle-mode-option ${isSelected ? "idle-mode-option-active" : ""}`}
               >
                 <div className={`idle-mode-icon-box bg-gradient-to-r ${config.color}`}>

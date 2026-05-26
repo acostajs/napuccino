@@ -10,6 +10,58 @@ type NavbarProps = {
   toggleTheme: () => void;
 };
 
+type LocaleDropdownProps = {
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+  dropdownRef: React.RefObject<HTMLDivElement | null>;
+  locale: "en" | "es" | "fr";
+  setLocale: (code: "en" | "es" | "fr") => void;
+};
+
+function LocaleDropdown({
+  isOpen,
+  setIsOpen,
+  dropdownRef,
+  locale,
+  setLocale,
+}: LocaleDropdownProps): React.ReactElement {
+  const languages = [{ code: "en" as const }, { code: "es" as const }, { code: "fr" as const }];
+
+  return (
+    <div className="relative" ref={dropdownRef}>
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        className="theme-toggle-btn text-[13px] font-black tracking-tight text-foreground uppercase"
+      >
+        {locale}
+      </button>
+
+      {isOpen && (
+        <ul className="locale-dropdown">
+          {languages.map((lang) => {
+            const isSelected = lang.code === locale;
+            return (
+              <li key={lang.code} className="w-full">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setLocale(lang.code);
+                    setIsOpen(false);
+                  }}
+                  className={`locale-option-btn ${isSelected ? "locale-option-btn-active" : ""}`}
+                >
+                  {lang.code}
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </div>
+  );
+}
+
 export function Navbar({ activeTab, setActiveTab, theme, toggleTheme }: NavbarProps): React.ReactElement {
   const { t, locale, setLocale } = useI18n();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -22,8 +74,6 @@ export function Navbar({ activeTab, setActiveTab, theme, toggleTheme }: NavbarPr
     { id: "timer" as const, label: t("nav.timer"), icon: Timer },
     { id: "science" as const, label: t("nav.science"), icon: BookOpen },
   ];
-
-  const languages = [{ code: "en" as const }, { code: "es" as const }, { code: "fr" as const }];
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent): void {
@@ -44,8 +94,13 @@ export function Navbar({ activeTab, setActiveTab, theme, toggleTheme }: NavbarPr
     <header className="navbar-header">
       <div className="navbar-container">
         {/* Mobile top-row container / Desktop side-by-side logo */}
-        <div className="flex w-full items-center justify-between md:w-auto">
-          <button type="button" onClick={() => setActiveTab("home")} className="navbar-logo-btn group">
+        <div className="navbar-mobile-row">
+          <button
+            type="button"
+            onClick={() => setActiveTab("home")}
+            aria-label={t("nav.home")}
+            className="navbar-logo-btn group"
+          >
             <div className="logo-badge">
               <div className="absolute top-1.5 flex gap-0.5 justify-center w-full">
                 <span className="logo-steam-line" style={{ animationDelay: "0.2s" }} />
@@ -61,45 +116,14 @@ export function Navbar({ activeTab, setActiveTab, theme, toggleTheme }: NavbarPr
           </button>
 
           {/* Controls (Mobile Only) */}
-          <div className="md:hidden flex items-center gap-2">
-            <div className="relative" ref={mobileRef}>
-              <button
-                type="button"
-                onClick={() => setMobileOpen((prev) => !prev)}
-                className="theme-toggle-btn text-[13px] font-black tracking-tight text-foreground uppercase"
-              >
-                {locale}
-              </button>
-
-              {mobileOpen && (
-                <ul
-                  className="absolute right-0 mt-2 w-10 border-2 border-primary bg-card text-foreground shadow-[3px_3px_0px_0px_var(--primary)] z-50 overflow-hidden flex flex-col gap-1 p-1"
-                  style={{ borderRadius: "12px 6px 10px 8px / 8px 10px 7px 11px" }}
-                >
-                  {languages.map((lang) => {
-                    const isSelected = lang.code === locale;
-                    return (
-                      <li key={lang.code} className="w-full">
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setLocale(lang.code);
-                            setMobileOpen(false);
-                          }}
-                          className={`w-full h-8 flex items-center justify-center text-[11px] font-extrabold transition-all duration-150 uppercase border-2 border-transparent rounded-md ${
-                            isSelected
-                              ? "bg-primary text-primary-foreground font-black"
-                              : "hover:bg-secondary text-muted-foreground hover:text-foreground"
-                          }`}
-                        >
-                          {lang.code}
-                        </button>
-                      </li>
-                    );
-                  })}
-                </ul>
-              )}
-            </div>
+          <div className="navbar-controls-mobile">
+            <LocaleDropdown
+              isOpen={mobileOpen}
+              setIsOpen={setMobileOpen}
+              dropdownRef={mobileRef}
+              locale={locale}
+              setLocale={setLocale}
+            />
 
             <button type="button" onClick={toggleTheme} aria-label="Toggle Theme" className="theme-toggle-btn">
               {theme === "dark" ? (
@@ -131,45 +155,14 @@ export function Navbar({ activeTab, setActiveTab, theme, toggleTheme }: NavbarPr
         </nav>
 
         {/* Controls (Desktop Only) */}
-        <div className="hidden md:flex items-center gap-3">
-          <div className="relative" ref={desktopRef}>
-            <button
-              type="button"
-              onClick={() => setDesktopOpen((prev) => !prev)}
-              className="theme-toggle-btn text-[13px] font-black tracking-tight text-foreground uppercase"
-            >
-              {locale}
-            </button>
-
-            {desktopOpen && (
-              <ul
-                className="absolute right-0 mt-2 w-10 border-2 border-primary bg-card text-foreground shadow-[3px_3px_0px_0px_var(--primary)] z-50 overflow-hidden flex flex-col gap-1 p-1"
-                style={{ borderRadius: "12px 6px 10px 8px / 8px 10px 7px 11px" }}
-              >
-                {languages.map((lang) => {
-                  const isSelected = lang.code === locale;
-                  return (
-                    <li key={lang.code} className="w-full">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setLocale(lang.code);
-                          setDesktopOpen(false);
-                        }}
-                        className={`w-full h-8 flex items-center justify-center text-[11px] font-extrabold transition-all duration-150 uppercase border-2 border-transparent rounded-md ${
-                          isSelected
-                            ? "bg-primary text-primary-foreground font-black"
-                            : "hover:bg-secondary text-muted-foreground hover:text-foreground"
-                        }`}
-                      >
-                        {lang.code}
-                      </button>
-                    </li>
-                  );
-                })}
-              </ul>
-            )}
-          </div>
+        <div className="navbar-controls-desktop">
+          <LocaleDropdown
+            isOpen={desktopOpen}
+            setIsOpen={setDesktopOpen}
+            dropdownRef={desktopRef}
+            locale={locale}
+            setLocale={setLocale}
+          />
 
           <button type="button" onClick={toggleTheme} aria-label="Toggle Theme" className="theme-toggle-btn">
             {theme === "dark" ? (
