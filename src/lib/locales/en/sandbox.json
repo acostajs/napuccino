@@ -1,0 +1,7 @@
+{
+  "title": "Developer Sandbox Tools",
+  "desc": "Fast-forward timer speed for testing and code validation.",
+  "speed_on": "Fast Speed (On)",
+  "speed_off": "Test Speed",
+  "toggle_label": "Toggle fast-forward sandbox speed"
+}

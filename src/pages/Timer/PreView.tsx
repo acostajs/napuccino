@@ -2,9 +2,11 @@ import { AlertCircle, FastForward, Sparkles, Square, Volume2 } from "lucide-reac
 import type React from "react";
 import type { AlarmSound, AmbientSound } from "../../hooks/useAudioEngine";
 import { useI18n } from "../../lib/i18n";
+import type { NapMode } from "../../lib/modes";
 import { SoundSelector } from "./SoundSelector";
 
 type PreViewProps = {
+  activeMode: NapMode;
   preTimeLeft: number;
   formatTime: (seconds: number) => string;
   ambientSound: AmbientSound;
@@ -17,6 +19,7 @@ type PreViewProps = {
 };
 
 export function PreView({
+  activeMode,
   preTimeLeft,
   formatTime,
   ambientSound,
@@ -53,7 +56,7 @@ export function PreView({
         <p className="pre-desc">{t("timer.pre.desc")}</p>
       </div>
 
-      <figure className="breathing-circle-wrapper">
+      <figure className={`breathing-circle-wrapper breathing-mode-${activeMode}`}>
         <div className="breathing-bg-ring" />
         <div className="breathing-dashed-ring" />
 

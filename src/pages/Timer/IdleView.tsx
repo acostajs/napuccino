@@ -29,9 +29,9 @@ export function IdleView({ activeMode, setActiveMode, handleStart }: IdleViewPro
                 type="button"
                 onClick={() => setActiveMode(mId)}
                 aria-pressed={isSelected}
-                className={`idle-mode-option ${isSelected ? "idle-mode-option-active" : ""}`}
+                className={`idle-mode-option ${isSelected ? `idle-mode-option-${mId}-active shadow-md` : ""}`}
               >
-                <div className={`idle-mode-icon-box bg-gradient-to-r ${config.color}`}>
+                <div className={`idle-mode-icon-box ${config.color}`}>
                   <Icon className="h-5 w-5" />
                 </div>
                 <div className="idle-mode-info">

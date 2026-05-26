@@ -11,34 +11,47 @@ type NavbarProps = {
 };
 
 type LocaleDropdownProps = {
-  isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
-  dropdownRef: React.RefObject<HTMLDivElement | null>;
+  id: string;
   locale: "en" | "es" | "fr";
   setLocale: (code: "en" | "es" | "fr") => void;
 };
 
-function LocaleDropdown({
-  isOpen,
-  setIsOpen,
-  dropdownRef,
-  locale,
-  setLocale,
-}: LocaleDropdownProps): React.ReactElement {
+function LocaleDropdown({ id, locale, setLocale }: LocaleDropdownProps): React.ReactElement {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const languages = [{ code: "en" as const }, { code: "es" as const }, { code: "fr" as const }];
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
 
   return (
     <div className="relative" ref={dropdownRef}>
       <button
         type="button"
+        id={`${id}-trigger`}
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+        aria-controls={id}
         onClick={() => setIsOpen(!isOpen)}
-        className="theme-toggle-btn text-[13px] font-black tracking-tight text-foreground uppercase"
+        className="theme-toggle-btn text-[13px] font-black tracking-tight text-foreground uppercase cursor-pointer"
       >
         {locale}
       </button>
 
       {isOpen && (
-        <ul className="locale-dropdown">
+        <ul id={id} className="locale-dropdown outline-none">
           {languages.map((lang) => {
             const isSelected = lang.code === locale;
             return (
@@ -64,31 +77,12 @@ function LocaleDropdown({
 
 export function Navbar({ activeTab, setActiveTab, theme, toggleTheme }: NavbarProps): React.ReactElement {
   const { t, locale, setLocale } = useI18n();
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [desktopOpen, setDesktopOpen] = useState(false);
-  const mobileRef = useRef<HTMLDivElement>(null);
-  const desktopRef = useRef<HTMLDivElement>(null);
 
   const tabs = [
     { id: "home" as const, label: t("nav.home"), icon: Coffee },
     { id: "timer" as const, label: t("nav.timer"), icon: Timer },
     { id: "science" as const, label: t("nav.science"), icon: BookOpen },
   ];
-
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent): void {
-      if (mobileRef.current && !mobileRef.current.contains(event.target as Node)) {
-        setMobileOpen(false);
-      }
-      if (desktopRef.current && !desktopRef.current.contains(event.target as Node)) {
-        setDesktopOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
 
   return (
     <header className="navbar-header">
@@ -117,13 +111,7 @@ export function Navbar({ activeTab, setActiveTab, theme, toggleTheme }: NavbarPr
 
           {/* Controls (Mobile Only) */}
           <div className="navbar-controls-mobile">
-            <LocaleDropdown
-              isOpen={mobileOpen}
-              setIsOpen={setMobileOpen}
-              dropdownRef={mobileRef}
-              locale={locale}
-              setLocale={setLocale}
-            />
+            <LocaleDropdown id="mobile-lang-popover" locale={locale} setLocale={setLocale} />
 
             <button type="button" onClick={toggleTheme} aria-label="Toggle Theme" className="theme-toggle-btn">
               {theme === "dark" ? (
@@ -156,13 +144,7 @@ export function Navbar({ activeTab, setActiveTab, theme, toggleTheme }: NavbarPr
 
         {/* Controls (Desktop Only) */}
         <div className="navbar-controls-desktop">
-          <LocaleDropdown
-            isOpen={desktopOpen}
-            setIsOpen={setDesktopOpen}
-            dropdownRef={desktopRef}
-            locale={locale}
-            setLocale={setLocale}
-          />
+          <LocaleDropdown id="desktop-lang-popover" locale={locale} setLocale={setLocale} />
 
           <button type="button" onClick={toggleTheme} aria-label="Toggle Theme" className="theme-toggle-btn">
             {theme === "dark" ? (

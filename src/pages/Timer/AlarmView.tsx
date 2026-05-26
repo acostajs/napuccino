@@ -1,15 +1,17 @@
 import { Coffee } from "lucide-react";
 import type React from "react";
 import { useI18n } from "../../lib/i18n";
+import type { NapMode } from "../../lib/modes";
 
 type AlarmViewProps = {
+  activeMode: NapMode;
   handleStop: () => void;
 };
 
-export function AlarmView({ handleStop }: AlarmViewProps): React.ReactElement {
+export function AlarmView({ activeMode, handleStop }: AlarmViewProps): React.ReactElement {
   const { t } = useI18n();
   return (
-    <section className="alarm-view">
+    <section className={`alarm-view alarm-mode-${activeMode}`}>
       <div className="alarm-alert-icon">
         <Coffee className="h-10 w-10 animate-pulse" />
       </div>

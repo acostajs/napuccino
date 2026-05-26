@@ -1,7 +1,6 @@
 import { FastForward, Sparkles } from "lucide-react";
 import type React from "react";
 import { useState } from "react";
-import { CoffeeRing, CrescentMoon, ZZzCloud } from "../../components/Doodles";
 import { type AlarmSound, type AmbientSound, useAudioEngine } from "../../hooks/useAudioEngine";
 import { useNapTimer } from "../../hooks/useNapTimer";
 import { useI18n } from "../../lib/i18n";
@@ -45,11 +44,6 @@ export function TimerPage(): React.ReactElement {
 
   return (
     <section className="timer-container" aria-label="Nap Timer">
-      {/* Sketchbook Background Doodles */}
-      <CoffeeRing className="absolute left-1/2 -translate-x-1/2 top-[120px] w-96 h-96 opacity-60 pointer-events-none z-0" />
-      <CrescentMoon className="absolute hidden md:block -right-28 top-[60px] w-24 h-24 pointer-events-none z-0 rotate-[10deg] opacity-75" />
-      <ZZzCloud className="absolute hidden md:block -left-28 top-[240px] w-28 h-28 pointer-events-none z-0 rotate-[-8deg] opacity-70" />
-
       <section className="sandbox-banner">
         <div className="sandbox-content">
           <Sparkles className="h-4 w-4 text-accent animate-pulse" />
@@ -81,6 +75,7 @@ export function TimerPage(): React.ReactElement {
 
         {timerState === "pre" && (
           <PreView
+            activeMode={activeMode}
             preTimeLeft={preTimeLeft}
             formatTime={formatTime}
             ambientSound={ambientSound}
@@ -110,7 +105,9 @@ export function TimerPage(): React.ReactElement {
           />
         )}
 
-        {timerState === "alarm" && <AlarmView handleStop={() => handleStop(audioEngine.stopAlarm)} />}
+        {timerState === "alarm" && (
+          <AlarmView activeMode={activeMode} handleStop={() => handleStop(audioEngine.stopAlarm)} />
+        )}
       </article>
     </section>
   );

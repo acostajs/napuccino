@@ -33,15 +33,28 @@ function AppContent(): React.ReactElement {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
   };
 
+  const handleTabChange = (tab: "home" | "timer" | "science"): void => {
+    if (!("startViewTransition" in document)) {
+      setActiveTab(tab);
+      return;
+    }
+    const doc = document as unknown as {
+      startViewTransition: (cb: () => void) => void;
+    };
+    doc.startViewTransition(() => {
+      setActiveTab(tab);
+    });
+  };
+
   return (
     <div className="app-container">
       <div className="bg-radial-highlight" />
 
       <div className="app-content-wrapper">
-        <Navbar activeTab={activeTab} setActiveTab={setActiveTab} theme={theme} toggleTheme={toggleTheme} />
+        <Navbar activeTab={activeTab} setActiveTab={handleTabChange} theme={theme} toggleTheme={toggleTheme} />
 
         <main className="app-main">
-          {activeTab === "home" && <HomePage setActiveTab={setActiveTab} />}
+          {activeTab === "home" && <HomePage setActiveTab={handleTabChange} />}
           {activeTab === "timer" && <TimerPage />}
           {activeTab === "science" && <SciencePage />}
         </main>
@@ -51,11 +64,11 @@ function AppContent(): React.ReactElement {
         <div className="footer-content">
           <p className="footer-text">{t("footer.copyright", { year: new Date().getFullYear().toString() })}</p>
           <div className="footer-links">
-            <button type="button" className="footer-link" onClick={() => setActiveTab("science")}>
+            <button type="button" className="footer-link" onClick={() => handleTabChange("science")}>
               {t("footer.science")}
             </button>
             <span>•</span>
-            <button type="button" className="footer-link" onClick={() => setActiveTab("timer")}>
+            <button type="button" className="footer-link" onClick={() => handleTabChange("timer")}>
               {t("footer.naps")}
             </button>
           </div>

@@ -1,0 +1,31 @@
+{
+  "hero": {
+    "badge": "Revoluciona tus Siestas",
+    "title_line1": "Prepara. Duerme.",
+    "title_accent": "Conquista.",
+    "desc": "Conoce Napuccino: la intersección científica de la absorción rica de cafeína y los estados de sueño optimizados. Vence la fatiga de la tarde con precisión matemática.",
+    "nap_state_locked": "Estado de la Siesta: Bloqueado",
+    "illustration_title": "Ilustración de taza de café durmiendo"
+  },
+  "cta": {
+    "start": "Iniciar Siesta Optimizada",
+    "explore": "Explorar la Ciencia"
+  },
+  "modes": {
+    "title": "Elige tu Ritmo",
+    "desc": "Selecciona una de las tres estructuras de siesta respaldadas científicamente y optimizadas para eliminar la fatiga cerebral sin causar pesadez.",
+    "benefit_label": "Beneficio:",
+    "select_mode": "Seleccionar Modo"
+  },
+  "science": {
+    "title": "La Ciencia de 30 Segundos del Napuccino",
+    "subtitle": "Cómo tomar cafeína antes de una siesta crea un superpoder de productividad.",
+    "read_deep": "Leer análisis científico profundo",
+    "step1_title": "Preparar e Ingerir",
+    "step1_desc": "Bebe una taza de café o una dosis de espresso *rápidamente*. Quieres que la cafeína entre en tu torrente sanguíneo toda a la vez.",
+    "step2_title": "Siesta Inmediata",
+    "step2_desc": "Acuéstate de inmediato y configura el temporizador bloqueado de 20 minutos. Mientras duermes, tu cerebro elimina la **adenosina** inductora del sueño.",
+    "step3_title": "Despertar Supercargado",
+    "step3_desc": "Al minuto 20, te despiertas. La cafeína acaba de llegar a tu cerebro. Como la adenosina se ha eliminado, la cafeína se une impecablemente."
+  }
+}

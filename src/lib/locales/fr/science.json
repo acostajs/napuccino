@@ -1,0 +1,58 @@
+{
+  "title": "La Science des",
+  "title_accent": "Siestes Haute Performance",
+  "subtitle": "Faire une sieste n'est pas de la paresse ; c'est un bio-hack. Découvrez la dynamique neurochimique derrière le nettoyage de l'adénosine, l'absorption de la caféine et les cycles de sommeil optimaux.",
+  "pillars_heading": "Piliers Biologiques",
+  "benefits_heading": "Bénéfices Prouvés",
+  "synergy_title": "La Synergie Moléculaire : Café vs Sommeil vs Napuccino",
+  "topics": {
+    "adenosine": {
+      "title": "1. L'Adénosine & Pression du Sommeil",
+      "summary": "Comprendre la batterie biologique organique qui déclenche la somnolence.",
+      "p1": "Tout au long de la journée, à mesure que votre cerveau consomme de l'énergie, un composé chimique appelé **adénosine** s'accumule régulièrement. L'adénosine se lie à des récepteurs spécifiques de votre système nerveux central, ralentissant progressivement l'activité neuronale et créant ce que les scientifiques appellent la **pression du sommeil**.",
+      "p2": "Plus la concentration d'adénosine est élevée, plus vous vous sentez fatigué et somnolent. Lorsque vous dormez, votre cerveau élimine naturellement cette accumulation, réinitialisant votre batterie biologique.",
+      "secret_title": "Le Secret de la Sieste :",
+      "secret_desc": " Même une petite sieste de 15 à 20 minutes élimine une quantité substantielle d'adénosine de vos récepteurs, les libérant pour que la caféine puisse les bloquer !"
+    },
+    "caffeine": {
+      "title": "2. Le Décalage de la Caféine de 20 Minutes",
+      "summary": "Pourquoi boire du café *juste avant* de dormir produit un superpouvoir mathématique.",
+      "p1": "Lorsque vous buvez une tasse de café, la caféine ne frappe pas instantanément votre cerveau. Elle doit passer par votre estomac, entrer dans votre intestin grêle, s'absorber dans le sang et enfin traverser la barrière hémato-encéphalique.",
+      "p2": "Ce voyage métabolique prend exactement **20 à 30 minutes**.",
+      "p3": "Par conséquent, si vous buvez du café et vous allongez immédiatement, la caféine est totalement inactive pendant les 20 minutes suivantes. Elle fonctionne comme un minuteur silencieux. Au moment où vous vous réveillez, la caféine atteint sa concentration maximale dans le cerveau, créant une onde de choc de vigilance doublement amplifiée."
+    },
+    "grogginess": {
+      "title": "3. Éviter l'Inertie du Sommeil (Le Piège de la Somnolence)",
+      "summary": "Pourquoi dormir exactement 20 minutes est structurellement supérieur à une sieste de 45 minutes.",
+      "p1": "Un cycle de sommeil humain standard se compose de plusieurs étapes : sommeil léger (étapes 1 et 2), sommeil profond à ondes lentes (étape 3) et sommeil REM.",
+      "p2": "Il faut environ **30 minutes** pour passer du sommeil léger au sommeil profond à ondes lentes. Si vous vous réveillez *pendant* le sommeil profond, votre cerveau subit une grave **inertie du sommeil** — cette sensation de lourdeur, de désorientation et de somnolence qui peut gâcher le reste de votre journée.",
+      "p3": "En verrouillant notre Napuccino à **20 minutes** et la Sieste Éclair à **15 minutes**, nous vous garantissons de rester strictement dans le sommeil léger, ce qui vous permet de vous réveiller immédiatement frais et alerte, avec zéro fatigue post-sieste."
+    }
+  },
+  "benefits": {
+    "learning": {
+      "title": "Apprentissage Accéléré",
+      "desc": "Des études montrent que les siestes au café améliorent la mémoire de travail, facilitant le traitement et la catégorisation d'informations complexes."
+    },
+    "sensory": {
+      "title": "Réinitialisation Sensorielle",
+      "desc": "Élimine la surcharge sensorielle et le stress, réinitialisant la fatigue oculaire et la vitesse de traitement mental."
+    },
+    "motor": {
+      "title": "Coordination Motrice",
+      "desc": "Améliore la précision des compétences motrices et la rapidité des temps de réaction, essentiel pour les athlètes, les musiciens et les développeurs."
+    }
+  },
+  "quote": {
+    "text": "\"Nous avons constaté que l'association d'une prise de caféine et d'une brève séance de sommeil entraîne des améliorations massives de la précision des tâches visuelles, de la motricité et de la mémoire de travail par rapport à la caféine ou au sommeil seuls.\"",
+    "source": "— Étude de Recherche sur le Sommeil de l'Université de l'Université de Loughborough"
+  },
+  "synergy": {
+    "coffee_title": "A. Café Seul",
+    "coffee_desc": "Les molécules de caféine rivalisent avec des molécules d'adénosine existante. Les récepteurs sont déjà saturés, entraînant un pic atténué et de la nervosité.",
+    "sleep_title": "B. Sommeil Seul",
+    "sleep_desc": "Nettoie l'adénosine avec succès, mais n'ajoute pas de molécules stimulantes. La vigilance augmente lentement, parfois accompagnée d'une inertie du sommeil initiale.",
+    "napuccino_title": "C. Le Napuccino",
+    "napuccino_desc": "Le sommeil balaye complètement l'adénosine des récepteurs cérébraux. La caféine arrive immédiatement après, se fixant parfaitement aux récepteurs vides. La vigilance est maximisée !"
+  }
+}

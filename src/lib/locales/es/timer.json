@@ -1,0 +1,34 @@
+{
+  "idle": {
+    "title": "Elige tu Onda de Sueño",
+    "desc": "Selecciona tu bloque objetivo científico bloqueado. Asegúrate de preparar tu café.",
+    "minute_short": "m",
+    "initiate": "Iniciar Cuenta Regresiva"
+  },
+  "pre": {
+    "badge": "Onda de Transición",
+    "title": "Prepárate para Dormir",
+    "desc": "¡Bebe tu café ahora si no lo has hecho! Sigue la guía de respiración abajo para calmar tu mente.",
+    "breathe_rest": "Respira y Descansa",
+    "skip": "Omitir Cuenta Regresiva de Preparación"
+  },
+  "sounds": {
+    "transition_title": "Sonido de Transición (Activo Ahora)",
+    "alarm_title": "Alarma de Despertar (Escuchar al tocar)",
+    "ambient_title": "Sonido Ambiental"
+  },
+  "sleep": {
+    "active": "{mode} Activo",
+    "desc": "Ciclo de eliminación de adenosina actualmente en progreso. Descansa cómodamente.",
+    "napping": "Tomando una siesta...",
+    "sound_machine": "Máquina de Sonidos para Dormir",
+    "cancel": "Cancelar Bucle de Siesta",
+    "mute": "Silenciar sonidos",
+    "unmute": "Activar sonidos"
+  },
+  "alarm": {
+    "title": "¡Hora de Conquistar!",
+    "desc": "Tus 20 minutos han terminado. La cafeína ha cruzado con éxito a tus receptores cerebrales. ¡Levántate y brilla!",
+    "action": "Levantarse y Moverse"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "idle": {
+    "title": "Réglez Votre Onde de Sommeil",
+    "desc": "Sélectionnez votre bloc cible scientifique verrouillé. Assurez-vous de préparer votre café.",
+    "minute_short": "m",
+    "initiate": "Lancer le Compte à Rebours"
+  },
+  "pre": {
+    "badge": "Onde de Transition",
+    "title": "Préparez-vous à Dormir",
+    "desc": "Buvez votre café maintenant si ce n'est pas fait ! Suivez le guide respiratoire ci-dessous pour calmer votre esprit.",
+    "breathe_rest": "Respirez et Reposez-vous",
+    "skip": "Passer la Pré-transition"
+  },
+  "sounds": {
+    "transition_title": "Son de Transition (Actif Maintenant)",
+    "alarm_title": "Alarme de Réveil (Auditionner en appuyant)",
+    "ambient_title": "Son Ambiant"
+  },
+  "sleep": {
+    "active": "{mode} Actif",
+    "desc": "Cycle de nettoyage de l'adénosine actuellement en cours. Reposez-vous confortablement.",
+    "napping": "Sieste en cours...",
+    "sound_machine": "Machine à Sons de Sommeil",
+    "cancel": "Annuler la Sieste",
+    "mute": "Muet",
+    "unmute": "Activer le son"
+  },
+  "alarm": {
+    "title": "L'Heure de Conquérir !",
+    "desc": "Vos 20 minutes sont écoulées. La caféine a traversé avec succès les récepteurs de votre cerveau. Réveillez-vous et brillez !",
+    "action": "Debout et Actif"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "hero": {
+    "badge": "Revolutionize Your Naps",
+    "title_line1": "Brew. Sleep.",
+    "title_accent": "Conquer.",
+    "desc": "Meet Napuccino: the scientific intersection of rich caffeine absorption and optimized sleep states. Beat afternoon fatigue with mathematical precision.",
+    "nap_state_locked": "Nap State: Locked",
+    "illustration_title": "Sleeping coffee mug illustration"
+  },
+  "cta": {
+    "start": "Start Optimized Nap",
+    "explore": "Explore the Science"
+  },
+  "modes": {
+    "title": "Choose Your Rhythm",
+    "desc": "Select one of three scientifically backed nap structures optimized to clear brain fatigue without causing grogginess.",
+    "benefit_label": "Benefit:",
+    "select_mode": "Select Mode"
+  },
+  "science": {
+    "title": "The 30-Second Napuccino Science",
+    "subtitle": "How drinking caffeine before a nap creates a productivity superpower.",
+    "read_deep": "Read deep science dive",
+    "step1_title": "Brew & Ingest",
+    "step1_desc": "Drink a cup of coffee or shot of espresso *rapidly*. You want the caffeine entering your bloodstream all at once.",
+    "step2_title": "Immediate Snooze",
+    "step2_desc": "Lie down immediately and set the locked 20-minute timer. As you sleep, your brain clears sleep-inducing **adenosine**.",
+    "step3_title": "Supercharged Wake",
+    "step3_desc": "At minute 20, you wake up. The caffeine has just reached your brain. Since adenosine is cleared, the caffeine binds flawlessly."
+  }
+}
