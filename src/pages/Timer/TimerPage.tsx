@@ -81,6 +81,7 @@ export function TimerPage(): React.ReactElement {
 
         {timerState === "pre" && (
           <PreView
+            activeMode={activeMode}
             preTimeLeft={preTimeLeft}
             formatTime={formatTime}
             ambientSound={ambientSound}
@@ -110,7 +111,9 @@ export function TimerPage(): React.ReactElement {
           />
         )}
 
-        {timerState === "alarm" && <AlarmView handleStop={() => handleStop(audioEngine.stopAlarm)} />}
+        {timerState === "alarm" && (
+          <AlarmView activeMode={activeMode} handleStop={() => handleStop(audioEngine.stopAlarm)} />
+        )}
       </article>
     </section>
   );

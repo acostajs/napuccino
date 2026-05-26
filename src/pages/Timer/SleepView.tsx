@@ -56,7 +56,7 @@ export function SleepView({
         <p className="sleep-desc">{t("timer.sleep.desc")}</p>
       </div>
 
-      <figure className="sleep-circular-progress">
+      <figure className={`sleep-circular-progress sleep-progress-${activeMode}`}>
         <svg className="absolute inset-0 w-full h-full transform -rotate-90">
           <title>Nap progress indicator</title>
           <circle cx="112" cy="112" r="100" className="svg-progress-track" strokeWidth="8" />

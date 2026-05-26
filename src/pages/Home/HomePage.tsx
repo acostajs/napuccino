@@ -110,7 +110,7 @@ export function HomePage({ setActiveTab }: HomePageProps): React.ReactElement {
             const Icon = mode.icon;
             return (
               <li key={mode.id}>
-                <article className={`mode-card group ${mode.glowColor}`}>
+                <article className={`mode-card preset-card-${mode.id} group ${mode.glowColor}`}>
                   <div className="mode-body">
                     <div className="mode-header">
                       <div className={`mode-icon-wrapper ${mode.color}`}>
