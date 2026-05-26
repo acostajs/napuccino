@@ -24,7 +24,7 @@ export function SoundSelector<T extends string>({
 }: SoundSelectorProps<T>): React.ReactElement {
   return (
     <div className="space-y-2.5">
-      <span className="sound-section-label">
+      <span className="flex items-center justify-center gap-1.5 text-xs font-black text-foreground uppercase tracking-wider">
         {icon}
         {title}
       </span>
@@ -42,7 +42,7 @@ export function SoundSelector<T extends string>({
                   }
                 }}
                 aria-pressed={isActive}
-                className={`sound-option-btn ${isActive ? "sound-option-btn-active" : ""}`}
+                className={`w-full border border-border py-2.5 text-xs font-bold transition-all duration-500 ease-out bg-card/60 text-muted-foreground hover:bg-secondary/50 rounded-xl ${isActive ? "bg-primary text-primary-foreground border border-transparent shadow-xs hover:bg-primary" : ""}`}
               >
                 {sound.label}
               </button>

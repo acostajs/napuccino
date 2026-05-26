@@ -47,28 +47,38 @@ function AppContent(): React.ReactElement {
   };
 
   return (
-    <div className="app-container">
-      <div className="bg-radial-highlight" />
+    <div className="min-h-screen w-full flex flex-col justify-between overflow-x-hidden pb-12 transition-colors duration-500 bg-transparent text-foreground relative">
+      <div className="absolute top-0 left-0 right-0 h-96 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none z-0" />
 
-      <div className="app-content-wrapper">
+      <div className="relative z-10 w-full flex flex-col gap-6 pt-4 px-4 sm:px-6">
         <Navbar activeTab={activeTab} setActiveTab={handleTabChange} theme={theme} toggleTheme={toggleTheme} />
 
-        <main className="app-main">
+        <main className="w-full flex-grow">
           {activeTab === "home" && <HomePage setActiveTab={handleTabChange} />}
           {activeTab === "timer" && <TimerPage />}
           {activeTab === "science" && <SciencePage />}
         </main>
       </div>
 
-      <footer className="app-footer">
-        <div className="footer-content">
-          <p className="footer-text">{t("footer.copyright", { year: new Date().getFullYear().toString() })}</p>
-          <div className="footer-links">
-            <button type="button" className="footer-link" onClick={() => handleTabChange("science")}>
+      <footer className="relative z-10 w-full max-w-5xl mx-auto px-6 mt-16 text-center">
+        <div className="border-t-2 border-primary/20 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-muted-foreground font-bold tracking-wide uppercase">
+            {t("footer.copyright", { year: new Date().getFullYear().toString() })}
+          </p>
+          <div className="flex gap-4 text-xs font-extrabold text-muted-foreground">
+            <button
+              type="button"
+              className="hover:text-accent transition-colors cursor-pointer underline decoration-primary/30 underline-offset-4"
+              onClick={() => handleTabChange("science")}
+            >
               {t("footer.science")}
             </button>
             <span>•</span>
-            <button type="button" className="footer-link" onClick={() => handleTabChange("timer")}>
+            <button
+              type="button"
+              className="hover:text-accent transition-colors cursor-pointer underline decoration-primary/30 underline-offset-4"
+              onClick={() => handleTabChange("timer")}
+            >
               {t("footer.naps")}
             </button>
           </div>
