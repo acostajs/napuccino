@@ -24,7 +24,7 @@ export function SoundSelector<T extends string>({
 }: SoundSelectorProps<T>): React.ReactElement {
   return (
     <div className="space-y-2.5">
-      <span className="flex items-center justify-center gap-1.5 text-xs font-black text-foreground uppercase tracking-wider">
+      <span className="sound-section-label">
         {icon}
         {title}
       </span>

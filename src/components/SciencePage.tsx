@@ -209,7 +209,7 @@ export function SciencePage(): React.ReactElement {
           <li className="synergy-card">
             <h3 className="synergy-card-title">B. Sleep Alone</h3>
             <div className="synergy-progress-track">
-              <div className="h-full bg-blue-500 w-1/2" />
+              <div className="synergy-progress-bar-partial" />
             </div>
             <p className="synergy-desc">
               Clears adenosine successfully, but does not add stimulant molecules. Alertness increases slowly, sometimes accompanied by initial sleep inertia.
