@@ -43,13 +43,15 @@ export function TimerPage(): React.ReactElement {
   };
 
   return (
-    <section className="timer-container" aria-label="Nap Timer">
-      <section className="sandbox-banner">
-        <div className="sandbox-content">
+    <section className="flex flex-col gap-10 max-w-2xl mx-auto py-6 text-center relative z-10" aria-label="Nap Timer">
+      <section className="flex justify-between items-center bg-secondary/45 border border-dashed border-border/80 p-4 rounded-2xl">
+        <div className="flex items-center gap-2 text-left">
           <Sparkles className="h-4 w-4 text-accent animate-pulse" />
           <div>
-            <span className="sandbox-title">{t("sandbox.title")}</span>
-            <span className="sandbox-desc">{t("sandbox.desc")}</span>
+            <span className="block text-xs font-black text-foreground uppercase tracking-wide">
+              {t("sandbox.title")}
+            </span>
+            <span className="block text-xs text-muted-foreground font-bold">{t("sandbox.desc")}</span>
           </div>
         </div>
         <button
@@ -57,14 +59,17 @@ export function TimerPage(): React.ReactElement {
           onClick={() => setTestMode((prev) => !prev)}
           aria-pressed={testMode}
           aria-label={t("sandbox.toggle_label")}
-          className={`sandbox-toggle-btn ${testMode ? "sandbox-toggle-btn-active" : ""}`}
+          className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-extrabold transition-all border border-border bg-card text-muted-foreground ${testMode ? "bg-accent/10 border-accent text-accent shadow-sm" : ""}`}
         >
           <FastForward className="h-3 w-3" />
           {testMode ? t("sandbox.speed_on") : t("sandbox.speed_off")}
         </button>
       </section>
 
-      <article className="timer-card" aria-label="Timer Card">
+      <article
+        className="bg-card border border-border/30 p-8 md:p-12 transition-all duration-500 rounded-3xl shadow-sm"
+        aria-label="Timer Card"
+      >
         {timerState === "idle" && (
           <IdleView
             activeMode={activeMode}
