@@ -5,11 +5,13 @@
     @apply font-sans;
   }
 
-  /* Ruled Notebook Paper Background */
+  /* Ruled Notebook Paper Background (Graph Paper Grid) */
   body {
     @apply min-w-[320px] min-h-screen relative m-0 bg-background text-foreground;
-    background-image: linear-gradient(var(--border) 1px, transparent 1px);
-    background-size: 100% 32px;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 32px 32px;
     background-attachment: local;
   }
 }
@@ -23,42 +25,54 @@ body::after {
   left: max(24px, calc(50vw - 496px));
   width: 2px;
   background-color: var(--accent);
-  opacity: 0.2;
+  opacity: 0.25;
   z-index: -1;
   pointer-events: none;
   transition: left 0.3s ease-in-out;
 }
 
-/* Soft paper shadow texture overlay */
+/* Soft paper shadow & tactile paper grain texture overlay */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -2;
-  opacity: 0.95;
-  background: radial-gradient(circle at 10% 20%, oklch(0.99 0.01 65) 0%, oklch(0.98 0.015 65) 100%);
+  opacity: 0.98;
+  background: 
+    radial-gradient(circle at 50% 50%, transparent 0%, oklch(0.02 0 0 / 2%) 100%),
+    radial-gradient(circle at 10% 20%, oklch(0.99 0.01 65) 0%, oklch(0.98 0.015 65) 100%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper-noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper-noise)' opacity='0.02'/%3E%3C/svg%3E");
+  background-blend-mode: multiply;
   pointer-events: none;
 }
 
 .dark body::before {
-  background: radial-gradient(circle at 10% 20%, oklch(0.15 0.01 35) 0%, oklch(0.12 0.01 35) 100%);
+  background: 
+    radial-gradient(circle at 50% 50%, transparent 0%, oklch(0 0 0 / 10%) 100%),
+    radial-gradient(circle at 10% 20%, oklch(0.15 0.01 35) 0%, oklch(0.12 0.01 35) 100%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper-noise-dark'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper-noise-dark)' opacity='0.025'/%3E%3C/svg%3E");
+  background-blend-mode: screen;
 }
 
 @keyframes spin {
   from {
     transform: rotate(0);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
 
 @keyframes breathe {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(0.9);
     opacity: 0.6;
     background-color: oklch(0.68 0.15 65 / 20%);
   }
+
   50% {
     transform: scale(1.1);
     opacity: 1;
@@ -71,13 +85,16 @@ body::before {
     transform: translateY(0) scaleX(1);
     opacity: 0;
   }
+
   15% {
     opacity: 0.5;
   }
+
   50% {
     transform: translateY(-15px) scaleX(1.1);
     opacity: 0.3;
   }
+
   100% {
     transform: translateY(-30px) scaleX(0.9);
     opacity: 0;
@@ -93,26 +110,33 @@ body::before {
 }
 
 @keyframes bounce {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(-10%);
-    animation-timing-function: cubic-bezier(0.8,0,1,1);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
   }
+
   50% {
     transform: none;
-    animation-timing-function: cubic-bezier(0,0,0.2,1);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
   }
 }
 
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
   }
+
   50% {
     opacity: .5;
   }
 }
 
 @media (prefers-reduced-motion) {
+
   *,
   ::before,
   ::after {
@@ -158,7 +182,7 @@ body::before {
 }
 
 .footer-link {
-  @apply hover:text-accent transition-colors cursor-pointer underline decoration-wavy decoration-primary/40 underline-offset-4;
+  @apply hover:text-accent transition-colors cursor-pointer underline decoration-primary/30 underline-offset-4;
 }
 
 /* 2. Navbar Styles */
@@ -167,9 +191,15 @@ body::before {
 }
 
 .navbar-container {
-  @apply flex h-16 items-center justify-between bg-card border-2 border-primary px-6 shadow-sm transition-all duration-300;
-  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  @apply flex flex-col h-auto gap-3 bg-card border-2 border-primary px-4 py-3 shadow-sm transition-all duration-300 md:flex-row md:h-16 md:py-0 md:px-6 md:justify-between md:items-center md:gap-0;
+  border-radius: 18px 10px 18px 10px/10px 18px 8px 20px;
   box-shadow: 4px 4px 0px 0px var(--primary);
+}
+
+@media (min-width: 768px) {
+  .navbar-container {
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  }
 }
 
 .navbar-logo-btn {
@@ -195,11 +225,11 @@ body::before {
 }
 
 .navbar-nav {
-  @apply flex items-center gap-1 rounded-xl bg-secondary/80 p-0.5 border-2 border-primary;
+  @apply flex items-center justify-around w-full md:w-auto gap-1 rounded-xl bg-secondary/80 p-0.5 border-2 border-primary;
 }
 
 .navbar-tab-btn {
-  @apply relative flex items-center gap-2 rounded-lg px-4 py-1.5 text-xs sm:text-sm font-extrabold transition-all duration-200 text-muted-foreground hover:text-foreground;
+  @apply relative flex items-center justify-center flex-grow md:flex-grow-0 gap-2 rounded-lg px-2 sm:px-4 py-1.5 text-[11px] sm:text-sm font-extrabold transition-all duration-200 text-muted-foreground hover:text-foreground;
 }
 
 .navbar-tab-btn-active {
@@ -249,7 +279,7 @@ body::before {
 }
 
 .hero-accent-text {
-  @apply text-accent underline decoration-wavy decoration-accent/60 underline-offset-8;
+  @apply text-accent underline decoration-2 decoration-accent/40 underline-offset-8;
 }
 
 .hero-desc {
@@ -430,7 +460,7 @@ body::before {
 }
 
 .science-intro-link {
-  @apply text-sm font-bold text-primary hover:text-accent flex items-center gap-1.5 transition-colors underline decoration-wavy decoration-primary/40 underline-offset-4;
+  @apply text-sm font-bold text-primary hover:text-accent flex items-center gap-1.5 transition-colors underline decoration-primary/30 underline-offset-4;
 }
 
 .science-intro-steps {
@@ -863,7 +893,6 @@ body::before {
 
 .alarm-view {
   @apply space-y-8 flex flex-col items-center;
-  animation: bounce 3s infinite;
 }
 
 .alarm-alert-icon {
@@ -882,4 +911,35 @@ body::before {
 .alarm-action-btn {
   @apply w-full flex items-center justify-center gap-2 border-2 border-primary bg-accent text-accent-foreground font-black text-base px-6 py-4.5 shadow-lg shadow-accent/20 transition-all duration-300;
   border-radius: 14px 24px 10px 18px/18px 10px 24px 14px;
+}
+
+/* Cozy Sketchbook Card Paper Grain Overlays */
+.navbar-container,
+.hero-section,
+.visual-card,
+.mode-card,
+.science-intro-section,
+.accordion-item,
+.benefit-card,
+.synergy-section,
+.timer-card,
+.idle-mode-option,
+.sandbox-banner {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='card-noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23card-noise)' opacity='0.025'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+.dark .navbar-container,
+.dark .hero-section,
+.dark .visual-card,
+.dark .mode-card,
+.dark .science-intro-section,
+.dark .accordion-item,
+.dark .benefit-card,
+.dark .synergy-section,
+.dark .timer-card,
+.dark .idle-mode-option,
+.dark .sandbox-banner {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='card-noise-dark'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23card-noise-dark)' opacity='0.025'/%3E%3C/svg%3E");
+  background-repeat: repeat;
 }

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Brain, Coffee, Zap, Award, Activity, Heart, ShieldAlert, Sparkles, ChevronDown, ChevronUp } from "lucide-react";
+import { CoffeeRing, SleepingSloth, CoffeeBeans } from "./Doodles";
 
 export function SciencePage() {
   const [openSection, setOpenSection] = useState<string | null>("adenosine");
@@ -91,11 +92,15 @@ export function SciencePage() {
 
   return (
     <div className="science-container">
+      {/* Sketchbook Background Doodles */}
+      <CoffeeRing className="absolute -left-20 -top-16 w-64 h-64 opacity-70 pointer-events-none z-0" />
+      <CoffeeBeans className="absolute hidden lg:block -left-28 top-[360px] w-28 h-28 pointer-events-none z-0 rotate-[-12deg] opacity-75" />
+      <SleepingSloth className="absolute hidden lg:block -right-28 top-[500px] w-24 h-24 pointer-events-none z-0 rotate-[6deg] opacity-75" />
       
       <section className="science-header">
         <h1 className="science-title">
           The Science of <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
+          <span className="text-accent underline decoration-2 underline-offset-8 decoration-accent/50">
             High-Performance Naps
           </span>
         </h1>
