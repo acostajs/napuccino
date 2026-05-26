@@ -1,6 +1,5 @@
 import { Activity, ArrowRight, Moon, Play, Zap } from "lucide-react";
 import type React from "react";
-import { CoffeeBeans, CoffeeRing, SleepingSloth, ZZzCloud } from "../../components/Doodles";
 import { useI18n } from "../../lib/i18n";
 import { MODES } from "../../lib/modes";
 
@@ -14,12 +13,6 @@ export function HomePage({ setActiveTab }: HomePageProps): React.ReactElement {
 
   return (
     <div className="home-container">
-      {/* Sketchbook Background Doodles */}
-      <CoffeeRing className="absolute -left-20 -top-16 w-64 h-64 opacity-70 pointer-events-none z-0" />
-      <SleepingSloth className="absolute hidden lg:block lg:-left-28 lg:top-[420px] w-24 h-24 pointer-events-none z-0 rotate-[-8deg]" />
-      <ZZzCloud className="absolute hidden lg:block lg:-right-28 lg:top-[280px] w-28 h-28 pointer-events-none z-0 rotate-[6deg]" />
-      <CoffeeBeans className="absolute hidden xl:block -right-16 -bottom-10 w-36 h-36 pointer-events-none z-0 rotate-[12deg] opacity-75" />
-
       <section className="hero-section">
         <div className="hero-gradient-overlay" />
         <div className="hero-content">

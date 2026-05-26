@@ -1,6 +1,5 @@
 import { Activity, Award, Brain, ChevronDown, Coffee, Heart, ShieldAlert, Sparkles, Zap } from "lucide-react";
 import type React from "react";
-import { CoffeeBeans, CoffeeRing, SleepingSloth } from "../../components/Doodles";
 import { useI18n } from "../../lib/i18n";
 
 export function SciencePage(): React.ReactElement {
@@ -74,11 +73,6 @@ export function SciencePage(): React.ReactElement {
 
   return (
     <div className="science-container">
-      {/* Sketchbook Background Doodles */}
-      <CoffeeRing className="absolute -left-20 -top-16 w-64 h-64 opacity-70 pointer-events-none z-0" />
-      <CoffeeBeans className="absolute hidden lg:block -left-28 top-[360px] w-28 h-28 pointer-events-none z-0 rotate-[-12deg] opacity-75" />
-      <SleepingSloth className="absolute hidden lg:block -right-28 top-[500px] w-24 h-24 pointer-events-none z-0 rotate-[6deg] opacity-75" />
-
       <section className="science-header">
         <h1 className="science-title">
           {t("science.title")} <br />
