@@ -1,6 +1,6 @@
 import { Activity, ArrowRight, Moon, Play, Zap } from "lucide-react";
 import type React from "react";
-import { t } from "../lib/i18n";
+import { useI18n } from "../lib/i18n";
 import { MODES } from "../lib/modes";
 import { CoffeeBeans, CoffeeRing, SleepingSloth, ZZzCloud } from "./Doodles";
 
@@ -9,6 +9,7 @@ type HomePageProps = {
 };
 
 export function HomePage({ setActiveTab }: HomePageProps): React.ReactElement {
+  const { t } = useI18n();
   const modes = Object.values(MODES);
 
   return (

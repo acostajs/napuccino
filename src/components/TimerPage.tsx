@@ -3,7 +3,7 @@ import type React from "react";
 import { useState } from "react";
 import { type AlarmSound, type AmbientSound, useAudioEngine } from "../hooks/useAudioEngine";
 import { useNapTimer } from "../hooks/useNapTimer";
-import { t } from "../lib/i18n";
+import { useI18n } from "../lib/i18n";
 import { AlarmView } from "./AlarmView";
 import { CoffeeRing, CrescentMoon, ZZzCloud } from "./Doodles";
 import { IdleView } from "./IdleView";
@@ -11,6 +11,7 @@ import { PreView } from "./PreView";
 import { SleepView } from "./SleepView";
 
 export function TimerPage(): React.ReactElement {
+  const { t } = useI18n();
   const [ambientSound, setAmbientSound] = useState<AmbientSound>("silence");
   const [alarmSound, setAlarmSound] = useState<AlarmSound>("harp");
   const [isMuted, setIsMuted] = useState<boolean>(false);

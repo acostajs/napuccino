@@ -1,6 +1,6 @@
 import { Play } from "lucide-react";
 import type React from "react";
-import { t } from "../lib/i18n";
+import { useI18n } from "../lib/i18n";
 import { MODES, type NapMode } from "../lib/modes";
 
 type IdleViewProps = {
@@ -10,6 +10,7 @@ type IdleViewProps = {
 };
 
 export function IdleView({ activeMode, setActiveMode, handleStart }: IdleViewProps): React.ReactElement {
+  const { t } = useI18n();
   return (
     <section className="idle-view">
       <div className="idle-header">

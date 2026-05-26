@@ -1,12 +1,13 @@
 import { Coffee } from "lucide-react";
 import type React from "react";
-import { t } from "../lib/i18n";
+import { useI18n } from "../lib/i18n";
 
 type AlarmViewProps = {
   handleStop: () => void;
 };
 
 export function AlarmView({ handleStop }: AlarmViewProps): React.ReactElement {
+  const { t } = useI18n();
   return (
     <section className="alarm-view">
       <div className="alarm-alert-icon">

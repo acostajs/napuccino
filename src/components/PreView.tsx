@@ -1,7 +1,7 @@
 import { AlertCircle, FastForward, Sparkles, Square, Volume2 } from "lucide-react";
 import type React from "react";
 import type { AlarmSound, AmbientSound } from "../hooks/useAudioEngine";
-import { t } from "../lib/i18n";
+import { useI18n } from "../lib/i18n";
 import { SoundSelector } from "./SoundSelector";
 
 type PreViewProps = {
@@ -27,6 +27,7 @@ export function PreView({
   handleSkipPre,
   handleStop,
 }: PreViewProps): React.ReactElement {
+  const { t } = useI18n();
   const transitionOptions = [
     { id: "silence" as const, label: t("sounds.silence") },
     { id: "cafe" as const, label: t("sounds.cafe") },

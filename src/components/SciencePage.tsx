@@ -12,10 +12,11 @@ import {
 } from "lucide-react";
 import type React from "react";
 import { useState } from "react";
-import { t } from "../lib/i18n";
+import { useI18n } from "../lib/i18n";
 import { CoffeeBeans, CoffeeRing, SleepingSloth } from "./Doodles";
 
 export function SciencePage(): React.ReactElement {
+  const { t } = useI18n();
   const [openSection, setOpenSection] = useState<string | null>("adenosine");
 
   const toggleSection = (id: string): void => {

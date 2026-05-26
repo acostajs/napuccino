@@ -1,7 +1,7 @@
 import { Sparkles, Square, Volume2, VolumeX } from "lucide-react";
 import type React from "react";
 import type { AlarmSound, AmbientSound } from "../hooks/useAudioEngine";
-import { t } from "../lib/i18n";
+import { useI18n } from "../lib/i18n";
 import type { NapMode } from "../lib/modes";
 import { SoundSelector } from "./SoundSelector";
 
@@ -34,6 +34,7 @@ export function SleepView({
   setIsMuted,
   handleStop,
 }: SleepViewProps): React.ReactElement {
+  const { t } = useI18n();
   const transitionOptions = [
     { id: "silence" as const, label: t("sounds.silence") },
     { id: "cafe" as const, label: t("sounds.cafe") },
