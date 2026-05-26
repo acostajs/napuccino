@@ -5,6 +5,14 @@
     @apply font-sans;
   }
 
+  /* §6.2 — Global focus-visible ring for all interactive elements */
+  button:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 2px var(--background),
+      0 0 0 4px var(--primary);
+  }
+
   /* Ruled Notebook Paper Background (Graph Paper Grid) */
   body {
     @apply min-w-[320px] min-h-screen relative m-0 bg-background text-foreground;
@@ -235,6 +243,33 @@ body::before {
 .theme-toggle-btn {
   @apply flex h-10 w-10 items-center justify-center border-2 border-primary bg-card text-foreground transition-all duration-200 hover:bg-secondary hover:scale-105 active:scale-95;
   border-radius: 14px 6px 12px 8px / 8px 12px 7px 10px;
+}
+
+/* Duplicated layout/inline classes extracted for Tasks 5.1 & 5.2 */
+.navbar-mobile-row {
+  @apply flex w-full items-center justify-between md:w-auto;
+}
+
+.navbar-controls-mobile {
+  @apply flex items-center gap-2 md:hidden;
+}
+
+.navbar-controls-desktop {
+  @apply hidden md:flex items-center gap-3;
+}
+
+.locale-dropdown {
+  @apply absolute right-0 mt-2 w-10 border-2 border-primary bg-card text-foreground z-50 overflow-hidden flex flex-col gap-1 p-1;
+  box-shadow: 3px 3px 0px 0px var(--primary);
+  border-radius: 12px 6px 10px 8px / 8px 10px 7px 11px;
+}
+
+.locale-option-btn {
+  @apply w-full h-8 flex items-center justify-center text-[11px] font-extrabold transition-all duration-150 uppercase border-2 border-transparent rounded-md hover:bg-secondary text-muted-foreground hover:text-foreground;
+}
+
+.locale-option-btn-active {
+  @apply bg-primary text-primary-foreground font-black hover:bg-primary;
 }
 
 /* 3. HomePage Styles */
@@ -536,7 +571,7 @@ body::before {
 }
 
 .accordion-trigger {
-  @apply w-full flex items-center justify-between p-6 text-left focus:outline-none;
+  @apply w-full flex items-center justify-between p-6 text-left outline-none;
 }
 
 .accordion-icon-box {
@@ -958,4 +993,21 @@ body::before {
 .dark .sandbox-banner {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='card-noise-dark'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23card-noise-dark)' opacity='0.025'/%3E%3C/svg%3E");
   background-repeat: repeat;
+}
+
+/* Miscellaneous Inline Strings Extracted (Task 5.4) */
+.accordion-detail-text {
+  @apply space-y-4 text-sm text-muted-foreground leading-relaxed;
+}
+
+.accent-underline {
+  @apply text-accent underline decoration-2 underline-offset-8 decoration-accent/50;
+}
+
+.timer-digits {
+  @apply font-extrabold text-foreground tracking-tight text-3xl md:text-4xl;
+}
+
+.sleep-alarm-box {
+  @apply w-full space-y-2.5 pt-2;
 }

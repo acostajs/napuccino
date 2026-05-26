@@ -1,8 +1,8 @@
 import { Sparkles, Square, Volume2, VolumeX } from "lucide-react";
 import type React from "react";
-import type { AlarmSound, AmbientSound } from "../hooks/useAudioEngine";
-import { useI18n } from "../lib/i18n";
-import type { NapMode } from "../lib/modes";
+import type { AlarmSound, AmbientSound } from "../../hooks/useAudioEngine";
+import { useI18n } from "../../lib/i18n";
+import type { NapMode } from "../../lib/modes";
 import { SoundSelector } from "./SoundSelector";
 
 type SleepViewProps = {
@@ -73,7 +73,7 @@ export function SleepView({
         </svg>
 
         <div className="timer-time-display">
-          <time className="text-4xl font-extrabold tracking-tight text-foreground">{formatTime(sleepTimeLeft)}</time>
+          <time className="timer-digits">{formatTime(sleepTimeLeft)}</time>
           <figcaption className="time-label-accent">{t("timer.sleep.napping")}</figcaption>
         </div>
       </figure>
@@ -89,7 +89,7 @@ export function SleepView({
             type="button"
             onClick={() => setIsMuted((prev) => !prev)}
             className={isMuted ? "sound-mute-btn-active" : "sound-mute-btn"}
-            title={isMuted ? t("timer.sleep.unmute") : t("timer.sleep.mute")}
+            aria-label={isMuted ? t("timer.sleep.unmute") : t("timer.sleep.mute")}
           >
             {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
           </button>
@@ -105,7 +105,7 @@ export function SleepView({
       </div>
 
       {/* Wake-Up Alarm Selector inside Sleep View */}
-      <div className="w-full space-y-2.5 pt-2">
+      <div className="sleep-alarm-box">
         <SoundSelector
           title={t("timer.sounds.alarm_title")}
           icon={<Sparkles className="h-4 w-4 text-accent animate-pulse" />}

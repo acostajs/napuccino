@@ -306,7 +306,7 @@ export function useAudioEngine({ isMuted, ambientSound, alarmSound, timerState }
         case "silence":
           break;
         default: {
-          const _exhaustiveCheck: never = currentSound;
+          ((_: never) => {})(currentSound);
         }
       }
 
@@ -369,7 +369,7 @@ export function useAudioEngine({ isMuted, ambientSound, alarmSound, timerState }
           playCafeNoise(ctx);
           break;
         default: {
-          const _exhaustiveCheck: never = ambientSound;
+          ((_: never) => {})(ambientSound);
         }
       }
     };

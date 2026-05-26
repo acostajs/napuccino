@@ -12,8 +12,8 @@ import {
 } from "lucide-react";
 import type React from "react";
 import { useState } from "react";
-import { useI18n } from "../lib/i18n";
-import { CoffeeBeans, CoffeeRing, SleepingSloth } from "./Doodles";
+import { CoffeeBeans, CoffeeRing, SleepingSloth } from "../../components/Doodles";
+import { useI18n } from "../../lib/i18n";
 
 export function SciencePage(): React.ReactElement {
   const { t } = useI18n();
@@ -30,7 +30,7 @@ export function SciencePage(): React.ReactElement {
       icon: Brain,
       summary: t("science.topics.adenosine.summary"),
       details: (
-        <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
+        <div className="accordion-detail-text">
           <p>{t("science.topics.adenosine.p1")}</p>
           <p>{t("science.topics.adenosine.p2")}</p>
           <div className="nap-secret-box">
@@ -49,7 +49,7 @@ export function SciencePage(): React.ReactElement {
       icon: Coffee,
       summary: t("science.topics.caffeine.summary"),
       details: (
-        <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
+        <div className="accordion-detail-text">
           <p>{t("science.topics.caffeine.p1")}</p>
           <p>{t("science.topics.caffeine.p2")}</p>
           <p>{t("science.topics.caffeine.p3")}</p>
@@ -62,7 +62,7 @@ export function SciencePage(): React.ReactElement {
       icon: ShieldAlert,
       summary: t("science.topics.grogginess.summary"),
       details: (
-        <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
+        <div className="accordion-detail-text">
           <p>{t("science.topics.grogginess.p1")}</p>
           <p>{t("science.topics.grogginess.p2")}</p>
           <p>{t("science.topics.grogginess.p3")}</p>
@@ -99,9 +99,7 @@ export function SciencePage(): React.ReactElement {
       <section className="science-header">
         <h1 className="science-title">
           {t("science.title")} <br />
-          <span className="text-accent underline decoration-2 underline-offset-8 decoration-accent/50">
-            {t("science.title_accent")}
-          </span>
+          <span className="accent-underline">{t("science.title_accent")}</span>
         </h1>
         <p className="science-subtitle">{t("science.subtitle")}</p>
       </section>
@@ -119,7 +117,12 @@ export function SciencePage(): React.ReactElement {
               const isOpen = openSection === topic.id;
               return (
                 <li key={topic.id} className="accordion-item">
-                  <button type="button" onClick={() => toggleSection(topic.id)} className="accordion-trigger">
+                  <button
+                    type="button"
+                    onClick={() => toggleSection(topic.id)}
+                    aria-expanded={isOpen}
+                    className="accordion-trigger"
+                  >
                     <div className="accordion-title-box">
                       <div className="accordion-icon-box">
                         <Icon className="h-5 w-5" />

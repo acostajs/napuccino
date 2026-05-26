@@ -41,6 +41,7 @@ export function SoundSelector<T extends string>({
                     onPreview(sound.id);
                   }
                 }}
+                aria-pressed={isActive}
                 className={`sound-option-btn ${isActive ? "sound-option-btn-active" : ""}`}
               >
                 {sound.label}

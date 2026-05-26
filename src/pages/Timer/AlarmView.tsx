@@ -1,6 +1,6 @@
 import { Coffee } from "lucide-react";
 import type React from "react";
-import { useI18n } from "../lib/i18n";
+import { useI18n } from "../../lib/i18n";
 
 type AlarmViewProps = {
   handleStop: () => void;

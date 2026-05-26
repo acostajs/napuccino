@@ -1,11 +1,11 @@
 import { FastForward, Sparkles } from "lucide-react";
 import type React from "react";
 import { useState } from "react";
-import { type AlarmSound, type AmbientSound, useAudioEngine } from "../hooks/useAudioEngine";
-import { useNapTimer } from "../hooks/useNapTimer";
-import { useI18n } from "../lib/i18n";
+import { CoffeeRing, CrescentMoon, ZZzCloud } from "../../components/Doodles";
+import { type AlarmSound, type AmbientSound, useAudioEngine } from "../../hooks/useAudioEngine";
+import { useNapTimer } from "../../hooks/useNapTimer";
+import { useI18n } from "../../lib/i18n";
 import { AlarmView } from "./AlarmView";
-import { CoffeeRing, CrescentMoon, ZZzCloud } from "./Doodles";
 import { IdleView } from "./IdleView";
 import { PreView } from "./PreView";
 import { SleepView } from "./SleepView";
@@ -44,7 +44,7 @@ export function TimerPage(): React.ReactElement {
   };
 
   return (
-    <div className="timer-container">
+    <section className="timer-container" aria-label="Nap Timer">
       {/* Sketchbook Background Doodles */}
       <CoffeeRing className="absolute left-1/2 -translate-x-1/2 top-[120px] w-96 h-96 opacity-60 pointer-events-none z-0" />
       <CrescentMoon className="absolute hidden md:block -right-28 top-[60px] w-24 h-24 pointer-events-none z-0 rotate-[10deg] opacity-75" />
@@ -61,6 +61,8 @@ export function TimerPage(): React.ReactElement {
         <button
           type="button"
           onClick={() => setTestMode((prev) => !prev)}
+          aria-pressed={testMode}
+          aria-label={t("sandbox.toggle_label")}
           className={`sandbox-toggle-btn ${testMode ? "sandbox-toggle-btn-active" : ""}`}
         >
           <FastForward className="h-3 w-3" />
@@ -68,7 +70,7 @@ export function TimerPage(): React.ReactElement {
         </button>
       </section>
 
-      <div className="timer-card">
+      <article className="timer-card" aria-label="Timer Card">
         {timerState === "idle" && (
           <IdleView
             activeMode={activeMode}
@@ -109,7 +111,7 @@ export function TimerPage(): React.ReactElement {
         )}
 
         {timerState === "alarm" && <AlarmView handleStop={() => handleStop(audioEngine.stopAlarm)} />}
-      </div>
-    </div>
+      </article>
+    </section>
   );
 }

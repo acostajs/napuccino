@@ -1,7 +1,7 @@
 import { AlertCircle, FastForward, Sparkles, Square, Volume2 } from "lucide-react";
 import type React from "react";
-import type { AlarmSound, AmbientSound } from "../hooks/useAudioEngine";
-import { useI18n } from "../lib/i18n";
+import type { AlarmSound, AmbientSound } from "../../hooks/useAudioEngine";
+import { useI18n } from "../../lib/i18n";
 import { SoundSelector } from "./SoundSelector";
 
 type PreViewProps = {
@@ -58,7 +58,7 @@ export function PreView({
         <div className="breathing-dashed-ring" />
 
         <div className="timer-time-display">
-          <time className="text-3xl font-extrabold text-foreground">{formatTime(preTimeLeft)}</time>
+          <time className="timer-digits">{formatTime(preTimeLeft)}</time>
           <figcaption className="time-label">{t("timer.pre.breathe_rest")}</figcaption>
         </div>
       </figure>
