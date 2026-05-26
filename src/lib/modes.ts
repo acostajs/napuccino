@@ -1,4 +1,4 @@
-import { Coffee, BatteryCharging, Brain } from "lucide-react";
+import { BatteryCharging, Brain, Coffee } from "lucide-react";
 
 export type NapMode = "napuccino" | "powernap" | "consolidation";
 

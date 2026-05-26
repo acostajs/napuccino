@@ -1,7 +1,7 @@
-import React from "react";
-import { AlertCircle, Volume2, Sparkles, FastForward, Square } from "lucide-react";
+import { AlertCircle, FastForward, Sparkles, Square, Volume2 } from "lucide-react";
+import type React from "react";
+import type { AlarmSound, AmbientSound } from "../hooks/useAudioEngine";
 import { SoundSelector } from "./SoundSelector";
-import type { AmbientSound, AlarmSound } from "../hooks/useAudioEngine";
 
 type PreViewProps = {
   preTimeLeft: number;
@@ -84,11 +84,11 @@ export function PreView({
       </div>
 
       <div className="timer-controls">
-        <button onClick={handleSkipPre} className="skip-pre-btn">
+        <button type="button" onClick={handleSkipPre} className="skip-pre-btn">
           Skip Pre-Countdown
           <FastForward className="h-4 w-4" />
         </button>
-        <button onClick={handleStop} className="stop-timer-btn" aria-label="Stop Timer">
+        <button type="button" onClick={handleStop} className="stop-timer-btn" aria-label="Stop Timer">
           <Square className="h-4 w-4 fill-current" />
         </button>
       </div>

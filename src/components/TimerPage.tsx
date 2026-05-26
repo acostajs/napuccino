@@ -1,12 +1,13 @@
-import React, { useState } from "react";
 import { FastForward, Sparkles } from "lucide-react";
-import { CoffeeRing, CrescentMoon, ZZzCloud } from "./Doodles";
-import { useAudioEngine, type AmbientSound, type AlarmSound } from "../hooks/useAudioEngine";
+import type React from "react";
+import { useState } from "react";
+import { type AlarmSound, type AmbientSound, useAudioEngine } from "../hooks/useAudioEngine";
 import { useNapTimer } from "../hooks/useNapTimer";
+import { AlarmView } from "./AlarmView";
+import { CoffeeRing, CrescentMoon, ZZzCloud } from "./Doodles";
 import { IdleView } from "./IdleView";
 import { PreView } from "./PreView";
 import { SleepView } from "./SleepView";
-import { AlarmView } from "./AlarmView";
 
 export function TimerPage(): React.ReactElement {
   const [ambientSound, setAmbientSound] = useState<AmbientSound>("silence");
@@ -56,6 +57,7 @@ export function TimerPage(): React.ReactElement {
           </div>
         </div>
         <button
+          type="button"
           onClick={() => setTestMode((prev) => !prev)}
           className={`sandbox-toggle-btn ${testMode ? "sandbox-toggle-btn-active" : ""}`}
         >
@@ -104,9 +106,7 @@ export function TimerPage(): React.ReactElement {
           />
         )}
 
-        {timerState === "alarm" && (
-          <AlarmView handleStop={() => handleStop(audioEngine.stopAlarm)} />
-        )}
+        {timerState === "alarm" && <AlarmView handleStop={() => handleStop(audioEngine.stopAlarm)} />}
       </div>
     </div>
   );

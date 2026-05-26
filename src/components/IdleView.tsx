@@ -1,5 +1,5 @@
-import React from "react";
 import { Play } from "lucide-react";
+import type React from "react";
 import { MODES, type NapMode } from "../lib/modes";
 
 type IdleViewProps = {
@@ -8,18 +8,12 @@ type IdleViewProps = {
   handleStart: () => void;
 };
 
-export function IdleView({
-  activeMode,
-  setActiveMode,
-  handleStart,
-}: IdleViewProps): React.ReactElement {
+export function IdleView({ activeMode, setActiveMode, handleStart }: IdleViewProps): React.ReactElement {
   return (
     <section className="idle-view">
       <div className="idle-header">
         <h2 className="idle-title">Set Your Sleep Wave</h2>
-        <p className="idle-desc">
-          Select your locked scientific target block. Make sure to prepare your coffee.
-        </p>
+        <p className="idle-desc">Select your locked scientific target block. Make sure to prepare your coffee.</p>
       </div>
 
       <ul className="idle-modes-list">
@@ -30,6 +24,7 @@ export function IdleView({
           return (
             <li key={mId}>
               <button
+                type="button"
                 onClick={() => setActiveMode(mId)}
                 className={`idle-mode-option ${isSelected ? "idle-mode-option-active" : ""}`}
               >
@@ -49,7 +44,7 @@ export function IdleView({
         })}
       </ul>
 
-      <button onClick={handleStart} className="primary-btn w-full justify-center py-4">
+      <button type="button" onClick={handleStart} className="primary-btn w-full justify-center py-4">
         <Play className="h-5 w-5 fill-current" />
         Initiate Countdown
       </button>

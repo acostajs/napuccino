@@ -1,6 +1,18 @@
-import React, { useState } from "react";
-import { Brain, Coffee, Zap, Award, Activity, Heart, ShieldAlert, Sparkles, ChevronDown, ChevronUp } from "lucide-react";
-import { CoffeeRing, SleepingSloth, CoffeeBeans } from "./Doodles";
+import {
+  Activity,
+  Award,
+  Brain,
+  ChevronDown,
+  ChevronUp,
+  Coffee,
+  Heart,
+  ShieldAlert,
+  Sparkles,
+  Zap,
+} from "lucide-react";
+import type React from "react";
+import { useState } from "react";
+import { CoffeeBeans, CoffeeRing, SleepingSloth } from "./Doodles";
 
 export function SciencePage(): React.ReactElement {
   const [openSection, setOpenSection] = useState<string | null>("adenosine");
@@ -18,15 +30,19 @@ export function SciencePage(): React.ReactElement {
       details: (
         <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
           <p>
-            Throughout the day, as your brain burns energy, a chemical compound called **adenosine** steadily accumulates. Adenosine binds to specific receptors in your central nervous system, gradually dampening neural activity and creating what scientists call **sleep pressure**.
+            Throughout the day, as your brain burns energy, a chemical compound called **adenosine** steadily
+            accumulates. Adenosine binds to specific receptors in your central nervous system, gradually dampening
+            neural activity and creating what scientists call **sleep pressure**.
           </p>
           <p>
-            The higher the concentration of adenosine, the sleepier and more fatigued you feel. When you sleep, your brain naturally clears this accumulation, reset-ing your biological battery.
+            The higher the concentration of adenosine, the sleepier and more fatigued you feel. When you sleep, your
+            brain naturally clears this accumulation, reset-ing your biological battery.
           </p>
           <div className="nap-secret-box">
             <Sparkles className="h-5 w-5 text-accent shrink-0 mt-0.5" />
             <p className="nap-secret-text">
-              <strong>The Nap Secret:</strong> Even a tiny 15-20 minute nap clears a substantial amount of adenosine from your receptors, freeing them up for caffeine to block!
+              <strong>The Nap Secret:</strong> Even a tiny 15-20 minute nap clears a substantial amount of adenosine
+              from your receptors, freeing them up for caffeine to block!
             </p>
           </div>
         </div>
@@ -40,13 +56,14 @@ export function SciencePage(): React.ReactElement {
       details: (
         <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
           <p>
-            When you drink a cup of coffee, the caffeine doesn't instantly hit your brain. It must pass through your stomach, enter your small intestine, absorb into the bloodstream, and finally cross the blood-brain barrier.
+            When you drink a cup of coffee, the caffeine doesn't instantly hit your brain. It must pass through your
+            stomach, enter your small intestine, absorb into the bloodstream, and finally cross the blood-brain barrier.
           </p>
+          <p>This metabolic journey takes exactly **20 to 30 minutes**.</p>
           <p>
-            This metabolic journey takes exactly **20 to 30 minutes**. 
-          </p>
-          <p>
-            Therefore, if you drink coffee and lie down immediately, the caffeine is completely inactive for the next 20 minutes. It operates as a silent timer. The moment you are waking up, the caffeine reaches its peak concentration in the brain, creating an double-amplified alertness shockwave.
+            Therefore, if you drink coffee and lie down immediately, the caffeine is completely inactive for the next 20
+            minutes. It operates as a silent timer. The moment you are waking up, the caffeine reaches its peak
+            concentration in the brain, creating an double-amplified alertness shockwave.
           </p>
         </div>
       ),
@@ -59,13 +76,17 @@ export function SciencePage(): React.ReactElement {
       details: (
         <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
           <p>
-            A standard human sleep cycle consists of multiple stages: Light sleep (Stages 1 and 2), Slow-Wave Deep Sleep (Stage 3), and REM sleep.
+            A standard human sleep cycle consists of multiple stages: Light sleep (Stages 1 and 2), Slow-Wave Deep Sleep
+            (Stage 3), and REM sleep.
           </p>
           <p>
-            It takes approximately **30 minutes** to transition from light sleep into slow-wave deep sleep. If you wake up *during* deep sleep, your brain experiences severe **sleep inertia**—the heavy, disoriented, and groggy feeling that can ruin the rest of your day.
+            It takes approximately **30 minutes** to transition from light sleep into slow-wave deep sleep. If you wake
+            up *during* deep sleep, your brain experiences severe **sleep inertia**—the heavy, disoriented, and groggy
+            feeling that can ruin the rest of your day.
           </p>
           <p>
-            By locking our Napuccino to **20 minutes** and Power Nap to **15 minutes**, we guarantee you stay strictly within light sleep, allowing you to wake up immediately refreshed and alert, with zero post-nap fatigue.
+            By locking our Napuccino to **20 minutes** and Power Nap to **15 minutes**, we guarantee you stay strictly
+            within light sleep, allowing you to wake up immediately refreshed and alert, with zero post-nap fatigue.
           </p>
         </div>
       ),
@@ -75,7 +96,8 @@ export function SciencePage(): React.ReactElement {
   const benefits = [
     {
       title: "Accelerated Learning",
-      description: "Studies show coffee naps improve working memory, facilitating the processing and categorization of complex information.",
+      description:
+        "Studies show coffee naps improve working memory, facilitating the processing and categorization of complex information.",
       icon: Award,
     },
     {
@@ -85,7 +107,8 @@ export function SciencePage(): React.ReactElement {
     },
     {
       title: "Motor Coordination",
-      description: "Improves motor skill accuracy and rapid reaction times, critical for athletes, musicians, and coders.",
+      description:
+        "Improves motor skill accuracy and rapid reaction times, critical for athletes, musicians, and coders.",
       icon: Activity,
     },
   ];
@@ -96,7 +119,7 @@ export function SciencePage(): React.ReactElement {
       <CoffeeRing className="absolute -left-20 -top-16 w-64 h-64 opacity-70 pointer-events-none z-0" />
       <CoffeeBeans className="absolute hidden lg:block -left-28 top-[360px] w-28 h-28 pointer-events-none z-0 rotate-[-12deg] opacity-75" />
       <SleepingSloth className="absolute hidden lg:block -right-28 top-[500px] w-24 h-24 pointer-events-none z-0 rotate-[6deg] opacity-75" />
-      
+
       <section className="science-header">
         <h1 className="science-title">
           The Science of <br />
@@ -105,12 +128,12 @@ export function SciencePage(): React.ReactElement {
           </span>
         </h1>
         <p className="science-subtitle">
-          Napping is not laziness; it is a bio-hack. Discover the neurochemical dynamics behind adenosine clearance, caffeine absorption, and optimal sleep cycles.
+          Napping is not laziness; it is a bio-hack. Discover the neurochemical dynamics behind adenosine clearance,
+          caffeine absorption, and optimal sleep cycles.
         </p>
       </section>
 
       <section className="science-grid">
-        
         <div className="pillars-col">
           <h2 className="section-heading">
             <Zap className="h-5 w-5 text-accent" />
@@ -123,7 +146,7 @@ export function SciencePage(): React.ReactElement {
               const isOpen = openSection === topic.id;
               return (
                 <li key={topic.id} className="accordion-item">
-                  <button onClick={() => toggleSection(topic.id)} className="accordion-trigger">
+                  <button type="button" onClick={() => toggleSection(topic.id)} className="accordion-trigger">
                     <div className="accordion-title-box">
                       <div className="accordion-icon-box">
                         <Icon className="h-5 w-5" />
@@ -140,11 +163,7 @@ export function SciencePage(): React.ReactElement {
                     )}
                   </button>
 
-                  {isOpen && (
-                    <article className="accordion-content">
-                      {topic.details}
-                    </article>
-                  )}
+                  {isOpen && <article className="accordion-content">{topic.details}</article>}
                 </li>
               );
             })}
@@ -158,10 +177,10 @@ export function SciencePage(): React.ReactElement {
           </h2>
 
           <ul className="benefits-list">
-            {benefits.map((benefit, idx) => {
+            {benefits.map((benefit) => {
               const Icon = benefit.icon;
               return (
-                <li key={idx} className="benefit-card">
+                <li key={benefit.title} className="benefit-card">
                   <div className="benefit-icon-box">
                     <Icon className="h-5 w-5" />
                   </div>
@@ -179,30 +198,26 @@ export function SciencePage(): React.ReactElement {
               <Coffee className="h-24 w-24 text-foreground" />
             </div>
             <p className="quote-text">
-              "We found that combining caffeine intake with a brief sleep session leads to massive improvements in visual task accuracy, motor skills, and working memory compared to caffeine or sleep alone."
+              "We found that combining caffeine intake with a brief sleep session leads to massive improvements in
+              visual task accuracy, motor skills, and working memory compared to caffeine or sleep alone."
             </p>
-            <cite className="quote-source">
-              — Loughborough University Sleep Research Study
-            </cite>
+            <cite className="quote-source">— Loughborough University Sleep Research Study</cite>
           </blockquote>
         </aside>
-
       </section>
 
       <section className="synergy-section">
-        <h2 className="synergy-title font-sans">
-          The Molecular Synergy: Coffee vs Sleep vs Napuccino
-        </h2>
+        <h2 className="synergy-title font-sans">The Molecular Synergy: Coffee vs Sleep vs Napuccino</h2>
 
         <ul className="synergy-grid">
-          
           <li className="synergy-card">
             <h3 className="synergy-card-title">A. Coffee Alone</h3>
             <div className="synergy-progress-track">
               <div className="synergy-progress-bar" />
             </div>
             <p className="synergy-desc">
-              Caffeine molecules compete with massive blocks of existing adenosine. Receptors are already saturated, leading to a muted spike and severe jitters.
+              Caffeine molecules compete with massive blocks of existing adenosine. Receptors are already saturated,
+              leading to a muted spike and severe jitters.
             </p>
           </li>
 
@@ -212,7 +227,8 @@ export function SciencePage(): React.ReactElement {
               <div className="synergy-progress-bar-partial" />
             </div>
             <p className="synergy-desc">
-              Clears adenosine successfully, but does not add stimulant molecules. Alertness increases slowly, sometimes accompanied by initial sleep inertia.
+              Clears adenosine successfully, but does not add stimulant molecules. Alertness increases slowly, sometimes
+              accompanied by initial sleep inertia.
             </p>
           </li>
 
@@ -222,13 +238,12 @@ export function SciencePage(): React.ReactElement {
               <div className="synergy-progress-bar-active" />
             </div>
             <p className="synergy-desc-active">
-              Sleep completely sweeps adenosine from brain receptors. Caffeine arrives immediately after, binding perfectly to empty receptors. Alertness is maximized!
+              Sleep completely sweeps adenosine from brain receptors. Caffeine arrives immediately after, binding
+              perfectly to empty receptors. Alertness is maximized!
             </p>
           </li>
-
         </ul>
       </section>
-
     </div>
   );
 }

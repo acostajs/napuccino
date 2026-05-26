@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { Navbar } from "./components/Navbar";
+import type React from "react";
+import { useEffect, useState } from "react";
 import { HomePage } from "./components/HomePage";
-import { TimerPage } from "./components/TimerPage";
+import { Navbar } from "./components/Navbar";
 import { SciencePage } from "./components/SciencePage";
+import { TimerPage } from "./components/TimerPage";
 import "./index.css";
 
 export function App(): React.ReactElement {
   const [activeTab, setActiveTab] = useState<"home" | "timer" | "science">("home");
-  
+
   const [theme, setTheme] = useState<"light" | "dark">(() => {
     if (typeof window !== "undefined") {
       const savedTheme = localStorage.getItem("napuccino-theme");
@@ -33,14 +34,9 @@ export function App(): React.ReactElement {
   return (
     <div className="app-container">
       <div className="bg-radial-highlight" />
-      
+
       <div className="app-content-wrapper">
-        <Navbar 
-          activeTab={activeTab} 
-          setActiveTab={setActiveTab} 
-          theme={theme} 
-          toggleTheme={toggleTheme} 
-        />
+        <Navbar activeTab={activeTab} setActiveTab={setActiveTab} theme={theme} toggleTheme={toggleTheme} />
 
         <main className="app-main">
           {activeTab === "home" && <HomePage setActiveTab={setActiveTab} />}
@@ -55,13 +51,13 @@ export function App(): React.ReactElement {
             © {new Date().getFullYear()} Napuccino. Engineered for peak cognitive performance.
           </p>
           <div className="footer-links">
-            <span className="footer-link" onClick={() => setActiveTab("science")}>
+            <button type="button" className="footer-link" onClick={() => setActiveTab("science")}>
               Science
-            </span>
+            </button>
             <span>•</span>
-            <span className="footer-link" onClick={() => setActiveTab("timer")}>
+            <button type="button" className="footer-link" onClick={() => setActiveTab("timer")}>
               Naps
-            </span>
+            </button>
           </div>
         </div>
       </footer>
