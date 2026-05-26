@@ -1,5 +1,6 @@
 import { Coffee } from "lucide-react";
 import type React from "react";
+import { t } from "../lib/i18n";
 
 type AlarmViewProps = {
   handleStop: () => void;
@@ -13,14 +14,12 @@ export function AlarmView({ handleStop }: AlarmViewProps): React.ReactElement {
       </div>
 
       <div className="pre-header">
-        <h2 className="alarm-title">Time to Conquer!</h2>
-        <p className="alarm-desc">
-          Your 20 minutes is up. The caffeine has successfully crossed into your brain receptors. Rise and shine!
-        </p>
+        <h2 className="alarm-title">{t("timer.alarm.title")}</h2>
+        <p className="alarm-desc">{t("timer.alarm.desc")}</p>
       </div>
 
       <button type="button" onClick={handleStop} className="alarm-action-btn">
-        Rise and Grind
+        {t("timer.alarm.action")}
       </button>
     </section>
   );

@@ -1,7 +1,8 @@
 import { Sparkles, Square, Volume2, VolumeX } from "lucide-react";
 import type React from "react";
 import type { AlarmSound, AmbientSound } from "../hooks/useAudioEngine";
-import { MODES, type NapMode } from "../lib/modes";
+import { t } from "../lib/i18n";
+import type { NapMode } from "../lib/modes";
 import { SoundSelector } from "./SoundSelector";
 
 type SleepViewProps = {
@@ -33,27 +34,25 @@ export function SleepView({
   setIsMuted,
   handleStop,
 }: SleepViewProps): React.ReactElement {
-  const currentConfig = MODES[activeMode];
-
   const transitionOptions = [
-    { id: "silence" as const, label: "Silence" },
-    { id: "cafe" as const, label: "Cozy Cafe" },
-    { id: "rain" as const, label: "Gentle Rain" },
-    { id: "white" as const, label: "Pink Noise" },
+    { id: "silence" as const, label: t("sounds.silence") },
+    { id: "cafe" as const, label: t("sounds.cafe") },
+    { id: "rain" as const, label: t("sounds.rain") },
+    { id: "white" as const, label: t("sounds.white") },
   ];
 
   const alarmOptions = [
-    { id: "silence" as const, label: "Silence" },
-    { id: "harp" as const, label: "Harp Arp" },
-    { id: "bells" as const, label: "Cozy Bells" },
-    { id: "forest" as const, label: "Forest Birds" },
+    { id: "silence" as const, label: t("sounds.silence") },
+    { id: "harp" as const, label: t("sounds.harp") },
+    { id: "bells" as const, label: t("sounds.bells") },
+    { id: "forest" as const, label: t("sounds.forest") },
   ];
 
   return (
     <section className="sleep-view">
       <div className="sleep-header">
-        <h2 className="sleep-title">{currentConfig.title} Active</h2>
-        <p className="sleep-desc">Adenosine clearance cycle currently in progress. Rest comfortably.</p>
+        <h2 className="sleep-title">{t("timer.sleep.active", { mode: t(`modes.${activeMode}.title`) })}</h2>
+        <p className="sleep-desc">{t("timer.sleep.desc")}</p>
       </div>
 
       <figure className="sleep-circular-progress">
@@ -74,7 +73,7 @@ export function SleepView({
 
         <div className="timer-time-display">
           <time className="text-4xl font-extrabold tracking-tight text-foreground">{formatTime(sleepTimeLeft)}</time>
-          <figcaption className="time-label-accent">Napping...</figcaption>
+          <figcaption className="time-label-accent">{t("timer.sleep.napping")}</figcaption>
         </div>
       </figure>
 
@@ -82,21 +81,21 @@ export function SleepView({
         <div className="sound-header">
           <span className="sound-title-box">
             <Volume2 className="h-4 w-4" />
-            Sleep Sound Machine
+            {t("timer.sleep.sound_machine")}
           </span>
 
           <button
             type="button"
             onClick={() => setIsMuted((prev) => !prev)}
             className={isMuted ? "sound-mute-btn-active" : "sound-mute-btn"}
-            title={isMuted ? "Unmute sounds" : "Mute sounds"}
+            title={isMuted ? t("timer.sleep.unmute") : t("timer.sleep.mute")}
           >
             {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
           </button>
         </div>
 
         <SoundSelector
-          title="Ambient Sound"
+          title={t("timer.sounds.ambient_title")}
           icon={null}
           activeId={ambientSound}
           options={transitionOptions}
@@ -107,7 +106,7 @@ export function SleepView({
       {/* Wake-Up Alarm Selector inside Sleep View */}
       <div className="w-full space-y-2.5 pt-2">
         <SoundSelector
-          title="Wake-Up Alarm (Audition on tap)"
+          title={t("timer.sounds.alarm_title")}
           icon={<Sparkles className="h-4 w-4 text-accent animate-pulse" />}
           activeId={alarmSound}
           options={alarmOptions}
@@ -118,7 +117,7 @@ export function SleepView({
 
       <button type="button" onClick={handleStop} className="cancel-nap-btn">
         <Square className="h-4.5 w-4.5 fill-current" />
-        Cancel Nap Loop
+        {t("timer.sleep.cancel")}
       </button>
     </section>
   );

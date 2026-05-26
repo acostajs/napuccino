@@ -1,5 +1,6 @@
 import { BookOpen, Coffee, Moon, Sun, Timer } from "lucide-react";
 import type React from "react";
+import { t } from "../lib/i18n";
 
 type NavbarProps = {
   activeTab: "home" | "timer" | "science";
@@ -10,9 +11,9 @@ type NavbarProps = {
 
 export function Navbar({ activeTab, setActiveTab, theme, toggleTheme }: NavbarProps): React.ReactElement {
   const tabs = [
-    { id: "home" as const, label: "Home", icon: Coffee },
-    { id: "timer" as const, label: "Nap Timer", icon: Timer },
-    { id: "science" as const, label: "Science", icon: BookOpen },
+    { id: "home" as const, label: t("nav.home"), icon: Coffee },
+    { id: "timer" as const, label: t("nav.timer"), icon: Timer },
+    { id: "science" as const, label: t("nav.science"), icon: BookOpen },
   ];
 
   return (
@@ -30,8 +31,8 @@ export function Navbar({ activeTab, setActiveTab, theme, toggleTheme }: NavbarPr
               <Coffee className="h-5 w-5 mt-1.5" />
             </div>
             <div className="text-left">
-              <span className="logo-brand-name">Napuccino</span>
-              <span className="logo-sub-tag">Coffee Nap Optimizer</span>
+              <span className="logo-brand-name">{t("nav.brand")}</span>
+              <span className="logo-sub-tag">{t("nav.sub")}</span>
             </div>
           </button>
 

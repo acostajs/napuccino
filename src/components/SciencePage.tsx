@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import type React from "react";
 import { useState } from "react";
+import { t } from "../lib/i18n";
 import { CoffeeBeans, CoffeeRing, SleepingSloth } from "./Doodles";
 
 export function SciencePage(): React.ReactElement {
@@ -24,25 +25,18 @@ export function SciencePage(): React.ReactElement {
   const scienceTopics = [
     {
       id: "adenosine",
-      title: "1. Adenosine & Sleep Pressure",
+      title: t("science.topics.adenosine.title"),
       icon: Brain,
-      summary: "Understanding the organic biological battery that triggers sleepiness.",
+      summary: t("science.topics.adenosine.summary"),
       details: (
         <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
-          <p>
-            Throughout the day, as your brain burns energy, a chemical compound called **adenosine** steadily
-            accumulates. Adenosine binds to specific receptors in your central nervous system, gradually dampening
-            neural activity and creating what scientists call **sleep pressure**.
-          </p>
-          <p>
-            The higher the concentration of adenosine, the sleepier and more fatigued you feel. When you sleep, your
-            brain naturally clears this accumulation, reset-ing your biological battery.
-          </p>
+          <p>{t("science.topics.adenosine.p1")}</p>
+          <p>{t("science.topics.adenosine.p2")}</p>
           <div className="nap-secret-box">
             <Sparkles className="h-5 w-5 text-accent shrink-0 mt-0.5" />
             <p className="nap-secret-text">
-              <strong>The Nap Secret:</strong> Even a tiny 15-20 minute nap clears a substantial amount of adenosine
-              from your receptors, freeing them up for caffeine to block!
+              <strong>{t("science.topics.adenosine.secret_title")}</strong>
+              {t("science.topics.adenosine.secret_desc")}
             </p>
           </div>
         </div>
@@ -50,44 +44,27 @@ export function SciencePage(): React.ReactElement {
     },
     {
       id: "caffeine-lag",
-      title: "2. The 20-Minute Caffeine Lag",
+      title: t("science.topics.caffeine.title"),
       icon: Coffee,
-      summary: "Why drinking coffee *right before* a sleep produces a mathematical superpower.",
+      summary: t("science.topics.caffeine.summary"),
       details: (
         <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
-          <p>
-            When you drink a cup of coffee, the caffeine doesn't instantly hit your brain. It must pass through your
-            stomach, enter your small intestine, absorb into the bloodstream, and finally cross the blood-brain barrier.
-          </p>
-          <p>This metabolic journey takes exactly **20 to 30 minutes**.</p>
-          <p>
-            Therefore, if you drink coffee and lie down immediately, the caffeine is completely inactive for the next 20
-            minutes. It operates as a silent timer. The moment you are waking up, the caffeine reaches its peak
-            concentration in the brain, creating an double-amplified alertness shockwave.
-          </p>
+          <p>{t("science.topics.caffeine.p1")}</p>
+          <p>{t("science.topics.caffeine.p2")}</p>
+          <p>{t("science.topics.caffeine.p3")}</p>
         </div>
       ),
     },
     {
       id: "sleep-inertia",
-      title: "3. Preventing Sleep Inertia (The Grogginess Trap)",
+      title: t("science.topics.grogginess.title"),
       icon: ShieldAlert,
-      summary: "Why sleeping for exactly 20 minutes is structurally superior to a 45-minute nap.",
+      summary: t("science.topics.grogginess.summary"),
       details: (
         <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
-          <p>
-            A standard human sleep cycle consists of multiple stages: Light sleep (Stages 1 and 2), Slow-Wave Deep Sleep
-            (Stage 3), and REM sleep.
-          </p>
-          <p>
-            It takes approximately **30 minutes** to transition from light sleep into slow-wave deep sleep. If you wake
-            up *during* deep sleep, your brain experiences severe **sleep inertia**—the heavy, disoriented, and groggy
-            feeling that can ruin the rest of your day.
-          </p>
-          <p>
-            By locking our Napuccino to **20 minutes** and Power Nap to **15 minutes**, we guarantee you stay strictly
-            within light sleep, allowing you to wake up immediately refreshed and alert, with zero post-nap fatigue.
-          </p>
+          <p>{t("science.topics.grogginess.p1")}</p>
+          <p>{t("science.topics.grogginess.p2")}</p>
+          <p>{t("science.topics.grogginess.p3")}</p>
         </div>
       ),
     },
@@ -95,20 +72,18 @@ export function SciencePage(): React.ReactElement {
 
   const benefits = [
     {
-      title: "Accelerated Learning",
-      description:
-        "Studies show coffee naps improve working memory, facilitating the processing and categorization of complex information.",
+      title: t("science.benefits.learning.title"),
+      description: t("science.benefits.learning.desc"),
       icon: Award,
     },
     {
-      title: "Sensory Reset",
-      description: "Clears sensory overload and stress, resetting eye fatigue and mental processing speeds.",
+      title: t("science.benefits.sensory.title"),
+      description: t("science.benefits.sensory.desc"),
       icon: Heart,
     },
     {
-      title: "Motor Coordination",
-      description:
-        "Improves motor skill accuracy and rapid reaction times, critical for athletes, musicians, and coders.",
+      title: t("science.benefits.motor.title"),
+      description: t("science.benefits.motor.desc"),
       icon: Activity,
     },
   ];
@@ -122,22 +97,19 @@ export function SciencePage(): React.ReactElement {
 
       <section className="science-header">
         <h1 className="science-title">
-          The Science of <br />
+          {t("science.title")} <br />
           <span className="text-accent underline decoration-2 underline-offset-8 decoration-accent/50">
-            High-Performance Naps
+            {t("science.title_accent")}
           </span>
         </h1>
-        <p className="science-subtitle">
-          Napping is not laziness; it is a bio-hack. Discover the neurochemical dynamics behind adenosine clearance,
-          caffeine absorption, and optimal sleep cycles.
-        </p>
+        <p className="science-subtitle">{t("science.subtitle")}</p>
       </section>
 
       <section className="science-grid">
         <div className="pillars-col">
           <h2 className="section-heading">
             <Zap className="h-5 w-5 text-accent" />
-            Biological Pillars
+            {t("science.pillars_heading")}
           </h2>
 
           <ul className="accordion-list">
@@ -173,7 +145,7 @@ export function SciencePage(): React.ReactElement {
         <aside className="aside-col">
           <h2 className="section-heading">
             <Sparkles className="h-5 w-5 text-accent" />
-            Proven Benefits
+            {t("science.benefits_heading")}
           </h2>
 
           <ul className="benefits-list">
@@ -197,50 +169,38 @@ export function SciencePage(): React.ReactElement {
             <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
               <Coffee className="h-24 w-24 text-foreground" />
             </div>
-            <p className="quote-text">
-              "We found that combining caffeine intake with a brief sleep session leads to massive improvements in
-              visual task accuracy, motor skills, and working memory compared to caffeine or sleep alone."
-            </p>
-            <cite className="quote-source">— Loughborough University Sleep Research Study</cite>
+            <p className="quote-text">{t("science.quote.text")}</p>
+            <cite className="quote-source">{t("science.quote.source")}</cite>
           </blockquote>
         </aside>
       </section>
 
       <section className="synergy-section">
-        <h2 className="synergy-title font-sans">The Molecular Synergy: Coffee vs Sleep vs Napuccino</h2>
+        <h2 className="synergy-title font-sans">{t("science.synergy_title")}</h2>
 
         <ul className="synergy-grid">
           <li className="synergy-card">
-            <h3 className="synergy-card-title">A. Coffee Alone</h3>
+            <h3 className="synergy-card-title">{t("science.synergy.coffee_title")}</h3>
             <div className="synergy-progress-track">
               <div className="synergy-progress-bar" />
             </div>
-            <p className="synergy-desc">
-              Caffeine molecules compete with massive blocks of existing adenosine. Receptors are already saturated,
-              leading to a muted spike and severe jitters.
-            </p>
+            <p className="synergy-desc">{t("science.synergy.coffee_desc")}</p>
           </li>
 
           <li className="synergy-card">
-            <h3 className="synergy-card-title">B. Sleep Alone</h3>
+            <h3 className="synergy-card-title">{t("science.synergy.sleep_title")}</h3>
             <div className="synergy-progress-track">
               <div className="synergy-progress-bar-partial" />
             </div>
-            <p className="synergy-desc">
-              Clears adenosine successfully, but does not add stimulant molecules. Alertness increases slowly, sometimes
-              accompanied by initial sleep inertia.
-            </p>
+            <p className="synergy-desc">{t("science.synergy.sleep_desc")}</p>
           </li>
 
           <li className="synergy-card-active">
-            <h3 className="synergy-card-title text-accent">C. The Napuccino</h3>
+            <h3 className="synergy-card-title text-accent">{t("science.synergy.napuccino_title")}</h3>
             <div className="synergy-progress-track bg-accent/20">
               <div className="synergy-progress-bar-active" />
             </div>
-            <p className="synergy-desc-active">
-              Sleep completely sweeps adenosine from brain receptors. Caffeine arrives immediately after, binding
-              perfectly to empty receptors. Alertness is maximized!
-            </p>
+            <p className="synergy-desc-active">{t("science.synergy.napuccino_desc")}</p>
           </li>
         </ul>
       </section>
