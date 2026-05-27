@@ -1,199 +1,142 @@
-import { Activity, Award, Brain, ChevronDown, Coffee, Heart, ShieldAlert, Sparkles, Zap } from "lucide-react";
 import type React from "react";
 import { useI18n } from "../../lib/i18n";
 
-export function SciencePage(): React.ReactElement {
-  const { t } = useI18n();
+type SciencePageProps = {
+  setActiveTab?: (tab: "home" | "timer" | "science") => void;
+};
 
-  const scienceTopics = [
-    {
-      id: "adenosine",
-      title: t("science.topics.adenosine.title"),
-      icon: Brain,
-      summary: t("science.topics.adenosine.summary"),
-      details: (
-        <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
-          <p>{t("science.topics.adenosine.p1")}</p>
-          <p>{t("science.topics.adenosine.p2")}</p>
-          <div className="p-4 border border-accent/25 bg-accent/5 flex gap-3 text-foreground rounded-2xl">
-            <Sparkles className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-            <p className="text-xs font-extrabold">
-              <strong>{t("science.topics.adenosine.secret_title")}</strong>
-              {t("science.topics.adenosine.secret_desc")}
-            </p>
-          </div>
-        </div>
-      ),
-    },
-    {
-      id: "caffeine-lag",
-      title: t("science.topics.caffeine.title"),
-      icon: Coffee,
-      summary: t("science.topics.caffeine.summary"),
-      details: (
-        <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
-          <p>{t("science.topics.caffeine.p1")}</p>
-          <p>{t("science.topics.caffeine.p2")}</p>
-          <p>{t("science.topics.caffeine.p3")}</p>
-        </div>
-      ),
-    },
-    {
-      id: "sleep-inertia",
-      title: t("science.topics.grogginess.title"),
-      icon: ShieldAlert,
-      summary: t("science.topics.grogginess.summary"),
-      details: (
-        <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
-          <p>{t("science.topics.grogginess.p1")}</p>
-          <p>{t("science.topics.grogginess.p2")}</p>
-          <p>{t("science.topics.grogginess.p3")}</p>
-        </div>
-      ),
-    },
-  ];
+export function SciencePage({ setActiveTab }: SciencePageProps): React.ReactElement {
+  const { t, locale } = useI18n();
 
-  const benefits = [
+  // Localized editorial titles mapped specifically to support multilinguality without breaking keys
+  const editorialTitle =
     {
-      title: t("science.benefits.learning.title"),
-      description: t("science.benefits.learning.desc"),
-      icon: Award,
-    },
+      en: "The Neurobiology of Nap.",
+      es: "La neurobiología de la siesta.",
+      fr: "La neurobiologie de la sieste.",
+    }[locale] || "The Neurobiology of Nap.";
+
+  const phase01Title =
     {
-      title: t("science.benefits.sensory.title"),
-      description: t("science.benefits.sensory.desc"),
-      icon: Heart,
-    },
+      en: "Phase 01: Adenosine",
+      es: "Fase 01: Adenosina",
+      fr: "Phase 01 : L'adénosine",
+    }[locale] || "Phase 01: Adenosine";
+
+  const phase02Title =
     {
-      title: t("science.benefits.motor.title"),
-      description: t("science.benefits.motor.desc"),
-      icon: Activity,
-    },
-  ];
+      en: "Phase 02: Sleep Inertia",
+      es: "Fase 02: Inercia del Sueño",
+      fr: "Phase 02 : L'inertie du sommeil",
+    }[locale] || "Phase 02: Sleep Inertia";
 
   return (
-    <div className="flex flex-col gap-16 max-w-5xl mx-auto py-6 text-left">
-      <section className="space-y-4">
-        <h1 className="text-4xl md:text-5xl font-black tracking-tight text-foreground font-serif leading-none">
-          {t("science.title")} <br />
-          <span className="text-accent underline decoration-2 underline-offset-8 decoration-accent/50">
-            {t("science.title_accent")}
-          </span>
-        </h1>
-        <p className="text-base md:text-lg text-muted-foreground font-semibold max-w-2xl leading-relaxed">
-          {t("science.subtitle")}
-        </p>
+    <div className="flex flex-col gap-12 max-w-4xl mx-auto py-12 text-left relative z-10">
+      {/* 
+        Zine-Inspired Editorial Science Page Redesign 
+        Completely borderless, pure typography-focused layout inspired by high-end print design.
+      */}
+
+      {/* Editorial Title */}
+      <section className="text-center py-6 select-none">
+        <h1 className="typography-display text-primary leading-tight lowercase">{editorialTitle}</h1>
       </section>
 
-      <section className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-        <div className="lg:col-span-2 space-y-6">
-          <h2 className="text-2xl font-black tracking-tight text-foreground flex items-center gap-2">
-            <Zap className="h-5 w-5 text-accent" />
-            {t("science.pillars_heading")}
-          </h2>
+      {/* Section Rhythm Gap 96px */}
+      <div className="h-section my-4" />
 
-          <ul className="space-y-4">
-            {scienceTopics.map((topic) => {
-              const Icon = topic.icon;
-              return (
-                <li
-                  key={topic.id}
-                  className="bg-card border border-border/30 overflow-hidden transition-all duration-500 ease-out rounded-2xl shadow-sm hover:shadow-md"
-                >
-                  <details name="science-pillars" open={topic.id === "adenosine"} className="group outline-none">
-                    <summary className="w-full flex items-center justify-between p-6 text-left outline-none cursor-pointer list-none">
-                      <div className="flex gap-4 items-center">
-                        <div className="p-2.5 border border-border/30 rounded-xl bg-secondary text-primary shrink-0">
-                          <Icon className="h-5 w-5" />
-                        </div>
-                        <div>
-                          <h3 className="text-base font-black text-foreground sm:text-lg">{topic.title}</h3>
-                          <p className="text-xs text-muted-foreground font-bold mt-0.5 uppercase tracking-wide">
-                            {topic.summary}
-                          </p>
-                        </div>
-                      </div>
-                      <ChevronDown className="h-5 w-5 text-muted-foreground shrink-0 transition-transform duration-300 group-open:rotate-180" />
-                    </summary>
-                    <article className="px-6 pb-6 pt-2 border-t-2 border-primary/20">{topic.details}</article>
-                  </details>
-                </li>
-              );
-            })}
-          </ul>
+      {/* Two-Column Grid: Phase 01 & Phase 02 */}
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 relative items-start">
+        {/* Left Column: Phase 01: Adenosine */}
+        <article className="space-y-6">
+          <h3 className="typography-title text-accent uppercase tracking-widest border-b border-border/20 pb-2">
+            {phase01Title}
+          </h3>
+          <div className="space-y-4">
+            <p className="typography-body text-muted-foreground">{t("science.topics.adenosine.p1")}</p>
+            <p className="typography-body text-muted-foreground">{t("science.topics.adenosine.p2")}</p>
+            <div className="p-5 border border-dashed border-accent/20 bg-accent/5 rounded-2xl">
+              <p className="text-xs font-bold leading-relaxed text-foreground">
+                <strong className="text-accent uppercase tracking-wider block mb-1">
+                  {t("science.topics.adenosine.secret_title")}
+                </strong>
+                {t("science.topics.adenosine.secret_desc")}
+              </p>
+            </div>
+          </div>
+        </article>
+
+        {/* Vertical Separation Divider Line (Visible only on desktop) */}
+        <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-[1px] bg-border/20 -translate-x-1/2" />
+
+        {/* Right Column: Phase 02: Sleep Inertia */}
+        <article className="space-y-6">
+          <h3 className="typography-title text-accent uppercase tracking-widest border-b border-border/20 pb-2">
+            {phase02Title}
+          </h3>
+          <div className="space-y-4">
+            <p className="typography-body text-muted-foreground">{t("science.topics.grogginess.p1")}</p>
+            <p className="typography-body text-muted-foreground">{t("science.topics.grogginess.p2")}</p>
+            <p className="typography-body text-muted-foreground">{t("science.topics.grogginess.p3")}</p>
+          </div>
+        </article>
+      </section>
+
+      {/* Section Rhythm Gap 96px */}
+      <div className="h-section my-4" />
+
+      {/* Full-width Synergy Block: The Caffeine Co-Factor (Napuccino) */}
+      <section className="space-y-8 pt-8 border-t border-dashed border-border/30">
+        <div className="text-center">
+          <h3 className="typography-title text-accent uppercase tracking-widest">
+            {t("science.synergy_title") || "The Caffeine Co-Factor (Napuccino)"}
+          </h3>
         </div>
 
-        <aside className="space-y-6 flex flex-col justify-start">
-          <h2 className="text-2xl font-black tracking-tight text-foreground flex items-center gap-2">
-            <Sparkles className="h-5 w-5 text-accent" />
-            {t("science.benefits_heading")}
-          </h2>
-
-          <ul className="space-y-4 flex-grow">
-            {benefits.map((benefit) => {
-              const Icon = benefit.icon;
-              return (
-                <li
-                  key={benefit.title}
-                  className="bg-card border border-border/30 p-6 flex gap-4 transition-all duration-500 ease-out rounded-2xl shadow-sm hover:shadow-md"
-                >
-                  <div className="h-10 w-10 rounded-xl border border-accent/25 bg-accent/5 text-accent flex items-center justify-center shrink-0">
-                    <Icon className="h-5 w-5" />
-                  </div>
-                  <div className="space-y-1">
-                    <h3 className="text-sm font-black text-foreground uppercase tracking-wider">{benefit.title}</h3>
-                    <p className="text-xs text-muted-foreground font-semibold leading-relaxed">{benefit.description}</p>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-
-          <blockquote className="rounded-2xl border border-dashed border-border p-6 bg-secondary/50 relative overflow-hidden">
-            <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
-              <Coffee className="h-24 w-24 text-foreground" />
-            </div>
-            <p className="text-xs font-bold text-muted-foreground italic leading-relaxed">{t("science.quote.text")}</p>
-            <cite className="block text-xs font-extrabold tracking-wide uppercase text-accent mt-3 text-right not-italic">
-              {t("science.quote.source")}
-            </cite>
-          </blockquote>
-        </aside>
-      </section>
-
-      <section className="bg-card border border-border/30 p-8 md:p-12 space-y-8 transition-all duration-500 ease-out rounded-3xl shadow-sm hover:shadow-md">
-        <h2 className="text-2xl font-black text-foreground text-center font-sans">{t("science.synergy_title")}</h2>
-
-        <ul className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-          <li className="border border-border/30 bg-secondary/40 p-6 space-y-3 transition-all duration-500 ease-out rounded-2xl">
-            <h3 className="text-base font-black text-foreground">{t("science.synergy.coffee_title")}</h3>
-            <div className="h-3.5 w-full rounded-full border border-border/30 bg-card overflow-hidden p-0.5">
-              <div className="h-full bg-amber-500 rounded-full w-1/3" />
-            </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center pt-4">
+          <div className="p-6 border border-border/10 bg-secondary/20 rounded-[32px] space-y-3 hover:scale-[1.01] transition-transform duration-300">
+            <h4 className="text-sm font-black text-foreground uppercase tracking-wider">
+              {t("science.synergy.coffee_title") || "A. Coffee Alone"}
+            </h4>
             <p className="text-xs text-muted-foreground font-semibold leading-relaxed">
               {t("science.synergy.coffee_desc")}
             </p>
-          </li>
+          </div>
 
-          <li className="border border-border/30 bg-secondary/40 p-6 space-y-3 transition-all duration-500 ease-out rounded-2xl">
-            <h3 className="text-base font-black text-foreground">{t("science.synergy.sleep_title")}</h3>
-            <div className="h-3.5 w-full rounded-full border border-border/30 bg-card overflow-hidden p-0.5">
-              <div className="h-full bg-blue-500 rounded-full w-1/2" />
-            </div>
+          <div className="p-6 border border-border/10 bg-secondary/20 rounded-[32px] space-y-3 hover:scale-[1.01] transition-transform duration-300">
+            <h4 className="text-sm font-black text-foreground uppercase tracking-wider">
+              {t("science.synergy.sleep_title") || "B. Sleep Alone"}
+            </h4>
             <p className="text-xs text-muted-foreground font-semibold leading-relaxed">
               {t("science.synergy.sleep_desc")}
             </p>
-          </li>
+          </div>
 
-          <li className="border border-accent/25 bg-accent/5 p-6 space-y-3 transition-all duration-500 ease-out rounded-2xl">
-            <h3 className="text-base font-black text-foreground text-accent">{t("science.synergy.napuccino_title")}</h3>
-            <div className="h-3.5 w-full rounded-full border border-border/30 bg-card overflow-hidden p-0.5 bg-accent/20">
-              <div className="h-full bg-accent rounded-full w-full animate-pulse" />
-            </div>
-            <p className="text-xs text-foreground leading-relaxed font-bold">{t("science.synergy.napuccino_desc")}</p>
-          </li>
-        </ul>
+          <div className="p-6 border border-accent/25 bg-accent/5 rounded-[32px] space-y-3 hover:scale-[1.02] transition-transform duration-300 shadow-xs">
+            <h4 className="text-sm font-black text-accent uppercase tracking-wider">
+              {t("science.synergy.napuccino_title") || "C. The Napuccino"}
+            </h4>
+            <p className="text-xs text-foreground font-bold leading-relaxed">{t("science.synergy.napuccino_desc")}</p>
+          </div>
+        </div>
+
+        <div className="max-w-2xl mx-auto space-y-4 pt-6 text-center md:text-left select-none">
+          <p className="typography-body text-muted-foreground">{t("science.topics.caffeine.p1")}</p>
+          <p className="typography-body text-muted-foreground">{t("science.topics.caffeine.p2")}</p>
+          <p className="typography-body text-muted-foreground">{t("science.topics.caffeine.p3")}</p>
+        </div>
       </section>
+
+      {/* Back to Workspace CTA Pill */}
+      <div className="flex justify-center mt-12 pb-8">
+        <button
+          type="button"
+          onClick={() => setActiveTab?.("timer")}
+          className="py-4.5 px-10 bg-primary text-primary-foreground font-black text-sm uppercase tracking-widest transition-all duration-500 ease-out active:scale-95 rounded-full shadow-md hover:-translate-y-0.5 hover:shadow-lg cursor-pointer"
+        >
+          {`(( ${t("nav.timer") || "Back to Workspace"} ))`}
+        </button>
+      </div>
     </div>
   );
 }

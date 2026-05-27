@@ -132,7 +132,7 @@ function AppContent(): React.ReactElement {
               stopAlarm={audioEngine.stopAlarm}
             />
           )}
-          {activeTab === "science" && <SciencePage />}
+          {activeTab === "science" && <SciencePage setActiveTab={handleTabChange} />}
         </main>
       </div>
 
