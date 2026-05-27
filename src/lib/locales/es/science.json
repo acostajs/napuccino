@@ -63,5 +63,12 @@
     "sleep_desc": "La caída no calibrada. Elimina la adenosina con éxito, pero carece de la entrega de estimulantes. La alerta aumenta lentamente, a menudo acompañada de la inercia inicial del sueño.",
     "napuccino_title": "La Matriz del Napuccino",
     "napuccino_desc": "El sueño elimina por completo la adenosina de los receptores cerebrales. La cafeína llega inmediatamente después, uniéndose perfectamente a los receptores vacíos. ¡La alerta se maximiza!"
+  },
+  "metabolic_flow_title": "LA CURVA CRONOLÓGICA",
+  "metabolic_flow_subtitle": "LA SINCRONIZACIÓN DE 30 MINUTOS",
+  "metabolic_flow": {
+    "step1_title": "ENTRADA METABÓLICA",
+    "step2_title": "LA VENTANA DE SUEÑO",
+    "step3_title": "SINCRONIZACIÓN DE RECEPTORES"
   }
 }

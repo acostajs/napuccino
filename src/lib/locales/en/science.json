@@ -63,5 +63,12 @@
     "sleep_desc": "The uncalibrated drop. Clears adenosine successfully, but lacks the stimulant hand-off. Alertness increases slowly, often accompanied by initial sleep inertia.",
     "napuccino_title": "The Napuccino Matrix",
     "napuccino_desc": "Sleep completely sweeps adenosine from brain receptors. Caffeine arrives immediately after, binding perfectly to empty receptors. Alertness is maximized!"
+  },
+  "metabolic_flow_title": "THE CHRONOLOGICAL CURVE",
+  "metabolic_flow_subtitle": "THE 30-MINUTE SYNCHRONIZATION",
+  "metabolic_flow": {
+    "step1_title": "METABOLIC ENTRY",
+    "step2_title": "THE SLEEP WINDOW",
+    "step3_title": "RECEPTOR SYNCHRONIZATION"
   }
 }

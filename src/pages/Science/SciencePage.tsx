@@ -168,11 +168,66 @@ export function SciencePage({ setActiveTab }: SciencePageProps): React.ReactElem
           </div>
         </div>
 
-        {/* Explanatory Metabolic Block */}
-        <div className="max-w-2xl mx-auto space-y-6 pt-12 text-center select-none">
-          <p className="typography-body text-muted-foreground select-text">{t("science.topics.caffeine.p1")}</p>
-          <p className="typography-body text-muted-foreground select-text">{t("science.topics.caffeine.p2")}</p>
-          <p className="typography-body text-muted-foreground select-text">{t("science.topics.caffeine.p3")}</p>
+        {/* Chronological Metabolic Flowchart */}
+        <div className="max-w-4xl mx-auto pt-16 border-t border-dashed border-border/40 relative">
+          <div className="text-center mb-12 select-none">
+            <span className="typography-utility uppercase text-xs tracking-widest text-accent block mb-2">
+              {t("science.metabolic_flow_title")}
+            </span>
+            <h4 className="typography-title uppercase tracking-wider font-bold text-foreground">
+              {t("science.metabolic_flow_subtitle")}
+            </h4>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 relative">
+            {/* Connecting line on desktop */}
+            <div className="hidden md:block absolute top-6 left-[10%] right-[10%] h-[1px] border-t border-dashed border-accent/20 z-0" />
+
+            {/* Step 1: Metabolic Entry */}
+            <div className="space-y-4 text-center md:text-left relative z-10">
+              <span className="font-serif text-4xl md:text-5xl font-extrabold italic text-accent opacity-80 block md:inline-block bg-background px-4">
+                01
+              </span>
+              <div className="space-y-2">
+                <h5 className="text-xs uppercase font-black tracking-widest text-foreground font-sans">
+                  {t("science.metabolic_flow.step1_title")}
+                </h5>
+                <p className="text-xs text-muted-foreground font-semibold leading-relaxed select-text">
+                  {t("science.topics.caffeine.p1")}
+                </p>
+              </div>
+            </div>
+
+            {/* Step 2: The Sleep Window */}
+            <div className="space-y-4 text-center md:text-left relative z-10">
+              <span className="font-serif text-4xl md:text-5xl font-extrabold italic text-accent opacity-80 block md:inline-block bg-background px-4">
+                02
+              </span>
+              <div className="space-y-2">
+                <h5 className="text-xs uppercase font-black tracking-widest text-foreground font-sans">
+                  {t("science.metabolic_flow.step2_title")}
+                </h5>
+                <p className="text-xs text-muted-foreground font-semibold leading-relaxed select-text">
+                  {t("science.topics.caffeine.p2")}
+                </p>
+              </div>
+            </div>
+
+            {/* Step 3: Receptor Synchronization */}
+            <div className="space-y-4 text-center md:text-left relative z-10">
+              <span className="font-serif text-4xl md:text-5xl font-extrabold italic text-accent opacity-80 block md:inline-block bg-background px-4">
+                03
+              </span>
+              <div className="space-y-2">
+                <h5 className="text-xs uppercase font-black tracking-widest text-foreground font-sans">
+                  {t("science.metabolic_flow.step3_title")}
+                </h5>
+                <p className="text-xs text-muted-foreground font-semibold leading-relaxed select-text">
+                  {t("science.topics.caffeine.p3")}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

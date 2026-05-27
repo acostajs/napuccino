@@ -63,5 +63,12 @@
     "sleep_desc": "La chute non calibrée. Nettoie l'adénosine avec succès, mais n'ajoute pas de molécules stimulantes. La vigilance augmente lentement, parfois accompagnée d'une inertie du sommeil initiale.",
     "napuccino_title": "La Matrice Napuccino",
     "napuccino_desc": "Le sommeil balaye complètement l'adénosine des récepteurs cérébraux. La caféine arrive immédiatement après, se fixant parfaitement aux récepteurs vides. La vigilance est maximisée !"
+  },
+  "metabolic_flow_title": "LA COURBE CHRONOLOGIQUE",
+  "metabolic_flow_subtitle": "LA SYNCHRONISATION DE 30 MINUTES",
+  "metabolic_flow": {
+    "step1_title": "ENTRÉE MÉTABOLIQUE",
+    "step2_title": "LA FENÊTRE DE SOMMEIL",
+    "step3_title": "SYNCHRONISATION DES RÉCEPTEURS"
   }
 }
