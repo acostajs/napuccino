@@ -15,23 +15,20 @@ export function AlarmView({ activeMode, handleStop }: AlarmViewProps): React.Rea
 
   return (
     <section className="min-h-[50vh] flex flex-col items-center justify-center select-none text-center max-w-md mx-auto space-y-12">
-      {/* Visual Indicator */}
-      <div className="flex flex-col items-center gap-4">
-        <div className="h-20 w-20 rounded-full border border-accent/30 bg-accent/10 text-accent flex items-center justify-center shadow-lg shadow-accent/15 animate-bounce">
+      <figure className="flex flex-col items-center gap-4">
+        <span className="h-20 w-20 rounded-full border border-accent/30 bg-accent/10 text-accent flex items-center justify-center shadow-lg shadow-accent/15 animate-bounce">
           <Coffee className="h-10 w-10 stroke-[1.2]" />
-        </div>
+        </span>
         <span className="typography-utility uppercase text-xs tracking-widest text-accent font-bold mt-2">
           {presetNames}
         </span>
-      </div>
+      </figure>
 
-      {/* Alarm Description */}
-      <div className="space-y-3">
+      <header className="space-y-3">
         <h2 className="typography-display text-primary">{t("timer.alarm.title")}</h2>
         <p className="typography-body text-muted-foreground font-semibold max-w-sm mx-auto">{t("timer.alarm.desc")}</p>
-      </div>
+      </header>
 
-      {/* Prominent, oversized, rounded-full structural button in the center */}
       <button
         type="button"
         onClick={handleStop}

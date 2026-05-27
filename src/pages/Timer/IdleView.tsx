@@ -67,65 +67,58 @@ export function IdleView({
 
   return (
     <section className="space-y-12 max-w-xl mx-auto flex flex-col items-center">
-      {/* Editorial Header */}
-      <div className="space-y-3 text-center">
+      <header className="space-y-3 text-center">
         <h2 className="typography-display text-primary">{t("timer.idle.title")}</h2>
         <p className="typography-body text-muted-foreground font-semibold max-w-sm mx-auto">
           {presetDetails[activeMode].desc}
         </p>
-      </div>
+      </header>
 
-      {/* 1. Flat, borderless edge-to-edge preset pill tabs switcher */}
-      <div className="w-full flex justify-center py-2">
-        <nav className="inline-flex items-center gap-1.5 p-1.5 rounded-full bg-secondary/60 border border-border/10 shadow-inner">
-          {(Object.keys(MODES) as NapMode[]).map((mId) => {
-            const isSelected = activeMode === mId;
-            const details = presetDetails[mId];
+      <nav className="inline-flex items-center gap-1.5 p-1.5 rounded-full bg-secondary/60 border border-border/10 shadow-inner my-2">
+        {(Object.keys(MODES) as NapMode[]).map((mId) => {
+          const isSelected = activeMode === mId;
+          const details = presetDetails[mId];
 
-            const activeColorStyles = {
-              napuccino: "bg-[var(--mode-napuccino-start)] text-primary-foreground font-black scale-105",
-              powernap: "bg-[var(--mode-powernap-start)] text-primary-foreground font-black scale-105",
-              consolidation: "bg-[var(--mode-consolidation-start)] text-primary-foreground font-black scale-105",
-            }[mId];
+          const activeColorStyles = {
+            napuccino: "bg-[var(--mode-napuccino-start)] text-primary-foreground font-black scale-105",
+            powernap: "bg-[var(--mode-powernap-start)] text-primary-foreground font-black scale-105",
+            consolidation: "bg-[var(--mode-consolidation-start)] text-primary-foreground font-black scale-105",
+          }[mId];
 
-            return (
-              <button
-                type="button"
-                key={mId}
-                onClick={() => setActiveMode(mId)}
-                aria-pressed={isSelected}
-                className={`relative flex items-center justify-center gap-1.5 rounded-full px-5 py-2.5 text-xs font-semibold tracking-wider uppercase transition-all duration-500 ease-out cursor-pointer ${
-                  isSelected ? `${activeColorStyles} shadow-sm` : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {details.name}
-              </button>
-            );
-          })}
-        </nav>
-      </div>
+          return (
+            <button
+              type="button"
+              key={mId}
+              onClick={() => setActiveMode(mId)}
+              aria-pressed={isSelected}
+              className={`relative flex items-center justify-center gap-1.5 rounded-full px-5 py-2.5 text-xs font-semibold tracking-wider uppercase transition-all duration-500 ease-out cursor-pointer ${
+                isSelected ? `${activeColorStyles} shadow-sm` : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {details.name}
+            </button>
+          );
+        })}
+      </nav>
 
-      {/* 2. Oversized timer display (Stripped bare of boxes) */}
-      <div className="flex flex-col items-center justify-center py-4 my-2 select-none">
+      <figure className="flex flex-col items-center justify-center py-4 my-2 select-none">
         <time className="typography-timer font-serif text-[84px] sm:text-[96px] text-primary tracking-tighter leading-none animate-fade-in transition-all">
           {formatDuration(MODES[activeMode].duration)}
         </time>
-        <span className="typography-utility uppercase text-xs tracking-widest text-accent mt-2 animate-pulse">
+        <figcaption className="typography-utility uppercase text-xs tracking-widest text-accent mt-2 animate-pulse">
           {presetDetails[activeMode].meta}
-        </span>
-      </div>
+        </figcaption>
+      </figure>
 
-      {/* 3. Evolve the Ambient Soundscape Matrix (Borderless line art grid) */}
-      <div className="w-full space-y-4 pt-4 border-t border-dashed border-border/40">
-        <span className="typography-utility uppercase text-xs tracking-widest text-muted-foreground block text-center">
+      <fieldset className="w-full space-y-4 pt-4 border-0 border-t border-dashed border-border/40">
+        <legend className="typography-utility uppercase text-xs tracking-widest text-muted-foreground block text-center w-full">
           {t("timer.sounds.ambient_title") || "Ambient Soundscape"}
-        </span>
-        <div className="flex justify-center gap-8 items-center max-w-sm mx-auto">
+        </legend>
+        <nav aria-label="Ambient sound choices" className="flex justify-center gap-8 items-center max-w-sm mx-auto">
           {ambientOptions.map((option) => {
             const Icon = option.icon;
             const isActive = ambientSound === option.id;
 
-            // Brand soft color glow matching active preset
             const glowColors = {
               napuccino:
                 "text-[var(--mode-napuccino-start)] drop-shadow-[0_0_8px_var(--mode-napuccino-glow)] font-extrabold opacity-100",
@@ -151,15 +144,14 @@ export function IdleView({
               </button>
             );
           })}
-        </div>
-      </div>
+        </nav>
+      </fieldset>
 
-      {/* 4. Elegant, borderless wake-up signal switcher */}
-      <div className="w-full space-y-3 pb-4">
-        <span className="typography-utility uppercase text-xs tracking-widest text-muted-foreground block text-center">
+      <fieldset className="w-full space-y-3 pb-4 border-none">
+        <legend className="typography-utility uppercase text-xs tracking-widest text-muted-foreground block text-center w-full">
           {t("timer.sounds.alarm_title") || "Wake-up Signal"}
-        </span>
-        <div className="flex justify-center gap-4 flex-wrap items-center">
+        </legend>
+        <nav aria-label="Wake-up sound choices" className="flex justify-center gap-4 flex-wrap items-center">
           {alarmOptions.map((option) => {
             const isActive = alarmSound === option.id;
 
@@ -188,10 +180,9 @@ export function IdleView({
               </button>
             );
           })}
-        </div>
-      </div>
+        </nav>
+      </fieldset>
 
-      {/* 5. Primary CTA Trigger - Large, rounded-full, high-comfort pill */}
       <button
         type="button"
         onClick={handleStart}

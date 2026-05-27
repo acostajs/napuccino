@@ -68,8 +68,7 @@ export function PreView({
 
   return (
     <section className="space-y-12 flex flex-col items-center max-w-md mx-auto py-8">
-      {/* Editorial Header */}
-      <div className="space-y-3 text-center">
+      <header className="space-y-3 text-center">
         <span className="inline-flex items-center gap-1.5 rounded-full bg-accent/10 border border-accent/20 px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-accent animate-pulse">
           <AlertCircle className="h-3 w-3 shrink-0" />
           {t("timer.pre.badge") || "Breathing Buffer"}
@@ -78,11 +77,10 @@ export function PreView({
         <p className="typography-body text-muted-foreground font-semibold max-w-xs leading-relaxed">
           {t("timer.pre.desc") || "Take a moment to align your breathing before the timer starts."}
         </p>
-      </div>
+      </header>
 
-      {/* Animated Breathing Ring (Centered) */}
       <figure className="relative w-52 h-52 flex items-center justify-center select-none">
-        <div
+        <span
           className={`absolute inset-0 rounded-full transition-all ease-in-out ${breathingRingColors[activeMode].bg}`}
           style={{
             transform: preTimeLeft > 7 ? "scale(1.25)" : "scale(0.9)",
@@ -90,19 +88,16 @@ export function PreView({
             transitionDuration: preTimeLeft <= 3 ? "3000ms" : "4000ms",
           }}
         />
-        <div
+        <span
           className={`absolute w-40 h-40 rounded-full border border-dashed animate-spin ${breathingRingColors[activeMode].border}`}
           style={{ animationDuration: "12s" }}
         />
 
-        <div className="relative z-10 flex flex-col items-center justify-center">
-          <time className="typography-timer font-serif text-5xl sm:text-6xl tracking-tight text-primary leading-none">
-            {formatTime(preTimeLeft)}
-          </time>
-        </div>
+        <time className="relative z-10 typography-timer font-serif text-5xl sm:text-6xl tracking-tight text-primary leading-none">
+          {formatTime(preTimeLeft)}
+        </time>
       </figure>
 
-      {/* Breathing Instruction Typography */}
       <div className="text-center space-y-2 h-14 select-none">
         <p
           className={`text-xl font-bold tracking-tight transition-all duration-500 ${breathingRingColors[activeMode].text}`}
@@ -112,8 +107,7 @@ export function PreView({
         <p className="text-xs text-muted-foreground font-bold transition-all duration-500">{guide.subtext}</p>
       </div>
 
-      {/* Flat, borderless pill actions */}
-      <div className="flex gap-4 w-full pt-4">
+      <nav aria-label="Drifting actions" className="flex gap-4 w-full pt-4">
         <button
           type="button"
           onClick={handleSkipPre}
@@ -130,7 +124,7 @@ export function PreView({
         >
           <Square className="h-4 w-4 fill-current" />
         </button>
-      </div>
+      </nav>
     </section>
   );
 }
