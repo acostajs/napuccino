@@ -22,7 +22,7 @@ function LocaleDropdown({ id, locale, setLocale }: LocaleDropdownProps): React.R
   const languages = [{ code: "en" as const }, { code: "es" as const }, { code: "fr" as const }];
 
   useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
+    function handleClickOutside(event: MouseEvent): void {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsOpen(false);
       }
