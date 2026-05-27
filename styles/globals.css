@@ -104,6 +104,11 @@
   --mode-consolidation-start: oklch(0.74 0.13 40);
   /* Warm peach/terracotta (#E8A598) */
   --mode-consolidation-end: oklch(0.78 0.14 30);
+
+  /* Mode Glows (Light) */
+  --mode-napuccino-glow: rgba(212, 163, 115, 0.6);
+  --mode-powernap-glow: rgba(204, 213, 174, 0.6);
+  --mode-consolidation-glow: rgba(232, 165, 152, 0.6);
 }
 
 .dark {
@@ -152,6 +157,11 @@
   --mode-consolidation-start: oklch(0.74 0.14 80);
   /* Honey gold night tone (#DDA15E) */
   --mode-consolidation-end: oklch(0.69 0.12 70);
+
+  /* Mode Glows (Dark) */
+  --mode-napuccino-glow: rgba(226, 149, 120, 0.6); /* Radiant warm amber (#E29578) */
+  --mode-powernap-glow: rgba(154, 193, 181, 0.6); /* Sage green night tone (#9AC1B5) */
+  --mode-consolidation-glow: rgba(221, 161, 94, 0.6); /* Honey gold night tone (#DDA15E) */
 }
 
 @layer base {

@@ -128,11 +128,11 @@ export function IdleView({
             // Brand soft color glow matching active preset
             const glowColors = {
               napuccino:
-                "text-[var(--mode-napuccino-start)] drop-shadow-[0_0_8px_rgba(212,163,115,0.6)] font-extrabold opacity-100",
+                "text-[var(--mode-napuccino-start)] drop-shadow-[0_0_8px_var(--mode-napuccino-glow)] font-extrabold opacity-100",
               powernap:
-                "text-[var(--mode-powernap-start)] drop-shadow-[0_0_8px_rgba(204,213,174,0.6)] font-extrabold opacity-100",
+                "text-[var(--mode-powernap-start)] drop-shadow-[0_0_8px_var(--mode-powernap-glow)] font-extrabold opacity-100",
               consolidation:
-                "text-[var(--mode-consolidation-start)] drop-shadow-[0_0_8px_rgba(232,165,152,0.6)] font-extrabold opacity-100",
+                "text-[var(--mode-consolidation-start)] drop-shadow-[0_0_8px_var(--mode-consolidation-glow)] font-extrabold opacity-100",
             }[activeMode];
 
             return (

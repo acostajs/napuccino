@@ -1,32 +1,39 @@
 {
+  "editorial_title": "the neurobiology of the perfect drift.",
+  "editorial_subtitle": "Why mechanical rest outperforms accidental sleep.",
+  "phase01_title_part1": "01 / THE ADENOSINE",
+  "phase01_title_part2": "ACCUMULATION",
+  "phase02_title_part1": "02 / THE SLEEP INERTIA",
+  "phase02_title_part2": "FAULTLINE",
+  "methodology_label": "[ METHODOLOGY // 01 ]",
   "title": "The Science of",
   "title_accent": "High-Performance Naps",
   "subtitle": "Napping is not laziness; it is a bio-hack. Discover the neurochemical dynamics behind adenosine clearance, caffeine absorption, and optimal sleep cycles.",
   "pillars_heading": "Biological Pillars",
   "benefits_heading": "Proven Benefits",
-  "synergy_title": "The Molecular Synergy: Coffee vs Sleep vs Napuccino",
+  "synergy_title": "THE MOLECULAR SYNERGY: COFFEE VS SLEEP VS NAPUCCINO",
   "topics": {
     "adenosine": {
-      "title": "1. Adenosine & Sleep Pressure",
+      "title": "Adenosine & Sleep Pressure",
       "summary": "Understanding the organic biological battery that triggers sleepiness.",
-      "p1": "Throughout the day, as your brain burns energy, a chemical compound called **adenosine** steadily accumulates. Adenosine binds to specific receptors in your central nervous system, gradually dampening neural activity and creating what scientists call **sleep pressure**.",
-      "p2": "The higher the concentration of adenosine, the sleepier and more fatigued you feel. When you sleep, your brain naturally clears this accumulation, reset-ing your biological battery.",
-      "secret_title": "The Nap Secret:",
-      "secret_desc": " Even a tiny 15-20 minute nap clears a substantial amount of adenosine from your receptors, freeing them up for caffeine to block!"
+      "p1": "Throughout your waking hours, as your brain continuously burns energy, a chemical byproduct called adenosine steadily accumulates in your system. This molecule binds tightly to specific receptors, slowly dampening neural activity and building up a high-pressure chemical debt.",
+      "p2": "This accumulation operates as your brain's organic sleep battery. The longer you stay awake, the heavier the debt, leading to mental fatigue. Standard rest clears this accumulation, but accidental sleep can trigger unexpected drag.",
+      "secret_title": "The Interception Secret:",
+      "secret_desc": "Even a brief rest sweeps a substantial block of adenosine from your neural receptors, leaving them wide open for immediate caffeine lock-in upon waking!"
     },
     "caffeine": {
-      "title": "2. The 20-Minute Caffeine Lag",
+      "title": "The 20-Minute Caffeine Lag",
       "summary": "Why drinking coffee *right before* a sleep produces a mathematical superpower.",
-      "p1": "When you drink a cup of coffee, the caffeine doesn't instantly hit your brain. It must pass through your stomach, enter your small intestine, absorb into the bloodstream, and finally cross the blood-brain barrier.",
-      "p2": "This metabolic journey takes exactly **20 to 30 minutes**.",
-      "p3": "Therefore, if you drink coffee and lie down immediately, the caffeine is completely inactive for the next 20 minutes. It operates as a silent timer. The moment you are waking up, the caffeine reaches its peak concentration in the brain, creating an double-amplified alertness shockwave."
+      "p1": "Upon consuming coffee, caffeine does not instantly populate your pathways. It must pass through your digestive system, enter the bloodstream, and cross the blood-brain barrier—a metabolic journey taking exactly 20 to 30 minutes.",
+      "p2": "This creates a silent, natural timer. By drifting immediately after drinking, you sleep while the caffeine is completely inactive.",
+      "p3": "The moment you awaken, the caffeine hits peak concentration, binding directly to newly vacated receptors for a double-amplified wave of cognitive clarity."
     },
     "grogginess": {
-      "title": "3. Preventing Sleep Inertia (The Grogginess Trap)",
+      "title": "Preventing Sleep Inertia",
       "summary": "Why sleeping for exactly 20 minutes is structurally superior to a 45-minute nap.",
-      "p1": "A standard human sleep cycle consists of multiple stages: Light sleep (Stages 1 and 2), Slow-Wave Deep Sleep (Stage 3), and REM sleep.",
-      "p2": "It takes approximately **30 minutes** to transition from light sleep into slow-wave deep sleep. If you wake up *during* deep sleep, your brain experiences severe **sleep inertia**—the heavy, disoriented, and groggy feeling that can ruin the rest of your day.",
-      "p3": "By locking our Napuccino to **20 minutes** and Power Nap to **15 minutes**, we guarantee you stay strictly within light sleep, allowing you to wake up immediately refreshed and alert, with zero post-nap fatigue."
+      "p1": "A standard human sleep cycle transitions from light sleep into slow-wave deep sleep in approximately 30 minutes. If you wake up during deep sleep, your brain experiences severe sleep inertia—a heavy, disoriented drag.",
+      "p2": "By locking our Napuccino to a strict 20 minutes and Power Nap to 15 minutes, we guarantee you stay strictly within light sleep.",
+      "p3": "This boundaries intercept slow-wave delta cycles before they lock your brain down, letting you wake up immediately refreshed."
     }
   },
   "benefits": {
@@ -48,11 +55,11 @@
     "source": "— Loughborough University Sleep Research Study"
   },
   "synergy": {
-    "coffee_title": "A. Coffee Alone",
-    "coffee_desc": "Caffeine molecules compete with massive blocks of existing adenosine. Receptors are already saturated, leading to a muted spike and severe jitters.",
-    "sleep_title": "B. Sleep Alone",
-    "sleep_desc": "Clears adenosine successfully, but does not add stimulant molecules. Alertness increases slowly, sometimes accompanied by initial sleep inertia.",
-    "napuccino_title": "C. The Napuccino",
+    "coffee_title": "Isolated Caffeine",
+    "coffee_desc": "The competitive receptor race. Caffeine molecules battle heavy blocks of existing adenosine. Receptors are already saturated, leading to a muted spike and severe jitters.",
+    "sleep_title": "Unassisted Sleep",
+    "sleep_desc": "The uncalibrated drop. Clears adenosine successfully, but lacks the stimulant hand-off. Alertness increases slowly, often accompanied by initial sleep inertia.",
+    "napuccino_title": "The Napuccino Matrix",
     "napuccino_desc": "Sleep completely sweeps adenosine from brain receptors. Caffeine arrives immediately after, binding perfectly to empty receptors. Alertness is maximized!"
   }
 }
