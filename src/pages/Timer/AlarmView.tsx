@@ -27,10 +27,8 @@ export function AlarmView({ activeMode, handleStop }: AlarmViewProps): React.Rea
 
       {/* Alarm Description */}
       <div className="space-y-3">
-        <h2 className="typography-display text-primary">{t("timer.alarm.title") || "Time to Awake"}</h2>
-        <p className="typography-body text-muted-foreground font-semibold max-w-sm mx-auto">
-          {t("timer.alarm.desc") || "Your resting cycle has completed successfully. Welcome back to active awareness."}
-        </p>
+        <h2 className="typography-display text-primary">{t("timer.alarm.title")}</h2>
+        <p className="typography-body text-muted-foreground font-semibold max-w-sm mx-auto">{t("timer.alarm.desc")}</p>
       </div>
 
       {/* Prominent, oversized, rounded-full structural button in the center */}

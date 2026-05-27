@@ -1,4 +1,10 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+
+declare global {
+  interface Window {
+    webkitAudioContext?: typeof AudioContext;
+  }
+}
 
 export type TimerState = "idle" | "pre" | "sleep" | "alarm";
 export type AmbientSound = "silence" | "cafe" | "rain" | "white";
@@ -18,6 +24,7 @@ type AudioEngineResult = {
   startAlarm: () => Promise<void>;
   stopAlarm: () => void;
   stopAmbient: () => void;
+  audioError: string | null;
 };
 
 export function useAudioEngine({ ambientSound, alarmSound, timerState }: AudioEngineProps): AudioEngineResult {
@@ -30,18 +37,29 @@ export function useAudioEngine({ ambientSound, alarmSound, timerState }: AudioEn
   const alarmTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const alarmSoundRef = useRef<AlarmSound>(alarmSound);
+  const [audioError, setAudioError] = useState<string | null>(null);
 
   useEffect(() => {
     alarmSoundRef.current = alarmSound;
   }, [alarmSound]);
 
   const initAudio = useCallback(async (): Promise<void> => {
-    if (!audioCtxRef.current) {
-      const AudioContextCtor = window.AudioContext ?? window.webkitAudioContext;
-      audioCtxRef.current = new AudioContextCtor();
-    }
-    if (audioCtxRef.current.state === "suspended") {
-      await audioCtxRef.current.resume();
+    try {
+      if (!audioCtxRef.current) {
+        const AudioContextCtor = window.AudioContext ?? window.webkitAudioContext;
+        if (!AudioContextCtor) {
+          throw new Error("Web Audio API is not supported in this browser.");
+        }
+        audioCtxRef.current = new AudioContextCtor();
+      }
+      if (audioCtxRef.current.state === "suspended") {
+        await audioCtxRef.current.resume();
+      }
+      setAudioError(null);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      console.error("Failed to initialize audio context:", err);
+      setAudioError(message);
     }
   }, []);
 
@@ -402,5 +420,6 @@ export function useAudioEngine({ ambientSound, alarmSound, timerState }: AudioEn
     startAlarm,
     stopAlarm,
     stopAmbient,
+    audioError,
   };
 }

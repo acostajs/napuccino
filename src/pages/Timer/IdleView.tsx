@@ -140,6 +140,8 @@ export function IdleView({
                 type="button"
                 key={option.id}
                 onClick={() => setAmbientSound(option.id)}
+                aria-label={option.label}
+                aria-pressed={isActive}
                 className={`flex flex-col items-center gap-2 cursor-pointer transition-all duration-500 ease-out border-0 bg-transparent p-2 hover:scale-110 ${
                   isActive ? glowColors : "text-muted-foreground hover:text-foreground opacity-50"
                 }`}

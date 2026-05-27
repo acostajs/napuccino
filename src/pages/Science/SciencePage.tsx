@@ -48,7 +48,7 @@ export function SciencePage({ setActiveTab }: SciencePageProps): React.ReactElem
         <article className="space-y-8 relative">
           {/* Micro-graphic editorial label */}
           <div className="typography-utility text-[10px] text-muted-foreground/60 select-none tracking-widest font-mono">
-            {t("science.methodology_label")}
+            {t("science.methodology_label_01")}
           </div>
 
           <h3 className="typography-title uppercase tracking-widest font-sans font-bold">
@@ -83,7 +83,7 @@ export function SciencePage({ setActiveTab }: SciencePageProps): React.ReactElem
         <article className="space-y-8 relative md:pl-6">
           {/* Micro-graphic editorial label */}
           <div className="typography-utility text-[10px] text-muted-foreground/60 select-none tracking-widest font-mono">
-            {t("science.methodology_label").replace("01", "02")}
+            {t("science.methodology_label_02")}
           </div>
 
           <h3 className="typography-title uppercase tracking-widest font-sans font-bold">

@@ -15,8 +15,12 @@ function AppContent(): React.ReactElement {
 
   const [theme, setTheme] = useState<"light" | "dark">(() => {
     if (typeof window !== "undefined") {
-      const savedTheme = localStorage.getItem("napuccino-theme");
-      return savedTheme === "light" ? "light" : "dark";
+      try {
+        const savedTheme = localStorage.getItem("napuccino-theme");
+        return savedTheme === "light" ? "light" : "dark";
+      } catch (_e) {
+        // Silent fallback
+      }
     }
     return "dark";
   });
@@ -51,7 +55,11 @@ function AppContent(): React.ReactElement {
     } else {
       root.classList.remove("dark");
     }
-    localStorage.setItem("napuccino-theme", theme);
+    try {
+      localStorage.setItem("napuccino-theme", theme);
+    } catch (_e) {
+      // Silent fallback
+    }
   }, [theme]);
 
   const toggleTheme = (): void => {
@@ -108,7 +116,7 @@ function AppContent(): React.ReactElement {
         </div>
 
         <main className="w-full flex-grow">
-          {activeTab === "home" && <HomePage setActiveTab={handleTabChange} />}
+          {activeTab === "home" && <HomePage setActiveTab={handleTabChange} setActiveMode={setActiveMode} />}
           {activeTab === "timer" && (
             <TimerPage
               timerState={timerState}

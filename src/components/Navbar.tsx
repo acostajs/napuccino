@@ -30,11 +30,19 @@ function LocaleDropdown({ id, locale, setLocale }: LocaleDropdownProps): React.R
       }
     }
 
+    function handleKeyDown(event: KeyboardEvent): void {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+      }
+    }
+
     if (isOpen) {
       document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("keydown", handleKeyDown);
     }
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, [isOpen]);
 
@@ -53,28 +61,31 @@ function LocaleDropdown({ id, locale, setLocale }: LocaleDropdownProps): React.R
       </button>
 
       {isOpen && (
-        <ul
+        <div
           id={id}
+          role="listbox"
+          aria-labelledby={`${id}-trigger`}
           className="absolute right-0 mt-2 w-10 border border-border bg-card text-foreground z-50 overflow-hidden flex flex-col gap-1 p-1 shadow-sm rounded-xl outline-none"
         >
           {languages.map((lang) => {
             const isSelected = lang.code === locale;
             return (
-              <li key={lang.code} className="w-full">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setLocale(lang.code);
-                    setIsOpen(false);
-                  }}
-                  className={`w-full h-8 flex items-center justify-center text-xs font-extrabold transition-all duration-500 ease-out uppercase border-2 border-transparent rounded-md hover:bg-secondary text-muted-foreground hover:text-foreground ${isSelected ? "bg-primary text-primary-foreground font-black hover:bg-primary" : ""}`}
-                >
-                  {lang.code}
-                </button>
-              </li>
+              <button
+                type="button"
+                key={lang.code}
+                role="option"
+                aria-selected={isSelected}
+                onClick={() => {
+                  setLocale(lang.code);
+                  setIsOpen(false);
+                }}
+                className={`w-full h-8 flex items-center justify-center text-xs font-extrabold transition-all duration-500 ease-out uppercase border-2 border-transparent rounded-md hover:bg-secondary text-muted-foreground hover:text-foreground ${isSelected ? "bg-primary text-primary-foreground font-black hover:bg-primary" : ""}`}
+              >
+                {lang.code}
+              </button>
             );
           })}
-        </ul>
+        </div>
       )}
     </div>
   );

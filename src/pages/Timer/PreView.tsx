@@ -82,7 +82,14 @@ export function PreView({
 
       {/* Animated Breathing Ring (Centered) */}
       <figure className="relative w-52 h-52 flex items-center justify-center select-none">
-        <div className={`absolute inset-0 rounded-full animate-breathe ${breathingRingColors[activeMode].bg}`} />
+        <div
+          className={`absolute inset-0 rounded-full transition-all ease-in-out ${breathingRingColors[activeMode].bg}`}
+          style={{
+            transform: preTimeLeft > 7 ? "scale(1.25)" : "scale(0.9)",
+            opacity: preTimeLeft > 7 ? 0.9 : 0.35,
+            transitionDuration: preTimeLeft <= 3 ? "3000ms" : "4000ms",
+          }}
+        />
         <div
           className={`absolute w-40 h-40 rounded-full border border-dashed animate-spin ${breathingRingColors[activeMode].border}`}
           style={{ animationDuration: "12s" }}

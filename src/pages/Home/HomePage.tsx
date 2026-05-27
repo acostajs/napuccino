@@ -1,10 +1,11 @@
 import { Activity, ArrowRight, Moon, Play, Zap } from "lucide-react";
 import type React from "react";
 import { useI18n } from "../../lib/i18n";
-import { MODES } from "../../lib/modes";
+import { MODES, type NapMode } from "../../lib/modes";
 
 type HomePageProps = {
   setActiveTab: (tab: "home" | "timer" | "science") => void;
+  setActiveMode: (mode: NapMode) => void;
 };
 
 const modeCardGradients = {
@@ -13,7 +14,7 @@ const modeCardGradients = {
   consolidation: "from-[var(--mode-consolidation-start)] to-[var(--mode-consolidation-end)]",
 };
 
-export function HomePage({ setActiveTab }: HomePageProps): React.ReactElement {
+export function HomePage({ setActiveTab, setActiveMode }: HomePageProps): React.ReactElement {
   const { t } = useI18n();
   const modes = Object.values(MODES);
 
@@ -164,7 +165,10 @@ export function HomePage({ setActiveTab }: HomePageProps): React.ReactElement {
                     </div>
                     <button
                       type="button"
-                      onClick={() => setActiveTab("timer")}
+                      onClick={() => {
+                        setActiveMode(mode.id);
+                        setActiveTab("timer");
+                      }}
                       aria-label={`${t("home.modes.select_mode")} ${t(`modes.${mode.id}.title`)}`}
                       className="w-full inline-flex items-center justify-center gap-2 border border-transparent bg-card text-primary font-bold text-sm px-4 py-2.5 hover:bg-card/90 transition-all duration-500 ease-out rounded-xl shadow-sm"
                     >

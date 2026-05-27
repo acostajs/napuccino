@@ -44,40 +44,40 @@
 
 :root {
   --radius: 1.5rem;
-  --background: oklch(0.97 0.008 75);
+  --background: #f9f5eb;
   /* Soft recycled paper/warm linen (#F9F5EB) */
-  --foreground: oklch(0.2 0.025 40);
+  --foreground: #2c1e16;
   /* Deep, organic espresso (#2C1E16) */
-  --card: oklch(0.996 0.003 85);
+  --card: #fffdf9;
   /* Clean white paper sheet (#FFFDF9) */
-  --card-foreground: oklch(0.2 0.025 40);
-  --popover: oklch(0.996 0.003 85);
-  --popover-foreground: oklch(0.2 0.025 40);
-  --primary: oklch(0.2 0.025 40);
-  --primary-foreground: oklch(0.98 0.01 75);
-  --secondary: oklch(0.95 0.015 75);
+  --card-foreground: #2c1e16;
+  --popover: #fffdf9;
+  --popover-foreground: #2c1e16;
+  --primary: #2c1e16;
+  --primary-foreground: #fefcfb;
+  --secondary: #f2ede2;
   /* Warm recycled paper button tags */
-  --secondary-foreground: oklch(0.2 0.025 40);
-  --muted: oklch(0.95 0.015 75);
-  --muted-foreground: oklch(0.5 0.02 45);
-  --accent: oklch(0.6 0.18 15);
-  --accent-foreground: oklch(0.99 0.01 65);
-  --destructive: oklch(0.55 0.18 28);
-  --border: oklch(0.2 0.025 40 / 8%);
+  --secondary-foreground: #2c1e16;
+  --muted: #f2ede2;
+  --muted-foreground: #81726a;
+  --accent: #9d3a1a;
+  --accent-foreground: #fffefa;
+  --destructive: #8a3b1a;
+  --border: rgba(44, 30, 22, 0.08);
   /* Delicate, subtle border */
-  --input: oklch(0.2 0.025 40 / 8%);
-  --ring: oklch(0.6 0.18 15);
+  --input: rgba(44, 30, 22, 0.08);
+  --ring: #9d3a1a;
 
   /* Mode Accents (Light) */
-  --mode-napuccino-start: oklch(0.72 0.11 75);
+  --mode-napuccino-start: #d4a373;
   /* Rich caramel cream (#D4A373) */
-  --mode-napuccino-end: oklch(0.76 0.13 65);
-  --mode-powernap-start: oklch(0.85 0.08 115);
+  --mode-napuccino-end: #d0945b;
+  --mode-powernap-start: #ccd5ae;
   /* Soft matcha green (#CCD5AE) */
-  --mode-powernap-end: oklch(0.89 0.09 105);
-  --mode-consolidation-start: oklch(0.74 0.13 40);
+  --mode-powernap-end: #b6c496;
+  --mode-consolidation-start: #e8a598;
   /* Warm peach/terracotta (#E8A598) */
-  --mode-consolidation-end: oklch(0.78 0.14 30);
+  --mode-consolidation-end: #e08b7a;
 
   /* Mode Glows (Light) */
   --mode-napuccino-glow: rgba(212, 163, 115, 0.6);
@@ -86,38 +86,38 @@
 }
 
 .dark {
-  --background: oklch(0.13 0.02 35);
+  --background: #1c130e;
   /* Deep roasted coffee night tint (#1C130E) */
-  --foreground: oklch(0.94 0.015 70);
+  --foreground: #f5ebe6;
   /* Steamed milk text (#F5EBE6) */
-  --card: oklch(0.17 0.025 35);
+  --card: #251b14;
   /* twilight slate board (#251B14) */
-  --card-foreground: oklch(0.94 0.015 70);
-  --popover: oklch(0.17 0.025 35);
-  --popover-foreground: oklch(0.94 0.015 70);
-  --primary: oklch(0.94 0.015 70);
-  --primary-foreground: oklch(0.13 0.02 35);
-  --secondary: oklch(0.22 0.02 35);
-  --secondary-foreground: oklch(0.94 0.015 70);
-  --muted: oklch(0.22 0.02 35);
-  --muted-foreground: oklch(0.65 0.01 65);
-  --accent: oklch(0.72 0.14 75);
-  --accent-foreground: oklch(0.13 0.02 35);
-  --destructive: oklch(0.62 0.17 28);
-  --border: oklch(0.94 0.015 70 / 8%);
-  --input: oklch(0.94 0.015 70 / 8%);
-  --ring: oklch(0.72 0.14 75);
+  --card-foreground: #f5ebe6;
+  --popover: #251b14;
+  --popover-foreground: #f5ebe6;
+  --primary: #f5ebe6;
+  --primary-foreground: #1c130e;
+  --secondary: #30221b;
+  --secondary-foreground: #f5ebe6;
+  --muted: #30221b;
+  --muted-foreground: #a69890;
+  --accent: #e29578;
+  --accent-foreground: #1c130e;
+  --destructive: #9f3e1a;
+  --border: rgba(245, 235, 230, 0.08);
+  --input: rgba(245, 235, 230, 0.08);
+  --ring: #e29578;
 
   /* Mode Accents (Dark) */
-  --mode-napuccino-start: oklch(0.71 0.14 45);
+  --mode-napuccino-start: #d47e5b;
   /* Radiant warm amber (#E29578) */
-  --mode-napuccino-end: oklch(0.66 0.12 35);
-  --mode-powernap-start: oklch(0.77 0.08 175);
+  --mode-napuccino-end: #b56241;
+  --mode-powernap-start: #9ac1b5;
   /* Sage green night tone (#9AC1B5) */
-  --mode-powernap-end: oklch(0.72 0.07 165);
-  --mode-consolidation-start: oklch(0.74 0.14 80);
+  --mode-powernap-end: #7ba89a;
+  --mode-consolidation-start: #dda15e;
   /* Honey gold night tone (#DDA15E) */
-  --mode-consolidation-end: oklch(0.69 0.12 70);
+  --mode-consolidation-end: #bf8545;
 
   /* Mode Glows (Dark) */
   --mode-napuccino-glow: rgba(226, 149, 120, 0.6); /* Radiant warm amber (#E29578) */

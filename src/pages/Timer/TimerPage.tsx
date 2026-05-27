@@ -1,6 +1,7 @@
 import { FastForward, Sparkles } from "lucide-react";
 import type React from "react";
 import type { AlarmSound, AmbientSound, TimerState } from "../../hooks/useAudioEngine";
+import { useFormatTime } from "../../hooks/useFormatTime";
 import { useI18n } from "../../lib/i18n";
 import type { NapMode } from "../../lib/modes";
 import { AlarmView } from "./AlarmView";
@@ -49,11 +50,7 @@ export function TimerPage({
 }: TimerPageProps): React.ReactElement {
   const { t } = useI18n();
 
-  const formatTime = (seconds: number): string => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
-  };
+  const formatTime = useFormatTime();
 
   return (
     <section className="flex flex-col gap-10 max-w-2xl mx-auto py-6 text-center relative z-10" aria-label="Nap Timer">
@@ -113,6 +110,8 @@ export function TimerPage({
             sleepTimeLeft={sleepTimeLeft}
             formatTime={formatTime}
             handleStop={() => handleStop(stopAlarm)}
+            ambientSound={ambientSound}
+            setAmbientSound={setAmbientSound}
           />
         )}
 
