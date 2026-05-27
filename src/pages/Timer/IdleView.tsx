@@ -1,5 +1,6 @@
-import { Play } from "lucide-react";
+import { CloudRain, Coffee, VolumeX, Wind } from "lucide-react";
 import type React from "react";
+import type { AlarmSound, AmbientSound } from "../../hooks/useAudioEngine";
 import { useI18n } from "../../lib/i18n";
 import { MODES, type NapMode } from "../../lib/modes";
 
@@ -7,71 +8,194 @@ type IdleViewProps = {
   activeMode: NapMode;
   setActiveMode: (mode: NapMode) => void;
   handleStart: () => void;
+  ambientSound: AmbientSound;
+  setAmbientSound: (sound: AmbientSound) => void;
+  alarmSound: AlarmSound;
+  setAlarmSound: (sound: AlarmSound) => void;
+  previewAlarmSound: (sound: AlarmSound) => Promise<void>;
 };
 
-const activeOptionGradients = {
-  napuccino:
-    "bg-gradient-to-r from-[var(--mode-napuccino-start)] to-[var(--mode-napuccino-end)] text-primary border-transparent",
-  powernap:
-    "bg-gradient-to-r from-[var(--mode-powernap-start)] to-[var(--mode-powernap-end)] text-primary border-transparent",
-  consolidation:
-    "bg-gradient-to-r from-[var(--mode-consolidation-start)] to-[var(--mode-consolidation-end)] text-primary border-transparent",
-};
-
-export function IdleView({ activeMode, setActiveMode, handleStart }: IdleViewProps): React.ReactElement {
+export function IdleView({
+  activeMode,
+  setActiveMode,
+  handleStart,
+  ambientSound,
+  setAmbientSound,
+  alarmSound,
+  setAlarmSound,
+  previewAlarmSound,
+}: IdleViewProps): React.ReactElement {
   const { t } = useI18n();
+
+  // Mapping modes to zine preset labels and description headers
+  const presetDetails = {
+    napuccino: {
+      name: "Caramel",
+      meta: "20m Espresso Shot",
+      desc: t("modes.napuccino.description"),
+    },
+    powernap: {
+      name: "Matcha",
+      meta: "15m Clearing Wave",
+      desc: t("modes.powernap.description"),
+    },
+    consolidation: {
+      name: "Terracotta",
+      meta: "45m Deep Co",
+      desc: t("modes.consolidation.description"),
+    },
+  };
+
+  const ambientOptions = [
+    { id: "silence" as const, label: t("sounds.silence") || "Silence", icon: VolumeX },
+    { id: "cafe" as const, label: t("sounds.cafe") || "Cafe", icon: Coffee },
+    { id: "rain" as const, label: t("sounds.rain") || "Rain", icon: CloudRain },
+    { id: "white" as const, label: t("sounds.white") || "Wind", icon: Wind },
+  ];
+
+  const alarmOptions = [
+    { id: "silence" as const, label: t("sounds.silence") || "None" },
+    { id: "harp" as const, label: t("sounds.harp") || "Harp" },
+    { id: "bells" as const, label: t("sounds.bells") || "Bells" },
+    { id: "forest" as const, label: t("sounds.forest") || "Forest" },
+  ];
+
+  const formatDuration = (seconds: number): string => {
+    const mins = Math.floor(seconds / 60);
+    return `${mins.toString().padStart(2, "0")}:00`;
+  };
+
   return (
-    <section className="space-y-8">
-      <div className="space-y-2">
-        <h2 className="text-2xl font-black tracking-tight text-foreground font-serif">{t("timer.idle.title")}</h2>
-        <p className="text-xs text-muted-foreground font-bold max-w-sm mx-auto">{t("timer.idle.desc")}</p>
+    <section className="space-y-12 max-w-xl mx-auto flex flex-col items-center">
+      {/* Editorial Header */}
+      <div className="space-y-3 text-center">
+        <h2 className="typography-display text-primary">{t("timer.idle.title")}</h2>
+        <p className="typography-body text-muted-foreground font-semibold max-w-sm mx-auto">
+          {presetDetails[activeMode].desc}
+        </p>
       </div>
 
-      <ul className="flex flex-col gap-4">
-        {(Object.keys(MODES) as NapMode[]).map((mId) => {
-          const config = MODES[mId];
-          const Icon = config.icon;
-          const isSelected = activeMode === mId;
-          return (
-            <li key={mId}>
+      {/* 1. Flat, borderless edge-to-edge preset pill tabs switcher */}
+      <div className="w-full flex justify-center py-2">
+        <nav className="inline-flex items-center gap-1.5 p-1.5 rounded-full bg-secondary/60 border border-border/10 shadow-inner">
+          {(Object.keys(MODES) as NapMode[]).map((mId) => {
+            const isSelected = activeMode === mId;
+            const details = presetDetails[mId];
+
+            const activeColorStyles = {
+              napuccino: "bg-[var(--mode-napuccino-start)] text-primary-foreground font-black scale-105",
+              powernap: "bg-[var(--mode-powernap-start)] text-primary-foreground font-black scale-105",
+              consolidation: "bg-[var(--mode-consolidation-start)] text-primary-foreground font-black scale-105",
+            }[mId];
+
+            return (
               <button
                 type="button"
+                key={mId}
                 onClick={() => setActiveMode(mId)}
                 aria-pressed={isSelected}
-                className={`w-full flex items-center gap-4 border border-border/30 p-4 text-left transition-all duration-500 ease-out bg-card hover:bg-secondary/40 hover:scale-[1.01] rounded-2xl shadow-sm ${isSelected ? `${activeOptionGradients[mId]} shadow-md` : ""}`}
+                className={`relative flex items-center justify-center gap-1.5 rounded-full px-5 py-2.5 text-xs font-semibold tracking-wider uppercase transition-all duration-500 ease-out cursor-pointer ${
+                  isSelected ? `${activeColorStyles} shadow-sm` : "text-muted-foreground hover:text-foreground"
+                }`}
               >
-                <div
-                  className={`p-3 border border-border/30 rounded-xl shadow-xs transition-colors duration-300 ${isSelected ? "bg-primary text-white border-transparent" : "bg-secondary text-primary"}`}
-                >
-                  <Icon className="h-5 w-5" />
-                </div>
-                <div className="flex-grow">
-                  <div className="flex justify-between items-center">
-                    <span className="text-base font-black text-foreground">{t(`modes.${mId}.title`)}</span>
-                    <span className="text-sm font-black text-primary">
-                      {config.duration / 60}
-                      {t("timer.idle.minute_short")}
-                    </span>
-                  </div>
-                  <span
-                    className={`block text-xs mt-0.5 leading-relaxed font-semibold ${isSelected ? "text-inherit opacity-85" : "text-muted-foreground"}`}
-                  >
-                    {t(`modes.${mId}.description`)}
-                  </span>
-                </div>
+                {details.name}
               </button>
-            </li>
-          );
-        })}
-      </ul>
+            );
+          })}
+        </nav>
+      </div>
 
+      {/* 2. Oversized timer display (Stripped bare of boxes) */}
+      <div className="flex flex-col items-center justify-center py-4 my-2 select-none">
+        <time className="typography-timer font-serif text-[84px] sm:text-[96px] text-primary tracking-tighter leading-none animate-fade-in transition-all">
+          {formatDuration(MODES[activeMode].duration)}
+        </time>
+        <span className="typography-utility uppercase text-xs tracking-widest text-accent mt-2 animate-pulse">
+          {presetDetails[activeMode].meta}
+        </span>
+      </div>
+
+      {/* 3. Evolve the Ambient Soundscape Matrix (Borderless line art grid) */}
+      <div className="w-full space-y-4 pt-4 border-t border-dashed border-border/40">
+        <span className="typography-utility uppercase text-xs tracking-widest text-muted-foreground block text-center">
+          {t("timer.sounds.ambient_title") || "Ambient Soundscape"}
+        </span>
+        <div className="flex justify-center gap-8 items-center max-w-sm mx-auto">
+          {ambientOptions.map((option) => {
+            const Icon = option.icon;
+            const isActive = ambientSound === option.id;
+
+            // Brand soft color glow matching active preset
+            const glowColors = {
+              napuccino:
+                "text-[var(--mode-napuccino-start)] drop-shadow-[0_0_8px_rgba(212,163,115,0.6)] font-extrabold opacity-100",
+              powernap:
+                "text-[var(--mode-powernap-start)] drop-shadow-[0_0_8px_rgba(204,213,174,0.6)] font-extrabold opacity-100",
+              consolidation:
+                "text-[var(--mode-consolidation-start)] drop-shadow-[0_0_8px_rgba(232,165,152,0.6)] font-extrabold opacity-100",
+            }[activeMode];
+
+            return (
+              <button
+                type="button"
+                key={option.id}
+                onClick={() => setAmbientSound(option.id)}
+                className={`flex flex-col items-center gap-2 cursor-pointer transition-all duration-500 ease-out border-0 bg-transparent p-2 hover:scale-110 ${
+                  isActive ? glowColors : "text-muted-foreground hover:text-foreground opacity-50"
+                }`}
+              >
+                <Icon className="h-6 w-6 stroke-[1.2]" />
+                <span className="text-[10px] font-semibold tracking-wider uppercase">{option.label}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* 4. Elegant, borderless wake-up signal switcher */}
+      <div className="w-full space-y-3 pb-4">
+        <span className="typography-utility uppercase text-xs tracking-widest text-muted-foreground block text-center">
+          {t("timer.sounds.alarm_title") || "Wake-up Signal"}
+        </span>
+        <div className="flex justify-center gap-4 flex-wrap items-center">
+          {alarmOptions.map((option) => {
+            const isActive = alarmSound === option.id;
+
+            const activeStyles = {
+              napuccino:
+                "text-[var(--mode-napuccino-start)] font-black decoration-2 underline underline-offset-4 decoration-[var(--mode-napuccino-start)]/40",
+              powernap:
+                "text-[var(--mode-powernap-start)] font-black decoration-2 underline underline-offset-4 decoration-[var(--mode-powernap-start)]/40",
+              consolidation:
+                "text-[var(--mode-consolidation-start)] font-black decoration-2 underline underline-offset-4 decoration-[var(--mode-consolidation-start)]/40",
+            }[activeMode];
+
+            return (
+              <button
+                type="button"
+                key={option.id}
+                onClick={() => {
+                  setAlarmSound(option.id);
+                  previewAlarmSound(option.id);
+                }}
+                className={`text-[11px] font-semibold uppercase tracking-wider cursor-pointer border-0 bg-transparent py-1 px-2.5 transition-all duration-300 ${
+                  isActive ? activeStyles : "text-muted-foreground hover:text-foreground opacity-60"
+                }`}
+              >
+                {option.label}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* 5. Primary CTA Trigger - Large, rounded-full, high-comfort pill */}
       <button
         type="button"
         onClick={handleStart}
-        className="flex items-center gap-2 bg-primary text-primary-foreground font-bold px-6 py-3 transition-all duration-500 ease-out active:scale-95 border border-transparent rounded-2xl shadow-sm hover:-translate-y-0.5 hover:shadow-md w-full justify-center py-4"
+        className="w-full py-4.5 px-8 bg-primary text-primary-foreground font-black text-sm uppercase tracking-widest transition-all duration-500 ease-out active:scale-95 rounded-full shadow-md hover:-translate-y-0.5 hover:shadow-lg cursor-pointer mt-4"
       >
-        <Play className="h-5 w-5 fill-current" />
-        {t("timer.idle.initiate")}
+        {`(( ${t("timer.idle.initiate") || "Begin Drift"} ))`}
       </button>
     </section>
   );
