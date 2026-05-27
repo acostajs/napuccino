@@ -9,6 +9,9 @@
     "badge": "Transition Wave",
     "title": "Prepare to Fall Asleep",
     "desc": "Drink your coffee now if you haven't! Follow the breathing guide below to calm your mind.",
+    "breathe_in": "Inhale deeply",
+    "breathe_hold": "Hold your breath",
+    "breathe_out": "Exhale slowly",
     "breathe_rest": "Breathe & Rest",
     "skip": "Skip Pre-Countdown"
   },
@@ -24,11 +27,21 @@
     "sound_machine": "Sleep Sound Machine",
     "cancel": "Cancel Nap Loop",
     "mute": "Mute sounds",
-    "unmute": "Unmute sounds"
+    "unmute": "Unmute sounds",
+    "mode_label": {
+      "napuccino": "Caramel Rest",
+      "powernap": "Matcha Rest",
+      "consolidation": "Terracotta Rest"
+    }
   },
   "alarm": {
     "title": "Time to Conquer!",
-    "desc": "Your 20 minutes is up. The caffeine has successfully crossed into your brain receptors. Rise and shine!",
-    "action": "Rise and Grind"
+    "desc": "Your resting cycle has completed successfully. The caffeine has successfully crossed into your brain receptors. Rise and shine!",
+    "action": "Rise and Grind",
+    "mode_label": {
+      "napuccino": "Caramel Wave Complete",
+      "powernap": "Matcha Wave Complete",
+      "consolidation": "Terracotta Wave Complete"
+    }
   }
 }

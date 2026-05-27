@@ -1,4 +1,10 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+
+declare global {
+  interface Window {
+    webkitAudioContext?: typeof AudioContext;
+  }
+}
 
 export type TimerState = "idle" | "pre" | "sleep" | "alarm";
 export type AmbientSound = "silence" | "cafe" | "rain" | "white";
@@ -7,7 +13,6 @@ export type AlarmSound = "silence" | "harp" | "bells" | "forest";
 type StoppableNode = { stop: () => void };
 
 type AudioEngineProps = {
-  isMuted: boolean;
   ambientSound: AmbientSound;
   alarmSound: AlarmSound;
   timerState: TimerState;
@@ -19,9 +24,10 @@ type AudioEngineResult = {
   startAlarm: () => Promise<void>;
   stopAlarm: () => void;
   stopAmbient: () => void;
+  audioError: string | null;
 };
 
-export function useAudioEngine({ isMuted, ambientSound, alarmSound, timerState }: AudioEngineProps): AudioEngineResult {
+export function useAudioEngine({ ambientSound, alarmSound, timerState }: AudioEngineProps): AudioEngineResult {
   const audioCtxRef = useRef<AudioContext | null>(null);
   const ambientNodeRef = useRef<StoppableNode | null>(null);
   const alarmNodeRef = useRef<AudioScheduledSourceNode[]>([]);
@@ -30,32 +36,30 @@ export function useAudioEngine({ isMuted, ambientSound, alarmSound, timerState }
   const isAlarmPlayingRef = useRef<boolean>(false);
   const alarmTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Sync props to refs to avoid stale closures in audio threads
-  const isMutedRef = useRef<boolean>(isMuted);
   const alarmSoundRef = useRef<AlarmSound>(alarmSound);
-
-  useEffect(() => {
-    isMutedRef.current = isMuted;
-    if (alarmGainRef.current && audioCtxRef.current) {
-      const ctx = audioCtxRef.current;
-      const targetGain = isMuted ? 0 : 0.4;
-      // Smooth out mute transitions to avoid clicks/pops
-      alarmGainRef.current.gain.setValueAtTime(alarmGainRef.current.gain.value, ctx.currentTime);
-      alarmGainRef.current.gain.linearRampToValueAtTime(targetGain, ctx.currentTime + 0.08);
-    }
-  }, [isMuted]);
+  const [audioError, setAudioError] = useState<string | null>(null);
 
   useEffect(() => {
     alarmSoundRef.current = alarmSound;
   }, [alarmSound]);
 
   const initAudio = useCallback(async (): Promise<void> => {
-    if (!audioCtxRef.current) {
-      const AudioContextCtor = window.AudioContext ?? window.webkitAudioContext;
-      audioCtxRef.current = new AudioContextCtor();
-    }
-    if (audioCtxRef.current.state === "suspended") {
-      await audioCtxRef.current.resume();
+    try {
+      if (!audioCtxRef.current) {
+        const AudioContextCtor = window.AudioContext ?? window.webkitAudioContext;
+        if (!AudioContextCtor) {
+          throw new Error("Web Audio API is not supported in this browser.");
+        }
+        audioCtxRef.current = new AudioContextCtor();
+      }
+      if (audioCtxRef.current.state === "suspended") {
+        await audioCtxRef.current.resume();
+      }
+      setAudioError(null);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      console.error("Failed to initialize audio context:", err);
+      setAudioError(message);
     }
   }, []);
 
@@ -76,7 +80,7 @@ export function useAudioEngine({ isMuted, ambientSound, alarmSound, timerState }
     filter.frequency.value = 400;
 
     const gainNode = ctx.createGain();
-    gainNode.gain.setValueAtTime(isMutedRef.current ? 0 : 0.15, ctx.currentTime);
+    gainNode.gain.setValueAtTime(0.15, ctx.currentTime);
 
     whiteNoise.connect(filter);
     filter.connect(gainNode);
@@ -104,7 +108,7 @@ export function useAudioEngine({ isMuted, ambientSound, alarmSound, timerState }
     filter.Q.value = 0.5;
 
     const gainNode = ctx.createGain();
-    gainNode.gain.setValueAtTime(isMutedRef.current ? 0 : 0.08, ctx.currentTime);
+    gainNode.gain.setValueAtTime(0.08, ctx.currentTime);
 
     const lfo = ctx.createOscillator();
     lfo.type = "sine";
@@ -148,7 +152,7 @@ export function useAudioEngine({ isMuted, ambientSound, alarmSound, timerState }
     filter.frequency.value = 180;
 
     const gainNode = ctx.createGain();
-    gainNode.gain.setValueAtTime(isMutedRef.current ? 0 : 0.05, ctx.currentTime);
+    gainNode.gain.setValueAtTime(0.05, ctx.currentTime);
 
     osc1.connect(filter);
     osc2.connect(filter);
@@ -187,7 +191,7 @@ export function useAudioEngine({ isMuted, ambientSound, alarmSound, timerState }
       if (!ctx) return;
 
       const gainNode = ctx.createGain();
-      gainNode.gain.setValueAtTime(isMutedRef.current ? 0 : 0.15, ctx.currentTime);
+      gainNode.gain.setValueAtTime(0.15, ctx.currentTime);
       gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.8);
       gainNode.connect(ctx.destination);
 
@@ -229,7 +233,7 @@ export function useAudioEngine({ isMuted, ambientSound, alarmSound, timerState }
 
     const gainNode = ctx.createGain();
     gainNode.gain.setValueAtTime(0, ctx.currentTime);
-    gainNode.gain.linearRampToValueAtTime(isMutedRef.current ? 0 : 0.4, ctx.currentTime + 8);
+    gainNode.gain.linearRampToValueAtTime(0.4, ctx.currentTime + 8);
     gainNode.connect(ctx.destination);
     alarmGainRef.current = gainNode;
 
@@ -353,7 +357,7 @@ export function useAudioEngine({ isMuted, ambientSound, alarmSound, timerState }
       return;
     }
 
-    if (ambientSound === "silence" || isMuted) {
+    if (ambientSound === "silence") {
       stopAmbient();
       return;
     }
@@ -385,7 +389,7 @@ export function useAudioEngine({ isMuted, ambientSound, alarmSound, timerState }
     startAmbient();
 
     return () => stopAmbient();
-  }, [ambientSound, timerState, isMuted, playCafeNoise, stopAmbient, playRainNoise, playWhiteNoise, initAudio]);
+  }, [ambientSound, timerState, playCafeNoise, stopAmbient, playRainNoise, playWhiteNoise, initAudio]);
 
   // Handle alarm when timerState becomes "alarm"
   useEffect(() => {
@@ -416,5 +420,6 @@ export function useAudioEngine({ isMuted, ambientSound, alarmSound, timerState }
     startAlarm,
     stopAlarm,
     stopAmbient,
+    audioError,
   };
 }

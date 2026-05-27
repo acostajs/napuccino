@@ -15,13 +15,13 @@
   100% {
     transform: scale(0.9);
     opacity: 0.6;
-    background-color: oklch(0.68 0.15 65 / 20%);
+    background-color: rgba(202, 126, 75, 0.2);
   }
 
   50% {
     transform: scale(1.1);
     opacity: 1;
-    background-color: oklch(0.68 0.15 65 / 50%);
+    background-color: rgba(202, 126, 75, 0.5);
   }
 }
 

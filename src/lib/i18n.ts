@@ -19,15 +19,23 @@ const I18nContext = createContext<I18nContextType | null>(null);
 const getInitialLocale = (): Locale => {
   if (typeof window !== "undefined") {
     // 1. Check local storage
-    const saved = localStorage.getItem("napuccino-locale") as Locale | null;
-    if (saved && (saved === "en" || saved === "es" || saved === "fr")) {
-      return saved;
+    try {
+      const saved = localStorage.getItem("napuccino-locale") as Locale | null;
+      if (saved && (saved === "en" || saved === "es" || saved === "fr")) {
+        return saved;
+      }
+    } catch (_e) {
+      // Silent fallback
     }
 
     // 2. Check system language
-    const sysLang = navigator.language.split("-")[0];
-    if (sysLang === "es" || sysLang === "fr" || sysLang === "en") {
-      return sysLang as Locale;
+    try {
+      const sysLang = navigator.language.split("-")[0];
+      if (sysLang === "es" || sysLang === "fr" || sysLang === "en") {
+        return sysLang as Locale;
+      }
+    } catch (_e) {
+      // Silent fallback
     }
   }
   return "en"; // Default fallback
@@ -38,7 +46,11 @@ export function I18nProvider({ children }: { children: React.ReactNode }): React
 
   const setLocale = (newLocale: Locale): void => {
     setLocaleState(newLocale);
-    localStorage.setItem("napuccino-locale", newLocale);
+    try {
+      localStorage.setItem("napuccino-locale", newLocale);
+    } catch (_e) {
+      // Silent fallback
+    }
   };
 
   const t = (key: string, replacements?: Record<string, string>): string => {

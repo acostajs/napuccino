@@ -2,27 +2,23 @@ import { useEffect, useState } from "react";
 import { MODES, type NapMode } from "../lib/modes";
 import type { TimerState } from "./useAudioEngine";
 
-type UseNapTimerProps = Record<string, never>;
-
 type UseNapTimerResult = {
   timerState: TimerState;
   activeMode: NapMode;
   preTimeLeft: number;
   sleepTimeLeft: number;
   testMode: boolean;
-  setTimerState: (state: TimerState) => void;
   setTestMode: React.Dispatch<React.SetStateAction<boolean>>;
   setActiveMode: React.Dispatch<React.SetStateAction<NapMode>>;
   handleStart: (initAudio: () => void) => void;
   handleStop: (stopAudio: () => void) => void;
   handleSkipPre: () => void;
-  progressPercent: number;
 };
 
-export function useNapTimer(_props: UseNapTimerProps = {}): UseNapTimerResult {
+export function useNapTimer(): UseNapTimerResult {
   const [timerState, setTimerState] = useState<TimerState>("idle");
   const [activeMode, setActiveMode] = useState<NapMode>("napuccino");
-  const [preTimeLeft, setPreTimeLeft] = useState<number>(150);
+  const [preTimeLeft, setPreTimeLeft] = useState<number>(15);
   const [sleepTimeLeft, setSleepTimeLeft] = useState<number>(1200);
   const [testMode, setTestMode] = useState<boolean>(false);
 
@@ -30,7 +26,7 @@ export function useNapTimer(_props: UseNapTimerProps = {}): UseNapTimerResult {
   useEffect(() => {
     if (timerState === "idle") {
       setSleepTimeLeft(MODES[activeMode].duration);
-      setPreTimeLeft(testMode ? 10 : 150);
+      setPreTimeLeft(testMode ? 3 : 15);
     }
   }, [activeMode, timerState, testMode]);
 
@@ -75,7 +71,7 @@ export function useNapTimer(_props: UseNapTimerProps = {}): UseNapTimerResult {
 
   const handleStart = (initAudio: () => void): void => {
     initAudio();
-    setPreTimeLeft(testMode ? 10 : 150);
+    setPreTimeLeft(testMode ? 3 : 15);
     setSleepTimeLeft(MODES[activeMode].duration);
     setTimerState("pre");
   };
@@ -83,7 +79,7 @@ export function useNapTimer(_props: UseNapTimerProps = {}): UseNapTimerResult {
   const handleStop = (stopAudio: () => void): void => {
     stopAudio();
     setTimerState("idle");
-    setPreTimeLeft(testMode ? 10 : 150);
+    setPreTimeLeft(testMode ? 3 : 15);
     setSleepTimeLeft(MODES[activeMode].duration);
   };
 
@@ -91,21 +87,16 @@ export function useNapTimer(_props: UseNapTimerProps = {}): UseNapTimerResult {
     setTimerState("sleep");
   };
 
-  const totalDuration = MODES[activeMode].duration;
-  const progressPercent = timerState === "sleep" ? ((totalDuration - sleepTimeLeft) / totalDuration) * 100 : 0;
-
   return {
     timerState,
     activeMode,
     preTimeLeft,
     sleepTimeLeft,
     testMode,
-    setTimerState,
     setTestMode,
     setActiveMode,
     handleStart,
     handleStop,
     handleSkipPre,
-    progressPercent,
   };
 }

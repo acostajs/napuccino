@@ -9,6 +9,9 @@
     "badge": "Onde de Transition",
     "title": "Préparez-vous à Dormir",
     "desc": "Buvez votre café maintenant si ce n'est pas fait ! Suivez le guide respiratoire ci-dessous pour calmer votre esprit.",
+    "breathe_in": "Inspirez profondément",
+    "breathe_hold": "Retenez votre respiration",
+    "breathe_out": "Expirez lentement",
     "breathe_rest": "Respirez et Reposez-vous",
     "skip": "Passer la Pré-transition"
   },
@@ -24,11 +27,21 @@
     "sound_machine": "Machine à Sons de Sommeil",
     "cancel": "Annuler la Sieste",
     "mute": "Muet",
-    "unmute": "Activer le son"
+    "unmute": "Activer le son",
+    "mode_label": {
+      "napuccino": "Repos de Caramel",
+      "powernap": "Repos de Matcha",
+      "consolidation": "Repos de Terracotta"
+    }
   },
   "alarm": {
     "title": "L'Heure de Conquérir !",
-    "desc": "Vos 20 minutes sont écoulées. La caféine a traversé avec succès les récepteurs de votre cerveau. Réveillez-vous et brillez !",
-    "action": "Debout et Actif"
+    "desc": "Votre cycle de repos s'est déroulé avec succès. La caféine a traversé avec succès les récepteurs de votre cerveau. Réveillez-vous et brillez !",
+    "action": "Debout et Actif",
+    "mode_label": {
+      "napuccino": "Vague de Caramel Complétée",
+      "powernap": "Vague de Matcha Complétée",
+      "consolidation": "Vague de Terracotta Complétée"
+    }
   }
 }
