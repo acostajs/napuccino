@@ -19,14 +19,11 @@ type TimerPageProps = {
   handleStart: (initAudio: () => void) => void;
   handleStop: (stopAudio: () => void) => void;
   handleSkipPre: () => void;
-  progressPercent: number;
   ambientSound: AmbientSound;
   setAmbientSound: (sound: AmbientSound) => void;
   alarmSound: AlarmSound;
   setAlarmSound: (sound: AlarmSound) => void;
   previewAlarmSound: (sound: AlarmSound) => Promise<void>;
-  isMuted: boolean;
-  setIsMuted: React.Dispatch<React.SetStateAction<boolean>>;
   initAudio: () => Promise<void>;
   stopAlarm: () => void;
 };
@@ -42,14 +39,11 @@ export function TimerPage({
   handleStart,
   handleStop,
   handleSkipPre,
-  progressPercent,
   ambientSound,
   setAmbientSound,
   alarmSound,
   setAlarmSound,
   previewAlarmSound,
-  isMuted,
-  setIsMuted,
   initAudio,
   stopAlarm,
 }: TimerPageProps): React.ReactElement {
@@ -108,11 +102,6 @@ export function TimerPage({
             activeMode={activeMode}
             preTimeLeft={preTimeLeft}
             formatTime={formatTime}
-            ambientSound={ambientSound}
-            setAmbientSound={setAmbientSound}
-            alarmSound={alarmSound}
-            setAlarmSound={setAlarmSound}
-            previewAlarmSound={previewAlarmSound}
             handleSkipPre={handleSkipPre}
             handleStop={() => handleStop(stopAlarm)}
           />
@@ -123,14 +112,6 @@ export function TimerPage({
             activeMode={activeMode}
             sleepTimeLeft={sleepTimeLeft}
             formatTime={formatTime}
-            progressPercent={progressPercent}
-            ambientSound={ambientSound}
-            setAmbientSound={setAmbientSound}
-            alarmSound={alarmSound}
-            setAlarmSound={setAlarmSound}
-            previewAlarmSound={previewAlarmSound}
-            isMuted={isMuted}
-            setIsMuted={setIsMuted}
             handleStop={() => handleStop(stopAlarm)}
           />
         )}
