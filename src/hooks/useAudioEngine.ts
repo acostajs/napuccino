@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 export type TimerState = "idle" | "pre" | "sleep" | "alarm";
 export type AmbientSound = "silence" | "cafe" | "rain" | "white";
@@ -49,7 +49,7 @@ export function useAudioEngine({ isMuted, ambientSound, alarmSound, timerState }
     alarmSoundRef.current = alarmSound;
   }, [alarmSound]);
 
-  const initAudio = async (): Promise<void> => {
+  const initAudio = useCallback(async (): Promise<void> => {
     if (!audioCtxRef.current) {
       const AudioContextCtor = window.AudioContext ?? window.webkitAudioContext;
       audioCtxRef.current = new AudioContextCtor();
@@ -57,9 +57,9 @@ export function useAudioEngine({ isMuted, ambientSound, alarmSound, timerState }
     if (audioCtxRef.current.state === "suspended") {
       await audioCtxRef.current.resume();
     }
-  };
+  }, []);
 
-  const playWhiteNoise = (ctx: AudioContext): void => {
+  const playWhiteNoise = useCallback((ctx: AudioContext): void => {
     const bufferSize = 2 * ctx.sampleRate;
     const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
     const output = noiseBuffer.getChannelData(0);
@@ -84,9 +84,9 @@ export function useAudioEngine({ isMuted, ambientSound, alarmSound, timerState }
 
     whiteNoise.start(0);
     ambientNodeRef.current = whiteNoise;
-  };
+  }, []);
 
-  const playRainNoise = (ctx: AudioContext): void => {
+  const playRainNoise = useCallback((ctx: AudioContext): void => {
     const bufferSize = 2 * ctx.sampleRate;
     const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
     const output = noiseBuffer.getChannelData(0);
@@ -132,9 +132,9 @@ export function useAudioEngine({ isMuted, ambientSound, alarmSound, timerState }
         } catch (_e) {}
       },
     };
-  };
+  }, []);
 
-  const playCafeNoise = (ctx: AudioContext): void => {
+  const playCafeNoise = useCallback((ctx: AudioContext): void => {
     const osc1 = ctx.createOscillator();
     const osc2 = ctx.createOscillator();
 
@@ -168,53 +168,56 @@ export function useAudioEngine({ isMuted, ambientSound, alarmSound, timerState }
         } catch (_e) {}
       },
     };
-  };
+  }, []);
 
-  const stopAmbient = (): void => {
+  const stopAmbient = useCallback((): void => {
     if (ambientNodeRef.current) {
       try {
         ambientNodeRef.current.stop();
       } catch (_e) {}
       ambientNodeRef.current = null;
     }
-  };
+  }, []);
 
-  const previewAlarmSound = async (sound: AlarmSound): Promise<void> => {
-    if (sound === "silence") return;
-    await initAudio();
-    const ctx = audioCtxRef.current;
-    if (!ctx) return;
+  const previewAlarmSound = useCallback(
+    async (sound: AlarmSound): Promise<void> => {
+      if (sound === "silence") return;
+      await initAudio();
+      const ctx = audioCtxRef.current;
+      if (!ctx) return;
 
-    const gainNode = ctx.createGain();
-    gainNode.gain.setValueAtTime(isMutedRef.current ? 0 : 0.15, ctx.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.8);
-    gainNode.connect(ctx.destination);
+      const gainNode = ctx.createGain();
+      gainNode.gain.setValueAtTime(isMutedRef.current ? 0 : 0.15, ctx.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.8);
+      gainNode.connect(ctx.destination);
 
-    const osc = ctx.createOscillator();
-    osc.type = "sine";
-    switch (sound) {
-      case "harp":
-        osc.frequency.setValueAtTime(440.0, ctx.currentTime);
-        break;
-      case "bells":
-        osc.frequency.setValueAtTime(523.25, ctx.currentTime);
-        break;
-      case "forest":
-        osc.frequency.setValueAtTime(880.0, ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(1320.0, ctx.currentTime + 0.12);
-        break;
-      default: {
-        const _exhaustiveCheck: never = sound;
-        return _exhaustiveCheck;
+      const osc = ctx.createOscillator();
+      osc.type = "sine";
+      switch (sound) {
+        case "harp":
+          osc.frequency.setValueAtTime(440.0, ctx.currentTime);
+          break;
+        case "bells":
+          osc.frequency.setValueAtTime(523.25, ctx.currentTime);
+          break;
+        case "forest":
+          osc.frequency.setValueAtTime(880.0, ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(1320.0, ctx.currentTime + 0.12);
+          break;
+        default: {
+          const _exhaustiveCheck: never = sound;
+          return _exhaustiveCheck;
+        }
       }
-    }
 
-    osc.connect(gainNode);
-    osc.start();
-    osc.stop(ctx.currentTime + 1.8);
-  };
+      osc.connect(gainNode);
+      osc.start();
+      osc.stop(ctx.currentTime + 1.8);
+    },
+    [initAudio],
+  );
 
-  const startAlarm = async (): Promise<void> => {
+  const startAlarm = useCallback(async (): Promise<void> => {
     if (alarmSoundRef.current === "silence") return;
 
     isAlarmPlayingRef.current = true;
@@ -309,7 +312,8 @@ export function useAudioEngine({ isMuted, ambientSound, alarmSound, timerState }
         case "silence":
           break;
         default: {
-          ((_: never) => {})(currentSound);
+          const _exhaustiveCheck: never = currentSound;
+          throw new Error(`Unknown alarm sound: ${_exhaustiveCheck}`);
         }
       }
 
@@ -320,9 +324,9 @@ export function useAudioEngine({ isMuted, ambientSound, alarmSound, timerState }
     };
 
     playLoop();
-  };
+  }, [initAudio, stopAmbient]);
 
-  const stopAlarm = (): void => {
+  const stopAlarm = useCallback((): void => {
     isAlarmPlayingRef.current = false;
     if (alarmTimeoutRef.current) {
       clearTimeout(alarmTimeoutRef.current);
@@ -340,7 +344,7 @@ export function useAudioEngine({ isMuted, ambientSound, alarmSound, timerState }
       } catch (_e) {}
       alarmGainRef.current = null;
     }
-  };
+  }, []);
 
   // Handle ambient loops based on timerState, ambientSound and isMuted
   useEffect(() => {
@@ -372,7 +376,8 @@ export function useAudioEngine({ isMuted, ambientSound, alarmSound, timerState }
           playCafeNoise(ctx);
           break;
         default: {
-          ((_: never) => {})(ambientSound);
+          const _exhaustiveCheck: never = ambientSound;
+          throw new Error(`Unknown ambient sound: ${_exhaustiveCheck}`);
         }
       }
     };
@@ -380,7 +385,6 @@ export function useAudioEngine({ isMuted, ambientSound, alarmSound, timerState }
     startAmbient();
 
     return () => stopAmbient();
-    // biome-ignore lint/correctness/useExhaustiveDependencies: audio nodes do not need to trigger re-renders
   }, [ambientSound, timerState, isMuted, playCafeNoise, stopAmbient, playRainNoise, playWhiteNoise, initAudio]);
 
   // Handle alarm when timerState becomes "alarm"
@@ -390,7 +394,6 @@ export function useAudioEngine({ isMuted, ambientSound, alarmSound, timerState }
     } else {
       stopAlarm();
     }
-    // biome-ignore lint/correctness/useExhaustiveDependencies: startAlarm and stopAlarm are stable audio controllers
   }, [timerState, startAlarm, stopAlarm]);
 
   // Clean up on component unmount
@@ -405,7 +408,6 @@ export function useAudioEngine({ isMuted, ambientSound, alarmSound, timerState }
         audioCtxRef.current = null;
       }
     };
-    // biome-ignore lint/correctness/useExhaustiveDependencies: run once on cleanup
   }, [stopAmbient, stopAlarm]);
 
   return {
