@@ -1,6 +1,7 @@
-import { BookOpen, Coffee, Moon, Sun, Timer } from "lucide-react";
+import { BookOpen, Moon, Sun, Timer } from "lucide-react";
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
+import type { TimerState } from "../hooks/useAudioEngine";
 import { useI18n } from "../lib/i18n";
 
 type NavbarProps = {
@@ -8,6 +9,7 @@ type NavbarProps = {
   setActiveTab: (tab: "home" | "timer" | "science") => void;
   theme: "light" | "dark";
   toggleTheme: () => void;
+  timerState?: TimerState;
 };
 
 type LocaleDropdownProps = {
@@ -78,89 +80,90 @@ function LocaleDropdown({ id, locale, setLocale }: LocaleDropdownProps): React.R
   );
 }
 
-export function Navbar({ activeTab, setActiveTab, theme, toggleTheme }: NavbarProps): React.ReactElement {
+export function Navbar({ activeTab, setActiveTab, theme, toggleTheme, timerState }: NavbarProps): React.ReactElement {
   const { t, locale, setLocale } = useI18n();
 
   const tabs = [
-    { id: "home" as const, label: t("nav.home"), icon: Coffee },
     { id: "timer" as const, label: t("nav.timer"), icon: Timer },
     { id: "science" as const, label: t("nav.science"), icon: BookOpen },
   ];
 
+  const renderStateBadge = () => {
+    if (!timerState || timerState === "idle") return null;
+
+    const activeLabel = {
+      pre: t("timer.pre.badge") || "Breathing",
+      sleep: t("timer.sleep.napping") || "Napping",
+      alarm: t("timer.alarm.title") || "Wake Up!",
+    }[timerState];
+
+    const activeColorClasses = {
+      pre: "bg-accent/10 text-accent border-accent/20",
+      sleep: "bg-primary/10 text-primary border-primary/20",
+      alarm: "bg-destructive/10 text-destructive border-destructive/20 animate-pulse",
+    }[timerState];
+
+    return (
+      <span
+        className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full border text-xs font-bold uppercase tracking-wider transition-all duration-500 ease-out ${activeColorClasses}`}
+      >
+        {timerState === "pre" && <span className="h-1.5 w-1.5 rounded-full bg-accent animate-ping" />}
+        {timerState === "sleep" && <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />}
+        {timerState === "alarm" && <span className="h-1.5 w-1.5 rounded-full bg-destructive animate-ping" />}
+        {activeLabel}
+      </span>
+    );
+  };
+
   return (
     <header className="sticky top-4 z-50 mx-auto w-full max-w-5xl">
-      <div className="flex flex-col h-auto gap-3 bg-card px-4 py-3 md:flex-row md:h-16 md:py-0 md:px-6 md:justify-between md:items-center md:gap-0 border border-border/30 transition-all duration-500 ease-out rounded-2xl shadow-sm md:rounded-full">
-        {/* Mobile top-row container / Desktop side-by-side logo */}
-        <div className="flex w-full items-center justify-between md:w-auto">
+      <div className="flex h-16 w-full items-center justify-between bg-card/85 backdrop-blur-md px-6 transition-all duration-500 ease-out rounded-full border border-transparent">
+        {/* Left: Wordmark Logo */}
+        <div className="flex items-center shrink-0">
           <button
             type="button"
             onClick={() => setActiveTab("home")}
-            aria-label={t("nav.home")}
-            className="flex items-center gap-3 transition-all duration-500 ease-out hover:opacity-85 hover:scale-105 group"
+            aria-label={t("nav.brand")}
+            className={`font-serif text-xl font-medium tracking-tight transition-all duration-500 ease-out cursor-pointer ${activeTab === "home" ? "text-accent scale-105" : "text-primary hover:opacity-85"}`}
           >
-            <div className="relative flex h-10 w-10 items-center justify-center border border-border text-primary overflow-hidden rounded-xl bg-secondary text-white">
-              <div className="absolute top-1.5 flex gap-0.5 justify-center w-full">
-                <span className="w-0.5 h-2 bg-primary/60 rounded-full" style={{ animationDelay: "0.2s" }} />
-                <span className="w-0.5 h-2 bg-primary/60 rounded-full" style={{ animationDelay: "0.8s" }} />
-                <span className="w-0.5 h-2 bg-primary/60 rounded-full" style={{ animationDelay: "0.5s" }} />
-              </div>
-              <Coffee className="h-5 w-5 mt-1.5" />
-            </div>
-            <div className="text-left">
-              <span className="block text-xl font-black tracking-tight text-accent font-serif">{t("nav.brand")}</span>
-              <span className="block text-xs font-bold text-muted-foreground -mt-1 tracking-wider uppercase">
-                {t("nav.sub")}
-              </span>
-            </div>
+            {t("nav.brand")}
           </button>
-
-          {/* Controls (Mobile Only) */}
-          <div className="flex items-center gap-2 md:hidden">
-            <LocaleDropdown id="mobile-lang-popover" locale={locale} setLocale={setLocale} />
-
-            <button
-              type="button"
-              onClick={toggleTheme}
-              aria-label="Toggle Theme"
-              className="flex h-10 w-10 items-center justify-center border border-border bg-card text-foreground transition-all duration-500 ease-out hover:bg-secondary hover:scale-105 active:scale-95 rounded-xl"
-            >
-              {theme === "dark" ? (
-                <Sun className="h-5 w-5 text-accent animate-spin" style={{ animationDuration: "12s" }} />
-              ) : (
-                <Moon className="h-5 w-5 text-primary" />
-              )}
-            </button>
-          </div>
         </div>
 
-        {/* Centered navigation tabs */}
-        <nav className="flex items-center justify-around w-full md:w-auto gap-1 rounded-xl bg-secondary/80 p-0.5 border border-border/30">
-          {tabs.map((tab) => {
-            const Icon = tab.icon;
-            const isActive = activeTab === tab.id;
-            return (
-              <button
-                type="button"
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`relative flex items-center justify-center flex-grow md:flex-grow-0 gap-2 rounded-lg px-2 sm:px-4 py-1.5 text-xs sm:text-sm font-extrabold transition-all duration-500 ease-out text-muted-foreground hover:text-foreground ${isActive ? "text-primary bg-primary/15 border border-primary/10 rounded-lg shadow-xs dark:bg-accent/15 dark:border-accent/10 dark:text-accent" : ""}`}
-              >
-                <Icon className="h-4 w-4" />
-                <span>{tab.label}</span>
-              </button>
-            );
-          })}
-        </nav>
+        {/* Center: Tabs or State Badge */}
+        <div className="flex items-center justify-center flex-grow mx-4">
+          {timerState && timerState !== "idle" ? (
+            renderStateBadge()
+          ) : (
+            <nav className="flex items-center gap-1 rounded-full bg-secondary/80 p-0.5 border border-border/10">
+              {tabs.map((tab) => {
+                const Icon = tab.icon;
+                const isActive = activeTab === tab.id;
+                return (
+                  <button
+                    type="button"
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`relative flex items-center justify-center gap-1.5 rounded-full px-4 py-1 text-xs font-semibold tracking-wider transition-all duration-500 ease-out text-muted-foreground hover:text-foreground cursor-pointer ${isActive ? "text-primary bg-primary/10 border border-primary/5 rounded-full shadow-xs" : "border border-transparent"}`}
+                  >
+                    <Icon className="h-3.5 w-3.5" />
+                    <span className="hidden sm:inline">{tab.label}</span>
+                  </button>
+                );
+              })}
+            </nav>
+          )}
+        </div>
 
-        {/* Controls (Desktop Only) */}
-        <div className="hidden md:flex items-center gap-3">
-          <LocaleDropdown id="desktop-lang-popover" locale={locale} setLocale={setLocale} />
+        {/* Right: Controls */}
+        <div className="flex items-center gap-2 shrink-0">
+          <LocaleDropdown id="navbar-lang-popover" locale={locale} setLocale={setLocale} />
 
           <button
             type="button"
             onClick={toggleTheme}
             aria-label="Toggle Theme"
-            className="flex h-10 w-10 items-center justify-center border border-border bg-card text-foreground transition-all duration-500 ease-out hover:bg-secondary hover:scale-105 active:scale-95 rounded-xl"
+            className="flex h-10 w-10 items-center justify-center border border-border bg-card text-foreground transition-all duration-500 ease-out hover:bg-secondary hover:scale-105 active:scale-95 rounded-xl cursor-pointer"
           >
             {theme === "dark" ? (
               <Sun className="h-5 w-5 text-accent animate-spin" style={{ animationDuration: "12s" }} />

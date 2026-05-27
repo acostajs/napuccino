@@ -1,6 +1,8 @@
 import type React from "react";
 import { useEffect, useState } from "react";
 import { Navbar } from "./components/Navbar";
+import { type AlarmSound, type AmbientSound, useAudioEngine } from "./hooks/useAudioEngine";
+import { useNapTimer } from "./hooks/useNapTimer";
 import { I18nProvider, useI18n } from "./lib/i18n";
 import { HomePage } from "./pages/Home/HomePage";
 import { SciencePage } from "./pages/Science/SciencePage";
@@ -17,6 +19,32 @@ function AppContent(): React.ReactElement {
       return savedTheme === "light" ? "light" : "dark";
     }
     return "dark";
+  });
+
+  // Coordinator: Lift state so Navbar and background effects sync
+  const {
+    timerState,
+    activeMode,
+    preTimeLeft,
+    sleepTimeLeft,
+    testMode,
+    setTestMode,
+    setActiveMode,
+    handleStart,
+    handleStop,
+    handleSkipPre,
+    progressPercent,
+  } = useNapTimer();
+
+  const [ambientSound, setAmbientSound] = useState<AmbientSound>("silence");
+  const [alarmSound, setAlarmSound] = useState<AlarmSound>("harp");
+  const [isMuted, setIsMuted] = useState<boolean>(false);
+
+  const audioEngine = useAudioEngine({
+    isMuted,
+    ambientSound,
+    alarmSound,
+    timerState,
   });
 
   useEffect(() => {
@@ -51,11 +79,40 @@ function AppContent(): React.ReactElement {
       <div className="absolute top-0 left-0 right-0 h-96 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none z-0" />
 
       <div className="relative z-10 w-full flex flex-col gap-6 pt-4 px-4 sm:px-6">
-        <Navbar activeTab={activeTab} setActiveTab={handleTabChange} theme={theme} toggleTheme={toggleTheme} />
+        <Navbar
+          activeTab={activeTab}
+          setActiveTab={handleTabChange}
+          theme={theme}
+          toggleTheme={toggleTheme}
+          timerState={timerState}
+        />
 
         <main className="w-full flex-grow">
           {activeTab === "home" && <HomePage setActiveTab={handleTabChange} />}
-          {activeTab === "timer" && <TimerPage />}
+          {activeTab === "timer" && (
+            <TimerPage
+              timerState={timerState}
+              activeMode={activeMode}
+              preTimeLeft={preTimeLeft}
+              sleepTimeLeft={sleepTimeLeft}
+              testMode={testMode}
+              setTestMode={setTestMode}
+              setActiveMode={setActiveMode}
+              handleStart={handleStart}
+              handleStop={handleStop}
+              handleSkipPre={handleSkipPre}
+              progressPercent={progressPercent}
+              ambientSound={ambientSound}
+              setAmbientSound={setAmbientSound}
+              alarmSound={alarmSound}
+              setAlarmSound={setAlarmSound}
+              previewAlarmSound={audioEngine.previewAlarmSound}
+              isMuted={isMuted}
+              setIsMuted={setIsMuted}
+              initAudio={audioEngine.initAudio}
+              stopAlarm={audioEngine.stopAlarm}
+            />
+          )}
           {activeTab === "science" && <SciencePage />}
         </main>
       </div>

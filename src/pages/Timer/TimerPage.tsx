@@ -1,40 +1,59 @@
 import { FastForward, Sparkles } from "lucide-react";
 import type React from "react";
-import { useState } from "react";
-import { type AlarmSound, type AmbientSound, useAudioEngine } from "../../hooks/useAudioEngine";
-import { useNapTimer } from "../../hooks/useNapTimer";
+import type { AlarmSound, AmbientSound, TimerState } from "../../hooks/useAudioEngine";
 import { useI18n } from "../../lib/i18n";
+import type { NapMode } from "../../lib/modes";
 import { AlarmView } from "./AlarmView";
 import { IdleView } from "./IdleView";
 import { PreView } from "./PreView";
 import { SleepView } from "./SleepView";
 
-export function TimerPage(): React.ReactElement {
+type TimerPageProps = {
+  timerState: TimerState;
+  activeMode: NapMode;
+  preTimeLeft: number;
+  sleepTimeLeft: number;
+  testMode: boolean;
+  setTestMode: React.Dispatch<React.SetStateAction<boolean>>;
+  setActiveMode: React.Dispatch<React.SetStateAction<NapMode>>;
+  handleStart: (initAudio: () => void) => void;
+  handleStop: (stopAudio: () => void) => void;
+  handleSkipPre: () => void;
+  progressPercent: number;
+  ambientSound: AmbientSound;
+  setAmbientSound: (sound: AmbientSound) => void;
+  alarmSound: AlarmSound;
+  setAlarmSound: (sound: AlarmSound) => void;
+  previewAlarmSound: (sound: AlarmSound) => Promise<void>;
+  isMuted: boolean;
+  setIsMuted: React.Dispatch<React.SetStateAction<boolean>>;
+  initAudio: () => Promise<void>;
+  stopAlarm: () => void;
+};
+
+export function TimerPage({
+  timerState,
+  activeMode,
+  preTimeLeft,
+  sleepTimeLeft,
+  testMode,
+  setTestMode,
+  setActiveMode,
+  handleStart,
+  handleStop,
+  handleSkipPre,
+  progressPercent,
+  ambientSound,
+  setAmbientSound,
+  alarmSound,
+  setAlarmSound,
+  previewAlarmSound,
+  isMuted,
+  setIsMuted,
+  initAudio,
+  stopAlarm,
+}: TimerPageProps): React.ReactElement {
   const { t } = useI18n();
-  const [ambientSound, setAmbientSound] = useState<AmbientSound>("silence");
-  const [alarmSound, setAlarmSound] = useState<AlarmSound>("harp");
-  const [isMuted, setIsMuted] = useState<boolean>(false);
-
-  const {
-    timerState,
-    activeMode,
-    preTimeLeft,
-    sleepTimeLeft,
-    testMode,
-    setTestMode,
-    setActiveMode,
-    handleStart,
-    handleStop,
-    handleSkipPre,
-    progressPercent,
-  } = useNapTimer();
-
-  const audioEngine = useAudioEngine({
-    isMuted,
-    ambientSound,
-    alarmSound,
-    timerState,
-  });
 
   const formatTime = (seconds: number): string => {
     const mins = Math.floor(seconds / 60);
@@ -71,11 +90,7 @@ export function TimerPage(): React.ReactElement {
         aria-label="Timer Card"
       >
         {timerState === "idle" && (
-          <IdleView
-            activeMode={activeMode}
-            setActiveMode={setActiveMode}
-            handleStart={() => handleStart(audioEngine.initAudio)}
-          />
+          <IdleView activeMode={activeMode} setActiveMode={setActiveMode} handleStart={() => handleStart(initAudio)} />
         )}
 
         {timerState === "pre" && (
@@ -87,9 +102,9 @@ export function TimerPage(): React.ReactElement {
             setAmbientSound={setAmbientSound}
             alarmSound={alarmSound}
             setAlarmSound={setAlarmSound}
-            previewAlarmSound={audioEngine.previewAlarmSound}
+            previewAlarmSound={previewAlarmSound}
             handleSkipPre={handleSkipPre}
-            handleStop={() => handleStop(audioEngine.stopAlarm)}
+            handleStop={() => handleStop(stopAlarm)}
           />
         )}
 
@@ -103,16 +118,14 @@ export function TimerPage(): React.ReactElement {
             setAmbientSound={setAmbientSound}
             alarmSound={alarmSound}
             setAlarmSound={setAlarmSound}
-            previewAlarmSound={audioEngine.previewAlarmSound}
+            previewAlarmSound={previewAlarmSound}
             isMuted={isMuted}
             setIsMuted={setIsMuted}
-            handleStop={() => handleStop(audioEngine.stopAlarm)}
+            handleStop={() => handleStop(stopAlarm)}
           />
         )}
 
-        {timerState === "alarm" && (
-          <AlarmView activeMode={activeMode} handleStop={() => handleStop(audioEngine.stopAlarm)} />
-        )}
+        {timerState === "alarm" && <AlarmView activeMode={activeMode} handleStop={() => handleStop(stopAlarm)} />}
       </article>
     </section>
   );
