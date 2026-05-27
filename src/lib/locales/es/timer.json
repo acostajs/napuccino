@@ -9,6 +9,9 @@
     "badge": "Onda de Transición",
     "title": "Prepárate para Dormir",
     "desc": "¡Bebe tu café ahora si no lo has hecho! Sigue la guía de respiración abajo para calmar tu mente.",
+    "breathe_in": "Inhala profundamente",
+    "breathe_hold": "Retén la respiración",
+    "breathe_out": "Exhala lentamente",
     "breathe_rest": "Respira y Descansa",
     "skip": "Omitir Cuenta Regresiva de Preparación"
   },
@@ -28,7 +31,7 @@
   },
   "alarm": {
     "title": "¡Hora de Conquistar!",
-    "desc": "Tus 20 minutos han terminado. La cafeína ha cruzado con éxito a tus receptores cerebrales. ¡Levántate y brilla!",
+    "desc": "Tu ciclo de descanso ha terminado con éxito. La cafeína ha cruzado con éxito a tus receptores cerebrales. ¡Levántate y brilla!",
     "action": "Levantarse y Moverse"
   }
 }

@@ -9,6 +9,9 @@
     "badge": "Transition Wave",
     "title": "Prepare to Fall Asleep",
     "desc": "Drink your coffee now if you haven't! Follow the breathing guide below to calm your mind.",
+    "breathe_in": "Inhale deeply",
+    "breathe_hold": "Hold your breath",
+    "breathe_out": "Exhale slowly",
     "breathe_rest": "Breathe & Rest",
     "skip": "Skip Pre-Countdown"
   },
@@ -28,7 +31,7 @@
   },
   "alarm": {
     "title": "Time to Conquer!",
-    "desc": "Your 20 minutes is up. The caffeine has successfully crossed into your brain receptors. Rise and shine!",
+    "desc": "Your resting cycle has completed successfully. The caffeine has successfully crossed into your brain receptors. Rise and shine!",
     "action": "Rise and Grind"
   }
 }

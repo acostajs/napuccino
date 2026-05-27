@@ -9,6 +9,9 @@
     "badge": "Onde de Transition",
     "title": "Préparez-vous à Dormir",
     "desc": "Buvez votre café maintenant si ce n'est pas fait ! Suivez le guide respiratoire ci-dessous pour calmer votre esprit.",
+    "breathe_in": "Inspirez profondément",
+    "breathe_hold": "Retenez votre respiration",
+    "breathe_out": "Expirez lentement",
     "breathe_rest": "Respirez et Reposez-vous",
     "skip": "Passer la Pré-transition"
   },
@@ -28,7 +31,7 @@
   },
   "alarm": {
     "title": "L'Heure de Conquérir !",
-    "desc": "Vos 20 minutes sont écoulées. La caféine a traversé avec succès les récepteurs de votre cerveau. Réveillez-vous et brillez !",
+    "desc": "Votre cycle de repos s'est déroulé avec succès. La caféine a traversé avec succès les récepteurs de votre cerveau. Réveillez-vous et brillez !",
     "action": "Debout et Actif"
   }
 }

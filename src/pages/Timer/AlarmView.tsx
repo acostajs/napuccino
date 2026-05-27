@@ -43,7 +43,7 @@ export function AlarmView({ activeMode, handleStop }: AlarmViewProps): React.Rea
         onClick={handleStop}
         className="w-full py-5 px-8 bg-primary text-primary-foreground font-black text-sm uppercase tracking-widest transition-all duration-500 ease-out active:scale-95 rounded-full shadow-lg hover:-translate-y-0.5 hover:shadow-xl cursor-pointer"
       >
-        {`(( Terminate Rest & Wake Up ))`}
+        {`(( ${t("timer.alarm.action").toUpperCase()} ))`}
       </button>
     </section>
   );

@@ -41,7 +41,7 @@ export function IdleView({
     },
     consolidation: {
       name: "Terracotta",
-      meta: "45m Deep Co",
+      meta: "45m Memory Lock",
       desc: t("modes.consolidation.description"),
     },
   };
