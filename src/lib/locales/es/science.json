@@ -5,56 +5,26 @@
   "phase01_title_part2": "ADENOSINA",
   "phase02_title_part1": "02 / LA INERCIA DEL",
   "phase02_title_part2": "SUEÑO",
-  "methodology_label": "[ METODOLOGÍA // 01 ]",
   "methodology_label_01": "[ METODOLOGÍA // 01 ]",
   "methodology_label_02": "[ METODOLOGÍA // 02 ]",
-  "title": "La Ciencia de las",
-  "title_accent": "Siestas de Alto Rendimiento",
-  "subtitle": "Tomar una siesta no es pereza; es un bio-hack. Descubre la dinámica neuroquímica detrás de la eliminación de adenosina, la absorción de cafeína y los ciclos de sueño óptmos.",
-  "pillars_heading": "Pilares Biológicos",
-  "benefits_heading": "Beneficios Demostrados",
   "synergy_title": "LA SINERGIA MOLECULAR: CAFÉ VS SUEÑO VS NAPUCCINO",
   "topics": {
     "adenosine": {
-      "title": "Adenosina y Presión de Sueño",
-      "summary": "Comprender la batería biológica orgánica que desencadena la somnolencia.",
       "p1": "A lo largo de tus horas de vigilia, a medida que tu cerebro quema energía constantemente, un subproducto químico llamado adenosina se acumula de forma constante en tu sistema. Esta molécula se une fuertemente a receptores específicos, amortiguando gradualmente la actividad neuronal y acumulando una deuda química de alta presión.",
       "p2": "Esta acumulación funciona como la batería orgánica de sueño de tu cerebro. Cuanto más tiempo pases despierto, más pesada es la deuda, lo que lleva a la fatiga mental. El descanso estándar limpia esta acumulación, pero el sueño accidental puede provocar un arrastre inesperado.",
       "secret_title": "El Secreto de la Intercepción:",
       "secret_desc": "¡Incluso un breve descanso barre un bloque sustancial de adenosina de tus receptores neuronales, dejándolos completamente abiertos para un bloqueo inmediato de cafeína al despertar!"
     },
     "caffeine": {
-      "title": "El Retraso de la Cafeína de 20 Minutos",
-      "summary": "Por qué tomar café *justo antes* de dormir produce un superpoder matemático.",
       "p1": "Al consumir café, la cafeína no puebla instantáneamente tus vías. Debe pasar por tu sistema digestivo, ingresar al torrente sanguíneo y cruzar la barrera hematoencefálica; un viaje metabólico que toma exactamente de 20 a 30 minutos.",
       "p2": "Esto crea un temporizador silencioso y natural. Al quedarte dormido inmediatamente después de beber, duermes mientras la cafeína está completamente inactiva.",
       "p3": "En el momento en que te despiertas, la cafeína alcanza su concentración máxima, uniéndose directamente a los receptores recién desocupados para una onda de claridad cognitiva doblemente amplificada."
     },
     "grogginess": {
-      "title": "Prevención de la Inercia del Sueño",
-      "summary": "Por qué dormir exactamente 20 minutos es estructuralmente superior a una siesta de 45 minutos.",
       "p1": "Un ciclo de sueño humano estándar pasa del sueño ligero al sueño profundo de ondas lentas en aproximadamente 30 minutos. Si te despiertas durante el sueño profundo, tu cerebro experimenta una inercia severa del sueño; un arrastre pesado y desorientado.",
       "p2": "Al bloquear nuestro Napuccino a un estricto de 20 minutos y la Siesta de Poder a 15 minutos, garantizamos que permanezcas estrictamente dentro del sueño ligero.",
       "p3": "Estos límites interceptan los ciclos delta de ondas lentas antes de que bloqueen tu cerebro, permitiéndote despertar inmediatamente refrescado."
     }
-  },
-  "benefits": {
-    "learning": {
-      "title": "Aprendizaje Acelerado",
-      "desc": "Estudios demuestran que las siestas de café mejoran la memoria de trabajo, facilitando el procesamiento y la categorización de información compleja."
-    },
-    "sensory": {
-      "title": "Reinicio Sensorial",
-      "desc": "Elimina la sobrecarga sensorial y el estrés, reiniciando la fatiga visual y las velocidades de procesamiento mental."
-    },
-    "motor": {
-      "title": "Coordinación Motora",
-      "desc": "Mejora la precisión de las habilidades motoras y los tiempos de reacción rápidos, fundamental para atletas, músicos y programadores."
-    }
-  },
-  "quote": {
-    "text": "\"Descubrimos que combinar la ingesta de cafeína con una breve sesión de sueño conduce a mejoras masivas en la precisión de las tareas visuales, las habilidades motoras y la memoria de trabajo en comparación con la cafeína o el sueño solos.\"",
-    "source": "— Estudio de Investigación del Sueño de la Universidad de Loughborough"
   },
   "synergy": {
     "coffee_title": "Cafeína Aislada",

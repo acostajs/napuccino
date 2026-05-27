@@ -5,56 +5,26 @@
   "phase01_title_part2": "ACCUMULATION",
   "phase02_title_part1": "02 / THE SLEEP INERTIA",
   "phase02_title_part2": "FAULTLINE",
-  "methodology_label": "[ METHODOLOGY // 01 ]",
   "methodology_label_01": "[ METHODOLOGY // 01 ]",
   "methodology_label_02": "[ METHODOLOGY // 02 ]",
-  "title": "The Science of",
-  "title_accent": "High-Performance Naps",
-  "subtitle": "Napping is not laziness; it is a bio-hack. Discover the neurochemical dynamics behind adenosine clearance, caffeine absorption, and optimal sleep cycles.",
-  "pillars_heading": "Biological Pillars",
-  "benefits_heading": "Proven Benefits",
   "synergy_title": "THE MOLECULAR SYNERGY: COFFEE VS SLEEP VS NAPUCCINO",
   "topics": {
     "adenosine": {
-      "title": "Adenosine & Sleep Pressure",
-      "summary": "Understanding the organic biological battery that triggers sleepiness.",
       "p1": "Throughout your waking hours, as your brain continuously burns energy, a chemical byproduct called adenosine steadily accumulates in your system. This molecule binds tightly to specific receptors, slowly dampening neural activity and building up a high-pressure chemical debt.",
       "p2": "This accumulation operates as your brain's organic sleep battery. The longer you stay awake, the heavier the debt, leading to mental fatigue. Standard rest clears this accumulation, but accidental sleep can trigger unexpected drag.",
       "secret_title": "The Interception Secret:",
       "secret_desc": "Even a brief rest sweeps a substantial block of adenosine from your neural receptors, leaving them wide open for immediate caffeine lock-in upon waking!"
     },
     "caffeine": {
-      "title": "The 20-Minute Caffeine Lag",
-      "summary": "Why drinking coffee *right before* a sleep produces a mathematical superpower.",
       "p1": "Upon consuming coffee, caffeine does not instantly populate your pathways. It must pass through your digestive system, enter the bloodstream, and cross the blood-brain barrier—a metabolic journey taking exactly 20 to 30 minutes.",
       "p2": "This creates a silent, natural timer. By drifting immediately after drinking, you sleep while the caffeine is completely inactive.",
       "p3": "The moment you awaken, the caffeine hits peak concentration, binding directly to newly vacated receptors for a double-amplified wave of cognitive clarity."
     },
     "grogginess": {
-      "title": "Preventing Sleep Inertia",
-      "summary": "Why sleeping for exactly 20 minutes is structurally superior to a 45-minute nap.",
       "p1": "A standard human sleep cycle transitions from light sleep into slow-wave deep sleep in approximately 30 minutes. If you wake up during deep sleep, your brain experiences severe sleep inertia—a heavy, disoriented drag.",
       "p2": "By locking our Napuccino to a strict 20 minutes and Power Nap to 15 minutes, we guarantee you stay strictly within light sleep.",
       "p3": "This boundaries intercept slow-wave delta cycles before they lock your brain down, letting you wake up immediately refreshed."
     }
-  },
-  "benefits": {
-    "learning": {
-      "title": "Accelerated Learning",
-      "desc": "Studies show coffee naps improve working memory, facilitating the processing and categorization of complex information."
-    },
-    "sensory": {
-      "title": "Sensory Reset",
-      "desc": "Clears sensory overload and stress, resetting eye fatigue and mental processing speeds."
-    },
-    "motor": {
-      "title": "Motor Coordination",
-      "desc": "Improves motor skill accuracy and rapid reaction times, critical for athletes, musicians, and coders."
-    }
-  },
-  "quote": {
-    "text": "\"We found that combining caffeine intake with a brief sleep session leads to massive improvements in visual task accuracy, motor skills, and working memory compared to caffeine or sleep alone.\"",
-    "source": "— Loughborough University Sleep Research Study"
   },
   "synergy": {
     "coffee_title": "Isolated Caffeine",
