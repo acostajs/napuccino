@@ -37,10 +37,8 @@ function AppContent(): React.ReactElement {
 
   const [ambientSound, setAmbientSound] = useState<AmbientSound>("silence");
   const [alarmSound, setAlarmSound] = useState<AlarmSound>("harp");
-  const isMuted = false;
 
   const audioEngine = useAudioEngine({
-    isMuted,
     ambientSound,
     alarmSound,
     timerState,

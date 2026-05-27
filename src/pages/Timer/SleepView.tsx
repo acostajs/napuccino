@@ -12,12 +12,7 @@ type SleepViewProps = {
 export function SleepView({ activeMode, sleepTimeLeft, formatTime, handleStop }: SleepViewProps): React.ReactElement {
   const { t } = useI18n();
 
-  // Mapping active modes to their visual meta subtitles
-  const presetNames = {
-    napuccino: "Caramel Rest",
-    powernap: "Matcha Rest",
-    consolidation: "Terracotta Rest",
-  }[activeMode];
+  const presetNames = t(`timer.sleep.mode_label.${activeMode}`);
 
   return (
     <section className="min-h-[60vh] flex flex-col items-center justify-center select-none text-center">

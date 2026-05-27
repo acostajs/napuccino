@@ -27,11 +27,21 @@
     "sound_machine": "Sleep Sound Machine",
     "cancel": "Cancel Nap Loop",
     "mute": "Mute sounds",
-    "unmute": "Unmute sounds"
+    "unmute": "Unmute sounds",
+    "mode_label": {
+      "napuccino": "Caramel Rest",
+      "powernap": "Matcha Rest",
+      "consolidation": "Terracotta Rest"
+    }
   },
   "alarm": {
     "title": "Time to Conquer!",
     "desc": "Your resting cycle has completed successfully. The caffeine has successfully crossed into your brain receptors. Rise and shine!",
-    "action": "Rise and Grind"
+    "action": "Rise and Grind",
+    "mode_label": {
+      "napuccino": "Caramel Wave Complete",
+      "powernap": "Matcha Wave Complete",
+      "consolidation": "Terracotta Wave Complete"
+    }
   }
 }

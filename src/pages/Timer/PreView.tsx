@@ -39,7 +39,7 @@ export function PreView({
   const { t } = useI18n();
 
   // Structured breathing guide synchronized with a 15-second breathing buffer
-  const getBreathingGuide = () => {
+  const getBreathingGuide = (): { instruction: string; subtext: string } => {
     if (preTimeLeft > 11) {
       return {
         instruction: t("timer.pre.breathe_in") || "Inhale deeply",

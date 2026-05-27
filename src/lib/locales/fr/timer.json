@@ -27,11 +27,21 @@
     "sound_machine": "Machine à Sons de Sommeil",
     "cancel": "Annuler la Sieste",
     "mute": "Muet",
-    "unmute": "Activer le son"
+    "unmute": "Activer le son",
+    "mode_label": {
+      "napuccino": "Repos de Caramel",
+      "powernap": "Repos de Matcha",
+      "consolidation": "Repos de Terracotta"
+    }
   },
   "alarm": {
     "title": "L'Heure de Conquérir !",
     "desc": "Votre cycle de repos s'est déroulé avec succès. La caféine a traversé avec succès les récepteurs de votre cerveau. Réveillez-vous et brillez !",
-    "action": "Debout et Actif"
+    "action": "Debout et Actif",
+    "mode_label": {
+      "napuccino": "Vague de Caramel Complétée",
+      "powernap": "Vague de Matcha Complétée",
+      "consolidation": "Vague de Terracotta Complétée"
+    }
   }
 }

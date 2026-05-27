@@ -27,11 +27,21 @@
     "sound_machine": "Máquina de Sonidos para Dormir",
     "cancel": "Cancelar Bucle de Siesta",
     "mute": "Silenciar sonidos",
-    "unmute": "Activar sonidos"
+    "unmute": "Activar sonidos",
+    "mode_label": {
+      "napuccino": "Descanso de Caramelo",
+      "powernap": "Descanso de Matcha",
+      "consolidation": "Descanso de Terracota"
+    }
   },
   "alarm": {
     "title": "¡Hora de Conquistar!",
     "desc": "Tu ciclo de descanso ha terminado con éxito. La cafeína ha cruzado con éxito a tus receptores cerebrales. ¡Levántate y brilla!",
-    "action": "Levantarse y Moverse"
+    "action": "Levantarse y Moverse",
+    "mode_label": {
+      "napuccino": "Onda de Caramelo Completada",
+      "powernap": "Onda de Matcha Completada",
+      "consolidation": "Onda de Terracota Completada"
+    }
   }
 }

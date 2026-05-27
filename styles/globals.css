@@ -8,19 +8,6 @@
   --font-serif: "Playfair Display", Georgia, Cambria, "Times New Roman", Times, serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -80,19 +67,6 @@
   /* Delicate, subtle border */
   --input: oklch(0.2 0.025 40 / 8%);
   --ring: oklch(0.6 0.18 15);
-  --chart-1: oklch(0.6 0.18 15);
-  --chart-2: oklch(0.2 0.025 40);
-  --chart-3: oklch(0.55 0.05 45);
-  --chart-4: oklch(0.82 0.1 70);
-  --chart-5: oklch(0.91 0.05 60);
-  --sidebar: oklch(0.97 0.008 75);
-  --sidebar-foreground: oklch(0.2 0.025 40);
-  --sidebar-primary: oklch(0.2 0.025 40);
-  --sidebar-primary-foreground: oklch(0.98 0.01 75);
-  --sidebar-accent: oklch(0.95 0.015 75);
-  --sidebar-accent-foreground: oklch(0.2 0.025 40);
-  --sidebar-border: oklch(0.2 0.025 40 / 8%);
-  --sidebar-ring: oklch(0.6 0.18 15);
 
   /* Mode Accents (Light) */
   --mode-napuccino-start: oklch(0.72 0.11 75);
@@ -133,19 +107,6 @@
   --border: oklch(0.94 0.015 70 / 8%);
   --input: oklch(0.94 0.015 70 / 8%);
   --ring: oklch(0.72 0.14 75);
-  --chart-1: oklch(0.72 0.14 75);
-  --chart-2: oklch(0.94 0.015 70);
-  --chart-3: oklch(0.55 0.08 45);
-  --chart-4: oklch(0.4 0.06 35);
-  --chart-5: oklch(0.3 0.04 35);
-  --sidebar: oklch(0.17 0.025 35);
-  --sidebar-foreground: oklch(0.94 0.015 70);
-  --sidebar-primary: oklch(0.94 0.015 70);
-  --sidebar-primary-foreground: oklch(0.13 0.02 35);
-  --sidebar-accent: oklch(0.22 0.02 35);
-  --sidebar-accent-foreground: oklch(0.94 0.015 70);
-  --sidebar-border: oklch(0.94 0.015 70 / 8%);
-  --sidebar-ring: oklch(0.72 0.14 75);
 
   /* Mode Accents (Dark) */
   --mode-napuccino-start: oklch(0.71 0.14 45);
@@ -172,10 +133,6 @@
   body {
     @apply bg-background text-foreground;
   }
-}
-
-.sound-selector-panel {
-  @apply w-full space-y-5 py-4 border-t border-dashed border-border/80;
 }
 
 /* Custom Typography System Utilities (Tailwind v4) */

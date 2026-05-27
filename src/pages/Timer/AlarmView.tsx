@@ -11,11 +11,7 @@ type AlarmViewProps = {
 export function AlarmView({ activeMode, handleStop }: AlarmViewProps): React.ReactElement {
   const { t } = useI18n();
 
-  const presetNames = {
-    napuccino: "Caramel Wave Complete",
-    powernap: "Matcha Wave Complete",
-    consolidation: "Terracotta Wave Complete",
-  }[activeMode];
+  const presetNames = t(`timer.alarm.mode_label.${activeMode}`);
 
   return (
     <section className="min-h-[50vh] flex flex-col items-center justify-center select-none text-center max-w-md mx-auto space-y-12">
