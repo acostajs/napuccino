@@ -126,8 +126,13 @@ export function Navbar({ activeTab, setActiveTab, theme, toggleTheme, timerState
     );
   };
 
+  const sleepTransitionClasses =
+    timerState === "sleep" ? "opacity-0 pointer-events-none -translate-y-4 scale-95" : "opacity-100";
+
   return (
-    <header className="sticky top-4 z-50 mx-auto w-full max-w-5xl">
+    <header
+      className={`sticky top-4 z-50 mx-auto w-full max-w-5xl transition-all duration-1000 ease-out ${sleepTransitionClasses}`}
+    >
       <div className="flex h-16 w-full items-center justify-between bg-card/85 backdrop-blur-md px-6 transition-all duration-500 ease-out rounded-full border border-transparent">
         {/* Left: Wordmark Logo */}
         <div className="flex items-center shrink-0">

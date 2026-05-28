@@ -101,19 +101,13 @@ function AppContent(): React.ReactElement {
       <div className="absolute top-0 left-0 right-0 h-96 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none z-0" />
 
       <div className="relative z-10 w-full flex flex-col gap-6 pt-4 px-4 sm:px-6">
-        <div
-          className={`transition-all duration-1000 ease-out ${
-            timerState === "sleep" ? "opacity-0 pointer-events-none -translate-y-4 scale-95" : "opacity-100"
-          }`}
-        >
-          <Navbar
-            activeTab={activeTab}
-            setActiveTab={handleTabChange}
-            theme={theme}
-            toggleTheme={toggleTheme}
-            timerState={timerState}
-          />
-        </div>
+        <Navbar
+          activeTab={activeTab}
+          setActiveTab={handleTabChange}
+          theme={theme}
+          toggleTheme={toggleTheme}
+          timerState={timerState}
+        />
 
         <main className="w-full flex-grow">
           {activeTab === "home" && <HomePage setActiveTab={handleTabChange} setActiveMode={setActiveMode} />}

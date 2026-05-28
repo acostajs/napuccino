@@ -34,11 +34,6 @@ export function SleepView({
 
   return (
     <section className="min-h-[60vh] flex flex-col items-center justify-center select-none text-center">
-      {/* 
-        Radical Reduction Phase: 
-        All headers, footers, sound matrices, and control boards have dissolved. 
-        Only the dimmed countdown remains to respect resting eyes.
-      */}
       <button
         type="button"
         onClick={handleStop}
@@ -53,8 +48,10 @@ export function SleepView({
         </span>
       </button>
 
-      {/* Mid-nap ambient sound controller - ultra-low opacity to respect resting eyes */}
-      <div className="mt-12 flex items-center justify-center gap-4 opacity-15 hover:opacity-75 focus-within:opacity-75 transition-opacity duration-700">
+      <nav
+        aria-label="Ambient sound controls"
+        className="mt-12 flex items-center justify-center gap-4 opacity-15 hover:opacity-75 focus-within:opacity-75 transition-opacity duration-700"
+      >
         {ambientOptions.map((option) => {
           const Icon = option.icon;
           const isActive = ambientSound === option.id;
@@ -76,9 +73,8 @@ export function SleepView({
             </button>
           );
         })}
-      </div>
+      </nav>
 
-      {/* Faint, subtle escape anchor below to ensure easy exiting */}
       <button
         type="button"
         onClick={handleStop}
